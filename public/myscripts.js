@@ -5,6 +5,7 @@ $(document).ready(function () {
         $('#refineModal').modal('show');
     });
 
+//  Hakuehdot: sijainti dropdown menu
     $('#refineLocation')
   .dropdown()
 ;

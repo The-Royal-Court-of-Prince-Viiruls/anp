@@ -1,3 +1,6 @@
 node_modules/
 semantic/
 bower_components/
+semantic.json
+public/semantic/
+public/bower_components/

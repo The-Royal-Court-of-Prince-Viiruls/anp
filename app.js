@@ -9,7 +9,6 @@ var mongoose = require('mongoose');
 
 //kontrollerit
 var routes = require('./routes/index');
-var hello = require('./routes/hello');
 
 //Käynnistetään framework.
 var app = express();
@@ -34,7 +33,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //liitetään kontrollerit
 app.use('/', routes);
-app.use('/hello', hello);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -29,152 +29,16 @@
   </div>
 
   <div class="ui main text container">
-    <h1 class="ui header">Ilmoitukset</h1>
-    <p>Täällä voit selata jätettyjä ilmoituksia. Nopeuttaaksesi hakuasi, tarkenna hakuehtojasi! </p>
+    <!-- View begins -->
 
-    <div class="ui top attached tabular menu">
-      <div class="active item">Lahjoitetaan</div>
-      <div class="item">Vaihdetaan</div>
-      <div class="item">Etsitään</div>
-    </div>
-
-    <div class="ui bottom attached active tab segment">
-
-      <div class="ui fluid action input">
-        <input type="text" placeholder="Etsi hakusanalla">
-
-        <div class="ui button" id="refineButton">
-          <i class="search icon"></i> Hakuehdot
-        </div>
-      </div>
-
-      <div class="ui relaxed divided list">
-        <div class="item">
-          <i class="large soccer middle aligned icon"></i>
-          <div class="content">
-            <a class="header">Tennismaila</a>
-            <div class="description">Lahjoitetaan hyväkuntoinen maila. Nouto Malmilta tai postitus. (Pitäiskö ilmoitukset avata Accordionilla?)</div>
-          </div>
-        </div>
-
-        <div class="item">
-          <i class="large game middle aligned icon"></i>
-          <div class="content">
-            <a class="header">Dark Souls 2</a>
-            <div class="description">Lahjoitetaan lähes uusi Dark Souls 2 -peli Xboxille tai vaihdetaan CoDiin. Paska peli.</div>
-          </div>
-        </div>
-
-        <div class="item">
-          <i class="large book middle aligned icon"></i>
-          <div class="content">
-            <a class="header">Hohto</a>
-            <div class="description">Lahjoitetaan Stephen Kingin kuuluisa teos Hohto tai vaihdetaan johonkin parempaan iltalukemiseen.</div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="ui modal" id="refineModal">
-      <div class="content">
-        <h1 class="ui header">Hakuehdot</h1>
-
-        <form class="ui form">
-          <div class="ui four column grid">
-            <!-- First row -->
-            <div class="row">
-
-              <div class="column">
-                <div class="grouped fields">
-                  <label>Ilmoitustyyppi</label>
-                  <div class="field">
-                    <div class="ui checked checkbox">
-                      <input type="checkbox" name="lahjoitetaan" checked="">
-                      <label>Lahjoitetaan</label>
-                    </div>
-                    <div class="field">
-                      <div class="ui checked checkbox">
-                        <input type="checkbox" name="vaihdetaan" checked="">
-                        <label>Vaihdetaan</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="column">
-                <div class="grouped fields">
-                  <label>Kunto</label>
-                  <div class="field">
-                    <div class="ui checked checkbox">
-                      <input type="checkbox" name="lahjoitetaan" checked="">
-                      <label>Uudenveroinen</label>
-                    </div>
-                    <div class="field">
-                      <div class="ui checked checkbox">
-                        <input type="checkbox" name="vaihdetaan" checked="">
-                        <label>Hyvä</label>
-                      </div>
-                    </div>
-                    <div class="field">
-                      <div class="ui checked checkbox">
-                        <input type="checkbox" name="vaihdetaan" checked="">
-                        <label>Tyydyttävä</label>
-                      </div>
-                    </div>
-                    <div class="field">
-                      <div class="ui checked checkbox">
-                        <input type="checkbox" name="vaihdetaan" checked="">
-                        <label>Heikko</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="column">
-                <div class="field">
-                  <div class="ui dropdown" id="refineLocation">
-                    <div class="text">Sijainti</div>
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                      <div class="item">Satakunta</div>
-                      <div class="item">Uusimaa</div>
-                      <div class="item">Varsinais-Suomi</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="column">
-                <div class="field">
-                </div>
-              </div>
-
-            </div>
-            <!-- First row ends -->
-            <!-- Second row -->
-            <div class="row">
-
-              <div class="column">
-                <button class="ui basic blue button">Tallenna</button>
-              </div>
-
-            </div>
-            <!-- Second row ends -->
-
-          </div>
-        </form>
-      </div>
-    </div>
-
+    <!-- View ends -->
   </div>
 
   <!-- Scripts -->
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/firebase/firebase.js"></script>
+  <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="semantic/out/semantic.min.js" type="text/javascript"></script>
   <script src="myscripts.js" type="text/javascript"></script>

@@ -4,25 +4,11 @@ var express = require('express');
 //path moduuli. Auttaa polkujen rakentelussa ja palastelussa
 var path = require('path');
 
-// mongodb driver
-var mongoose = require('mongoose');
-
 //kontrollerit
 var routes = require('./routes/index');
-var hello = require('./routes/hello');
 
 //Käynnistetään framework.
 var app = express();
-
-// Connect to mongodb
-var connect = function () {
-  var options = { server: { socketOptions: { keepAlive: 1 } } };
-  mongoose.connect("mongodb://anp:anp@ds033744.mongolab.com:33744/anp", options);
-};
-connect();
-
-mongoose.connection.on('error', console.log);
-mongoose.connection.on('disconnected', connect);
 
 // Annetaan polku viewsiin template enginelle
 app.set('views', path.join(__dirname, 'views'));
@@ -34,7 +20,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //liitetään kontrollerit
 app.use('/', routes);
-app.use('/hello', hello);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

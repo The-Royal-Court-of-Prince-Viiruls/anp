@@ -33,11 +33,12 @@
     <p>Täällä voit selata jätettyjä ilmoituksia. Nopeuttaaksesi hakuasi, tarkenna hakuehtojasi! </p>
 
     <div class="ui top attached tabular menu">
-      <div class="active item">Annetaan</div>
+      <div class="active item">Lahjoitetaan</div>
+      <div class="item">Vaihdetaan</div>
       <div class="item">Etsitään</div>
     </div>
 
-      <div class="ui bottom attached active tab segment">
+    <div class="ui bottom attached active tab segment">
 
       <div class="ui fluid action input">
         <input type="text" placeholder="Etsi hakusanalla">
@@ -45,19 +46,19 @@
         <div class="ui button" id="refineButton">
           <i class="search icon"></i> Hakuehdot
         </div>
-    </div>
+      </div>
 
-            <div class="ui relaxed divided list">
+      <div class="ui relaxed divided list">
         <div class="item">
           <i class="large soccer middle aligned icon"></i>
-              <div class="content">
+          <div class="content">
             <a class="header">Tennismaila</a>
             <div class="description">Lahjoitetaan hyväkuntoinen maila. Nouto Malmilta tai postitus. (Pitäiskö ilmoitukset avata Accordionilla?)</div>
           </div>
         </div>
 
         <div class="item">
-                    <i class="large game middle aligned icon"></i>
+          <i class="large game middle aligned icon"></i>
           <div class="content">
             <a class="header">Dark Souls 2</a>
             <div class="description">Lahjoitetaan lähes uusi Dark Souls 2 -peli Xboxille tai vaihdetaan CoDiin. Paska peli.</div>
@@ -67,12 +68,12 @@
         <div class="item">
           <i class="large book middle aligned icon"></i>
           <div class="content">
-                      <a class="header">Hohto</a>
+            <a class="header">Hohto</a>
             <div class="description">Lahjoitetaan Stephen Kingin kuuluisa teos Hohto tai vaihdetaan johonkin parempaan iltalukemiseen.</div>
           </div>
         </div>
 
-          </div>
+      </div>
 
     </div>
 
@@ -103,9 +104,9 @@
                 </div>
               </div>
 
-                <div class="column">
-                  <div class="grouped fields">
-                    <label>Kunto</label>
+              <div class="column">
+                <div class="grouped fields">
+                  <label>Kunto</label>
                   <div class="field">
                     <div class="ui checked checkbox">
                       <input type="checkbox" name="lahjoitetaan" checked="">
@@ -131,52 +132,53 @@
                     </div>
                   </div>
                 </div>
-                </div>
+              </div>
 
-                <div class="column">
-                  <div class="field">
-                    <div class="ui dropdown" id="refineLocation">
-                      <div class="text">Sijainti</div>
-                        <i class="dropdown icon"></i>
-                        <div class="menu">
-                          <div class="item">Satakunta</div>
-                          <div class="item">Uusimaa</div>
-                          <div class="item">Varsinais-Suomi</div>
-                        </div>
-                      </div>
+              <div class="column">
+                <div class="field">
+                  <div class="ui dropdown" id="refineLocation">
+                    <div class="text">Sijainti</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                      <div class="item">Satakunta</div>
+                      <div class="item">Uusimaa</div>
+                      <div class="item">Varsinais-Suomi</div>
+                    </div>
                   </div>
                 </div>
-
-                <div class="column">
-                  <div class="field">
-                  </div>
-                </div>
-
               </div>
-              <!-- First row ends -->
-              <!-- Second row -->
-              <div class="row">
 
-                <div class="column">
-                  <button class="ui basic blue button">Tallenna</button>
+              <div class="column">
+                <div class="field">
                 </div>
-
               </div>
-              <!-- Second row ends -->
 
             </div>
-          </form>
-        </div>
-      </div>
+            <!-- First row ends -->
+            <!-- Second row -->
+            <div class="row">
 
+              <div class="column">
+                <button class="ui basic blue button">Tallenna</button>
+              </div>
+
+            </div>
+            <!-- Second row ends -->
+
+          </div>
+        </form>
+      </div>
     </div>
 
+  </div>
 
-    <!-- Scripts -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="semantic/out/semantic.min.js" type="text/javascript"></script>
-    <script src="myscripts.js" type="text/javascript"></script>
+  <!-- Scripts -->
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="semantic/out/semantic.min.js" type="text/javascript"></script>
+  <script src="myscripts.js" type="text/javascript"></script>
 
-  </body>
+</body>
 
-  </html>
+</html>

@@ -5,7 +5,7 @@ var express = require('express');
 var path = require('path');
 
 //kontrollerit
-var routes = require('./routes/index');
+var index = require('./routes/index');
 
 //Käynnistetään framework.
 var app = express();
@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //liitetään kontrollerit
-app.use('/', routes);
+app.use('/', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

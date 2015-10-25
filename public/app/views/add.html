@@ -1,20 +1,180 @@
-<div class="">
-  <p>
-    moi
-  </p>
-  <p>
-    moi
-  </p>
-  <p>
-    moi
-  </p>
-  <p>
-    moi
-  </p>
-  <p>
-    moi
-  </p>
-  <p>
-    moi
-  </p>
+<!-- Add new post into database -->
+<h1 class="ui header">
+  Lisää uusi ilmoitus
+</h1>
+
+<div class="ui piled segment">
+
+  <!-- Form begins -->
+  <div class="ui form" name=newPostForm>
+
+    <div class="inline fields">
+      <label>Ilmoitustyyppi</label>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" checked="checked" ng-model="newType" value="lookingFor">
+          <label>Etsitään</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" ng-model="newType" value="free">
+          <label>Lahjoitetaan</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" ng-model="newType" value="exchange">
+          <label>Vaihdetaan</label>
+        </div>
+      </div>
+    </div>
+
+    <a class="ui blue ribbon label">Tavaran tiedot</a>
+
+    <div class="field">
+      <div class="two fields">
+
+        <div class="required field">
+          <label>Tavara </label>
+          <input type="text" name=newItem ng-model="newItem" placeholder="Esim. Kirjoituspöytä">
+        </div>
+
+        <div class="required field">
+          <label>Kategoria</label>
+          <select class="ui fluid dropdown" id="refineCategory" ng-model="newCategory">
+            <option value="">Valitse</option>
+            <option value="AJO">Ajoneuvot</option>
+            <option value="ELO">Elokuvat</option>
+            <option value="HAR">Harrastukset</option>
+            <option value="KOR">Korut</option>
+            <option value="ELE">Elektroniikka</option>
+            <option value="KOT">Koti</option>
+            <option value="LAS">Lastentarvikkeet</option>
+            <option value="MUS">Musiikki</option>
+            <option value="SEK">Sekalaista</option>
+            <option value="TAI">Taide</option>
+            <option value="TIE">Tietotekniikka</option>
+            <option value="VAA">Vaatetus</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="required field">
+      <label>Ilmoitusteksti</label>
+      <textarea ng-model="newDescription"></textarea>
+    </div>
+
+    <div class="inline fields">
+      <label>Kunto</label>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="frequency" checked="checked">
+          <label>Uudenveroinen</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="frequency">
+          <label>Hyvä</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="frequency">
+          <label>Kohtalainen</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="frequency">
+          <label>Huono</label>
+        </div>
+      </div>
+    </div>
+
+    <a class="ui blue ribbon label">Toimitus- ja yhteystiedot</a>
+
+    <div class="field">
+      <div class="two fields">
+
+        <div class="required field">
+          <label>Sijainti</label>
+          <select class="ui fluid dropdown" id="refineLocation" ng-model="newLocation">
+            <option value="">Valitse</option>
+            <option value="AHV">Ahvenanmaa</option>
+            <option value="EKA">Etelä-Karjala</option>
+            <option value="EPO">Etelä-Pohjanmaa</option>
+            <option value="ESA">Etelä-Savo</option>
+            <option value="KAI">Kainuu</option>
+            <option value="KHÄ">Kanta-Häme</option>
+            <option value="KPO">Keski-Pohjanmaa</option>
+            <option value="KSU">Keski-Suomi</option>
+            <option value="KYM">Kymenlaakso</option>
+            <option value="LAP">Lappi</option>
+            <option value="PIR">Pirkanmaa</option>
+            <option value="POH">Pohjanmaa</option>
+            <option value="PKA">Pohjois-Karjala</option>
+            <option value="PPO">Pohjois-Pohjanmaa</option>
+            <option value="PSA">Pohjois-Savo</option>
+            <option value="PHÄ">Päijät-Häme</option>
+            <option value="SAT">Satakunta</option>
+            <option value="UUS">Uusimaa</option>
+            <option value="VSU">Varsinais-Suomi</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Mahdolliset toimitustavat</label>
+
+          <div class="ui slider checkbox">
+            <input type="checkbox" ng-model="newShippingPickup">
+            <label>Nouto</label>
+          </div>
+          <label></label>
+
+          <div class="ui slider checkbox">
+            <input type="checkbox" ng-model="newShippingMail">
+            <label>Postitus</label>
+          </div>
+          <label></label>
+
+          <div class="ui slider checkbox">
+            <input type="checkbox" ng-model="newShippingHome">
+            <label>Toimitus kotiin</label>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="required field">
+        <label>Yhteystiedot</label>
+      </div>
+
+      <div class="inline fields">
+        <div class="five wide field">
+          <input type="text" placeholder="Puhelinnumero" ng-model="newGSM" ng-required="!(newGSM.length || newEmail.length)" ng-pattern="/^[0-9]{10,}$/">
+        </div>
+
+        <div class="eight wide field">
+          <input type="text" placeholder="Sähköpostiosoite" ng-model="newEmail" ng-required="!(newGSM.length || newEmail.length)" ng-pattern="/^.+@.+\..+$/">
+        </div>
+
+        <div class="three wide field">
+          <div class="ui left pointing label">
+            Toinen vaaditaan
+          </div>
+        </div>
+
+      </div>
+
+      <button ng-click="addPost()" class="ui button">Lisää</button>
+
+    </div>
+  </div>
+  <!-- Form ends -->
+
 </div>

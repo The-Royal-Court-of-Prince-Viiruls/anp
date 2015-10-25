@@ -69,47 +69,6 @@
         </div>
       </div>
 
-      <!-- Add new post into database -->
-      <div class="ui form" name=newPostForm ng-controller=ListController>
-        <div class="grouped fields">
-
-          <div class="field">
-            <label>Tavaran nimi</label>
-            <input type="text" ng-model="newItem">
-          </div>
-
-          <div class="field">
-            <label>Ilmoitusteksti</label>
-            <input type="text" ng-model="newDescription">
-          </div>
-
-          <div class="field">
-            <div class="two fields">
-              <div class="field">
-                <label>Hinta</label>
-                <input type="text" ng-model="newPrice">
-              </div>
-
-              <div class="field">
-                <label>Sijainti</label>
-                <select class="ui fluid dropdown" id="refineLocation">
-                  <option value="">State</option>
-                  <option value="AL">Alabama</option>
-                  <option value="AK">Alaska</option>
-                  <option value="AZ">Arizona</option>
-                  <option value="AR">Arkansas</option>
-                  <option value="CA">California</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <button ng-click="addPost()" class="ui button">Lisää</button>
-
-        </div>
-      </div>
-      <!-- Form ends -->
-
     </div>
     <!-- Content below tab menu ends -->
 

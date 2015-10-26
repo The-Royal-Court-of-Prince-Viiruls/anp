@@ -1,4 +1,5 @@
 node_modules/
 bower_components/
-public/semantic/out/
+public/semantic/
+semantic.json
 public/bower_components/

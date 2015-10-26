@@ -2,7 +2,7 @@
 var index = require('../routes/index');
 var posts = require('../routes/posts');
 
-module.exports = function (app, passport) {
+module.exports = function (app) {
   // liitetään kontrollerit
   app.use('/', index);
   app.post('/posts',posts.add);

@@ -4,7 +4,7 @@ exports.add = function (req, res){
   var post = req.body;
   var collection = db.get().collection('posts');
   collection.insertOne(post,function(err, post) {
-    res.json(post)
+    res.json(post);
   });
 };
 

@@ -1,13 +1,22 @@
 // kontrollerit
 var index = require('../routes/index');
 var posts = require('../routes/posts');
+var users = require('../routes/users');
 
 module.exports = function (app) {
   // liitetään kontrollerit
   app.use('/', index);
-  app.post('/posts',posts.add);
-  app.get('/posts',posts.all);
 
+  app.post('/posts',posts.add);
+  app.get('/posts',posts.listAll);
+  app.get('/posts/query',posts.listByQuery);
+  app.get('/posts/:username',posts.listByUser);
+  app.delete('/posts/:id',posts.removeById);
+
+  app.post('/users',users.add);
+  app.get('/users',users.listAll);
+  app.get('/users/:username',users.findByUsername);
+  app.delete('/users/:id',users.removeById);
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
     var err = new Error('Not Found');

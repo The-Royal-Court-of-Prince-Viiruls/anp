@@ -12,35 +12,36 @@
       <label>Ilmoitustyyppi</label>
       <div class="field">
         <div class="ui radio checkbox">
-          <input type="radio" checked="checked" ng-model="newType" value="lookingFor">
+          <input type="radio" ng-model="newType" value="Etsitään">
           <label>Etsitään</label>
         </div>
       </div>
       <div class="field">
         <div class="ui radio checkbox">
-          <input type="radio" ng-model="newType" value="free">
+          <input type="radio" ng-model="newType" value="Lahjoitetaan">
           <label>Lahjoitetaan</label>
         </div>
       </div>
       <div class="field">
         <div class="ui radio checkbox">
-          <input type="radio" ng-model="newType" value="exchange">
+          <input type="radio" ng-model="newType" value="Vaihdetaan">
           <label>Vaihdetaan</label>
         </div>
       </div>
     </div>
 
     <a class="ui blue ribbon label">Tavaran tiedot</a>
+    <p></p>
 
     <div class="field">
       <div class="two fields">
 
-        <div class="required field">
+        <div class="field">
           <label>Tavara </label>
           <input type="text" name=newItem ng-model="newItem" placeholder="Esim. Kirjoituspöytä">
         </div>
 
-        <div class="required field">
+        <div class="field">
           <label>Kategoria</label>
           <select class="ui fluid dropdown" id="refineCategory" ng-model="newCategory">
             <option value="">Valitse</option>
@@ -62,7 +63,7 @@
       </div>
     </div>
 
-    <div class="required field">
+    <div class="field">
       <label>Ilmoitusteksti</label>
       <textarea ng-model="newDescription"></textarea>
     </div>
@@ -71,36 +72,37 @@
       <label>Kunto</label>
       <div class="field">
         <div class="ui radio checkbox">
-          <input type="radio" name="frequency" checked="checked">
+          <input type="radio" name="frequency" ng-model="newCondition" value="Uudenveroinen">
           <label>Uudenveroinen</label>
         </div>
       </div>
       <div class="field">
         <div class="ui radio checkbox">
-          <input type="radio" name="frequency">
+          <input type="radio" name="frequency" ng-model="newCondition" value="Hyvä">
           <label>Hyvä</label>
         </div>
       </div>
       <div class="field">
         <div class="ui radio checkbox">
-          <input type="radio" name="frequency">
+          <input type="radio" name="frequency" ng-model="newCondition" value="Kohtalainen">
           <label>Kohtalainen</label>
         </div>
       </div>
       <div class="field">
         <div class="ui radio checkbox">
-          <input type="radio" name="frequency">
+          <input type="radio" name="frequency" ng-model="newCondition" value="Huono">
           <label>Huono</label>
         </div>
       </div>
     </div>
 
     <a class="ui blue ribbon label">Toimitus- ja yhteystiedot</a>
+    <p></p>
 
     <div class="field">
       <div class="two fields">
 
-        <div class="required field">
+        <div class="field">
           <label>Sijainti</label>
           <select class="ui fluid dropdown" id="refineLocation" ng-model="newLocation">
             <option value="">Valitse</option>
@@ -130,19 +132,19 @@
           <label>Mahdolliset toimitustavat</label>
 
           <div class="ui slider checkbox">
-            <input type="checkbox" ng-model="newShippingPickup">
+            <input type="checkbox" ng-model="newShippingMethods.pickup">
             <label>Nouto</label>
           </div>
           <label></label>
 
           <div class="ui slider checkbox">
-            <input type="checkbox" ng-model="newShippingMail">
+            <input type="checkbox" ng-model="newShippingMethods.mail">
             <label>Postitus</label>
           </div>
           <label></label>
 
           <div class="ui slider checkbox">
-            <input type="checkbox" ng-model="newShippingHome">
+            <input type="checkbox" ng-model="newShippingMethods.home">
             <label>Toimitus kotiin</label>
           </div>
 
@@ -150,7 +152,7 @@
 
       </div>
 
-      <div class="required field">
+      <div class="field">
         <label>Yhteystiedot</label>
       </div>
 
@@ -171,7 +173,7 @@
 
       </div>
 
-      <button ng-click="addPost()" class="ui button">Lisää</button>
+      <button ng-click="addPost()" class="ui blue button">Lisää</button>
 
     </div>
   </div>

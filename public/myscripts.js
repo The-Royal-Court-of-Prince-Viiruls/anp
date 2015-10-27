@@ -1,24 +1,13 @@
 $(document).ready(function () {
 
-  //  Listeneri hakuehtomodalille
-  $('#refineButton').click(function () {
-    $('#refineModal').modal('show');
-  });
-
-  //  Hakuehdot: sijainti dropdown menu
-  $('#refineLocation')
+  //  Refine search: location dropdown menu
+  $('.ui.dropdown')
   .dropdown()
   ;
 
-  // Ilmoituksen lisäys: "Vain nouto" -slideri
+  // Add post: "Pickup only" -slider
   $('.ui.slider.checkbox')
     .checkbox()
   ;
-
-  // Ilmoituksen lisäys: Puhelinnumeron popup
-  $('input')
-  .popup({
-    on: 'focus'
-  });
 
 });

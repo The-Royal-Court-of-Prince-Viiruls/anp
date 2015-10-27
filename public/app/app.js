@@ -7,7 +7,7 @@ IlmoitusApp.config(function ($routeProvider) {
     templateUrl: 'app/views/etusivu.html'
   })
   .when('/posts', {
-    controller:'',
+    controller:'ListController',
     templateUrl: 'app/views/posts.html'
   })
   .when('/add', {

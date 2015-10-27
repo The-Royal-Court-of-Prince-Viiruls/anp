@@ -1,56 +1,49 @@
 <!-- View begins -->
 
+<!-- Some introduction for the page -->
 <h1 class="ui header">Ilmoitukset</h1>
 <p>Täällä voit selata jätettyjä ilmoituksia. Nopeuttaaksesi hakuasi, tarkenna hakuehtojasi! </p>
 
-<!-- Tabular menu -->
+<!-- Tabular menu for different post options -->
 <div class="ui top attached tabular menu">
   <div class="active item">Lahjoitetaan</div>
   <div class="item">Vaihdetaan</div>
   <div class="item">Etsitään</div>
 </div>
 
-<!-- Contents of tabular menu -->
+<!-- The actual content below the tab menu -->
 <div class="ui bottom attached active tab segment">
 
+  <!-- Search for filtering posts -->
   <div class="ui fluid action input">
     <input type="text" placeholder="Etsi hakusanalla">
 
-    <div class="ui button" id="refineButton">
+    <div class="ui button" id="refineButton" ng-click="refineModal()">
       <i class="search icon"></i> Hakuehdot
     </div>
   </div>
 
-  <div class="ui relaxed divided list">
-    <div class="item">
-      <i class="large soccer middle aligned icon"></i>
+  <div class="ui accordion">
+    <div ng-repeat="post in posts">
+      <div class="title" ng-click="accordion()">
+        <i class="dropdown icon"></i>
+        {{post.item}}
+      </div>
       <div class="content">
-        <a class="header">Tennismaila</a>
-        <div class="description">Lahjoitetaan hyväkuntoinen maila. Nouto Malmilta tai postitus. (Pitäiskö ilmoitukset avata Accordionilla?)</div>
+        <div class="ui fluid card">
+          <div class="content">
+            <div class="header">{{post.type}}</div>
+            <p>{{post.description}}</p>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="item">
-      <i class="large game middle aligned icon"></i>
-      <div class="content">
-        <a class="header">Dark Souls 2</a>
-        <div class="description">Lahjoitetaan lähes uusi Dark Souls 2 -peli Xboxille tai vaihdetaan CoDiin. Paska peli.</div>
-      </div>
-    </div>
-
-    <div class="item">
-      <i class="large book middle aligned icon"></i>
-      <div class="content">
-        <a class="header">Hohto</a>
-        <div class="description">Lahjoitetaan Stephen Kingin kuuluisa teos Hohto tai vaihdetaan johonkin parempaan iltalukemiseen.</div>
-      </div>
-    </div>
-
   </div>
 
 </div>
 <!-- End of tabular menu contents -->
 
+<!-- Modal for refining search results -->
 <div class="ui modal" id="refineModal">
   <div class="content">
     <h1 class="ui header">Hakuehdot</h1>
@@ -66,12 +59,18 @@
               <div class="field">
                 <div class="ui checked checkbox">
                   <input type="checkbox" name="lahjoitetaan" checked="">
-                  <label>Lahjoitetaan</label>
+                  <label>Etsitään</label>
                 </div>
                 <div class="field">
                   <div class="ui checked checkbox">
-                    <input type="checkbox" name="vaihdetaan" checked="">
-                    <label>Vaihdetaan</label>
+                    <input type="checkbox" name="lahjoitetaan" checked="">
+                    <label>Lahjoitetaan</label>
+                  </div>
+                  <div class="field">
+                    <div class="ui checked checkbox">
+                      <input type="checkbox" name="vaihdetaan" checked="">
+                      <label>Vaihdetaan</label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -95,7 +94,7 @@
                 <div class="field">
                   <div class="ui checked checkbox">
                     <input type="checkbox" name="vaihdetaan" checked="">
-                    <label>Tyydyttävä</label>
+                    <label>Kohtalainen</label>
                   </div>
                 </div>
                 <div class="field">
@@ -110,13 +109,51 @@
 
           <div class="column">
             <div class="field">
-              <div class="ui dropdown" id="refineLocation">
-                <div class="text">Sijainti</div>
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                  <div class="item">Satakunta</div>
-                  <div class="item">Uusimaa</div>
-                  <div class="item">Varsinais-Suomi</div>
+              <label>Sijainti</label>
+              <select class="ui fluid dropdown">
+                <option value="">Valitse</option>
+                <option value="AHV">Ahvenanmaa</option>
+                <option value="EKA">Etelä-Karjala</option>
+                <option value="EPO">Etelä-Pohjanmaa</option>
+                <option value="ESA">Etelä-Savo</option>
+                <option value="KAI">Kainuu</option>
+                <option value="KHÄ">Kanta-Häme</option>
+                <option value="KPO">Keski-Pohjanmaa</option>
+                <option value="KSU">Keski-Suomi</option>
+                <option value="KYM">Kymenlaakso</option>
+                <option value="LAP">Lappi</option>
+                <option value="PIR">Pirkanmaa</option>
+                <option value="POH">Pohjanmaa</option>
+                <option value="PKA">Pohjois-Karjala</option>
+                <option value="PPO">Pohjois-Pohjanmaa</option>
+                <option value="PSA">Pohjois-Savo</option>
+                <option value="PHÄ">Päijät-Häme</option>
+                <option value="SAT">Satakunta</option>
+                <option value="UUS">Uusimaa</option>
+                <option value="VSU">Varsinais-Suomi</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="grouped fields">
+              <label>Toimitustapa</label>
+              <div class="field">
+                <div class="ui checked checkbox">
+                  <input type="checkbox" name="pickup" checked="checked">
+                  <label>Nouto</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui checked checkbox">
+                  <input type="checkbox" name="mail" checked="checked">
+                  <label>Postitus</label>
+                </div>
+                <div class="field">
+                  <div class="ui checked checkbox">
+                    <input type="checkbox" name="home" checked="checked">
+                    <label>Toimitus kotiin</label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -141,7 +178,10 @@
 
       </div>
     </form>
+    <!-- End of form -->
+
   </div>
 </div>
+<!-- End of modal -->
 
 <!-- View ends -->

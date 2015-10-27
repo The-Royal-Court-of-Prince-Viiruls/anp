@@ -6,177 +6,203 @@
 <div class="ui piled segment">
 
   <!-- Form begins -->
-  <div class="ui form" name=newPostForm>
+  <div class="ui form">
 
-    <div class="inline fields">
-      <label>Ilmoitustyyppi</label>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" ng-model="newType" value="Etsitään">
-          <label>Etsitään</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" ng-model="newType" value="Lahjoitetaan">
-          <label>Lahjoitetaan</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" ng-model="newType" value="Vaihdetaan">
-          <label>Vaihdetaan</label>
-        </div>
-      </div>
-    </div>
+    <form name=newPostForm >
 
-    <a class="ui blue ribbon label">Tavaran tiedot</a>
-    <p></p>
-
-    <div class="field">
-      <div class="two fields">
-
+      <div class="inline fields">
+        <label>Ilmoitustyyppi</label>
         <div class="field">
-          <label>Tavara </label>
-          <input type="text" name=newItem ng-model="newItem" placeholder="Esim. Kirjoituspöytä">
-        </div>
-
-        <div class="field">
-          <label>Kategoria</label>
-          <select class="ui fluid dropdown" id="refineCategory" ng-model="newCategory">
-            <option value="">Valitse</option>
-            <option value="AJO">Ajoneuvot</option>
-            <option value="ELO">Elokuvat</option>
-            <option value="HAR">Harrastukset</option>
-            <option value="KOR">Korut</option>
-            <option value="ELE">Elektroniikka</option>
-            <option value="KOT">Koti</option>
-            <option value="LAS">Lastentarvikkeet</option>
-            <option value="MUS">Musiikki</option>
-            <option value="SEK">Sekalaista</option>
-            <option value="TAI">Taide</option>
-            <option value="TIE">Tietotekniikka</option>
-            <option value="VAA">Vaatetus</option>
-          </select>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="field">
-      <label>Ilmoitusteksti</label>
-      <textarea ng-model="newDescription"></textarea>
-    </div>
-
-    <div class="inline fields">
-      <label>Kunto</label>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="frequency" ng-model="newCondition" value="Uudenveroinen">
-          <label>Uudenveroinen</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="frequency" ng-model="newCondition" value="Hyvä">
-          <label>Hyvä</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="frequency" ng-model="newCondition" value="Kohtalainen">
-          <label>Kohtalainen</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="frequency" ng-model="newCondition" value="Huono">
-          <label>Huono</label>
-        </div>
-      </div>
-    </div>
-
-    <a class="ui blue ribbon label">Toimitus- ja yhteystiedot</a>
-    <p></p>
-
-    <div class="field">
-      <div class="two fields">
-
-        <div class="field">
-          <label>Sijainti</label>
-          <select class="ui fluid dropdown" id="refineLocation" ng-model="newLocation">
-            <option value="">Valitse</option>
-            <option value="AHV">Ahvenanmaa</option>
-            <option value="EKA">Etelä-Karjala</option>
-            <option value="EPO">Etelä-Pohjanmaa</option>
-            <option value="ESA">Etelä-Savo</option>
-            <option value="KAI">Kainuu</option>
-            <option value="KHÄ">Kanta-Häme</option>
-            <option value="KPO">Keski-Pohjanmaa</option>
-            <option value="KSU">Keski-Suomi</option>
-            <option value="KYM">Kymenlaakso</option>
-            <option value="LAP">Lappi</option>
-            <option value="PIR">Pirkanmaa</option>
-            <option value="POH">Pohjanmaa</option>
-            <option value="PKA">Pohjois-Karjala</option>
-            <option value="PPO">Pohjois-Pohjanmaa</option>
-            <option value="PSA">Pohjois-Savo</option>
-            <option value="PHÄ">Päijät-Häme</option>
-            <option value="SAT">Satakunta</option>
-            <option value="UUS">Uusimaa</option>
-            <option value="VSU">Varsinais-Suomi</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>Mahdolliset toimitustavat</label>
-
-          <div class="ui slider checkbox">
-            <input type="checkbox" ng-model="newShippingMethods.pickup">
-            <label>Nouto</label>
+          <div class="ui radio checkbox">
+            <input type="radio" ng-model="newType" value="Etsitään" ng-required="!newType">
+            <label>Etsitään</label>
           </div>
-          <label></label>
-
-          <div class="ui slider checkbox">
-            <input type="checkbox" ng-model="newShippingMethods.mail">
-            <label>Postitus</label>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" ng-model="newType" value="Lahjoitetaan">
+            <label>Lahjoitetaan</label>
           </div>
-          <label></label>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" ng-model="newType" value="Vaihdetaan">
+            <label>Vaihdetaan</label>
+          </div>
+        </div>
+      </div>
 
-          <div class="ui slider checkbox">
-            <input type="checkbox" ng-model="newShippingMethods.home">
-            <label>Toimitus kotiin</label>
+      <a class="ui blue ribbon label">Tavaran tiedot</a>
+      <p></p>
+
+      <div class="field">
+        <div class="two fields">
+
+          <div class="field">
+            <label>Tavara </label>
+            <input type="text" name=newItem ng-model="newItem" placeholder="Esim. Kirjoituspöytä" required ng-minlength="3" ng-model-options="{ updateOn: 'blur' }">
+            <!-- Error message for input -->
+            <div ng-show="newPostForm.newItem.$invalid && newPostForm.newItem.$dirty">
+              <div class="ui pointing blue label">
+                Kuvauksen oltava 3 merkkiä tai pidempi
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Kategoria</label>
+            <select class="ui fluid dropdown" id="refineCategory" ng-model="newCategory" required>
+              <option value="">Valitse</option>
+              <option value="AJO">Ajoneuvot</option>
+              <option value="ELO">Elokuvat</option>
+              <option value="HAR">Harrastukset</option>
+              <option value="KOR">Korut</option>
+              <option value="ELE">Elektroniikka</option>
+              <option value="KOT">Koti</option>
+              <option value="LAS">Lastentarvikkeet</option>
+              <option value="MUS">Musiikki</option>
+              <option value="SEK">Sekalaista</option>
+              <option value="TAI">Taide</option>
+              <option value="TIE">Tietotekniikka</option>
+              <option value="VAA">Vaatetus</option>
+            </select>
           </div>
 
         </div>
+      </div>
 
+      <div class="field">
+        <label>Ilmoitusteksti</label>
+        <textarea name="newDescription" ng-model="newDescription" required ng-minlength="10" ng-model-options="{ updateOn: 'blur' }"></textarea>
+        <!-- Error message for input -->
+        <div ng-show="newPostForm.newDescription.$invalid && newPostForm.newDescription.$dirty">
+          <div class="ui pointing blue label">
+            Ilmoituksen oltava 10 merkkiä tai pidempi
+          </div>
+        </div>
+      </div>
+
+      <div class="inline fields">
+        <label>Kunto</label>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="frequency" ng-model="newCondition" value="Uudenveroinen" ng-required="!newCondition">
+            <label>Uudenveroinen</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="frequency" ng-model="newCondition" value="Hyvä">
+            <label>Hyvä</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="frequency" ng-model="newCondition" value="Kohtalainen">
+            <label>Kohtalainen</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="frequency" ng-model="newCondition" value="Huono">
+            <label>Huono</label>
+          </div>
+        </div>
+      </div>
+
+      <a class="ui blue ribbon label">Toimitus- ja yhteystiedot</a>
+      <p></p>
+
+      <div class="field">
+        <div class="two fields">
+
+          <div class="field">
+            <label>Sijainti</label>
+            <select class="ui fluid dropdown" id="refineLocation" ng-model="newLocation" required>
+              <option value="">Valitse</option>
+              <option value="AHV">Ahvenanmaa</option>
+              <option value="EKA">Etelä-Karjala</option>
+              <option value="EPO">Etelä-Pohjanmaa</option>
+              <option value="ESA">Etelä-Savo</option>
+              <option value="KAI">Kainuu</option>
+              <option value="KHÄ">Kanta-Häme</option>
+              <option value="KPO">Keski-Pohjanmaa</option>
+              <option value="KSU">Keski-Suomi</option>
+              <option value="KYM">Kymenlaakso</option>
+              <option value="LAP">Lappi</option>
+              <option value="PIR">Pirkanmaa</option>
+              <option value="POH">Pohjanmaa</option>
+              <option value="PKA">Pohjois-Karjala</option>
+              <option value="PPO">Pohjois-Pohjanmaa</option>
+              <option value="PSA">Pohjois-Savo</option>
+              <option value="PHÄ">Päijät-Häme</option>
+              <option value="SAT">Satakunta</option>
+              <option value="UUS">Uusimaa</option>
+              <option value="VSU">Varsinais-Suomi</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Mahdolliset toimitustavat</label>
+
+            <div class="ui slider checkbox">
+              <input type="checkbox" ng-model="newShippingMethods.pickup" ng-required="!(newShippingMethods.pickup || newShippingMethods.mail || newShippingMethods.home)" >
+              <label>Nouto</label>
+            </div>
+            <label></label>
+
+            <div class="ui slider checkbox">
+              <input type="checkbox" ng-model="newShippingMethods.mail">
+              <label>Postitus</label>
+            </div>
+            <label></label>
+
+            <div class="ui slider checkbox">
+              <input type="checkbox" ng-model="newShippingMethods.home">
+              <label>Toimitus kotiin</label>
+            </div>
+
+          </div>
+
+        </div>
       </div>
 
       <div class="field">
         <label>Yhteystiedot</label>
-      </div>
+        <div class="two fields">
 
-      <div class="inline fields">
-        <div class="five wide field">
-          <input type="text" placeholder="Puhelinnumero" ng-model="newGSM" ng-required="!(newGSM.length || newEmail.length)" ng-pattern="/^[0-9]{10,}$/">
-        </div>
+          <div class="field">
+            <input type="text" name="newGSM" placeholder="Puhelinnumero" ng-model="newGSM" ng-required="!(newGSM.length || newEmail.length)" ng-pattern="/^[0-9]{10,}$/" ng-model-options="{ updateOn: 'blur' }">
+            <!-- Error message for input -->
+            <div ng-show="newPostForm.newGSM.$invalid && newPostForm.newGSM.$dirty">
+              <div class="ui pointing blue label">
+                Puhelinnumeron on oltava muotoa "0401234567"
+              </div>
+            </div>
 
-        <div class="eight wide field">
-          <input type="text" placeholder="Sähköpostiosoite" ng-model="newEmail" ng-required="!(newGSM.length || newEmail.length)" ng-pattern="/^.+@.+\..+$/">
-        </div>
+          </div>
 
-        <div class="three wide field">
-          <div class="ui left pointing label">
-            Toinen vaaditaan
+          <div class="field">
+            <input type="text" name="newEmail" placeholder="Sähköpostiosoite" ng-model="newEmail" ng-required="!(newGSM.length || newEmail.length)" ng-pattern="/^.+@.+\..+$/" ng-model-options="{ updateOn: 'blur' }">
+            <!-- Error message for input -->
+            <div ng-show="newPostForm.newEmail.$invalid && newPostForm.newEmail.$dirty">
+              <div class="ui pointing blue label">
+                Sähköpostiosoitteen on oltava muotoa "user@host.com"
+              </div>
+            </div>
+
           </div>
         </div>
 
       </div>
 
-      <button ng-click="addPost()" class="ui blue button">Lisää</button>
+      <button ng-click="addPost()" class="ui blue button" ng-disabled="newPostForm.$invalid">Lisää</button>
 
     </div>
-  </div>
-  <!-- Form ends -->
+
+  </form>
+
+</div>
+<!-- Form ends -->
 
 </div>

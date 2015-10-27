@@ -1,15 +1,20 @@
 branches:
-    only:
-        - deploy
+  only:
+  - deploy
 language: node_js
 env:
-    - CXX=g++-4.8
+- CXX=g++-4.8
 addons:
-    apt:
-        sources:
-            - ubuntu-toolchain-r-test
-        packages:
-            - g++-4.8
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
 node_js:
-    - "4.2"
-
+- '4.2'
+deploy:
+  provider: heroku
+  api_key:
+    secure: XlRjorRoG36tXJXINfXHZHDKV/HT2NUxZEhBgTRRiOd7JxKE8QBeTy5AoEggpnWdEkdbtm8R2L4107/THuMFQOwVHt67E1Klljlpa+VX+SDl6eU5ISxF3GQv98Dpm4TxTb8WIorBbTJn+e1ueyepbkvH4t8TvECr+PUmEamnrx6rSZJK78MvicIGxowhffe/ePSiuQXylFncpOJgO8+gh7OZGSDkYHQ7Kd0O6q8C7nQzBQ28ilG0WhBRjjb6/N+Mhbr9uJ45sE4xMMVfuw+1XE7NtY1E0MP3G3Wm0oKxEMSVH7LvlbMc4uSWKjGb8xhUwf8nA/sR5moid0TBUofKyzggxCN06VUs6GcPXAR/5cbAKHa5vUHR6iRwb/jLlbU6unlL7DklKnu3S48GtaCyt26uYzrT3B9HKzt3KukAQ1+FjcmlXMMMw8bwHwpcNv1ZwoN/9Ybgqeixw9E+8Q2yc1cqSDhJFWKePN8dAo+egNvEjbvQ06EYQj1cIQVdn4vT2SCDbiPwyUgemwKoXzCeRDwyhUEzyG192DfyIREw0qpdre1NXZvj2dCaY6feBFl1sHsmCjcQ1zaYiGa/p8td3fXMMMQa2NwI40tUOKuuflkYoTMtwYIoX6IVC1+NYIUyg/8A9qhqe0y09X0Jv1M2f1///HRlfJtV9jY/tIvyoo0=
+  app:
+    deploy: viiru

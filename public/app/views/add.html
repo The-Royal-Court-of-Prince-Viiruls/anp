@@ -10,24 +10,27 @@
 
     <form name=newPostForm >
 
-      <div class="inline fields">
+      <div class="field">
         <label>Ilmoitustyyppi</label>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" ng-model="newType" value="Etsitään" ng-required="!newType">
-            <label>Etsitään</label>
+        <div class="inline fields">
+
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" ng-model="newType" value="Etsitään" ng-required="!newType">
+              <label>Etsitään</label>
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" ng-model="newType" value="Lahjoitetaan">
-            <label>Lahjoitetaan</label>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" ng-model="newType" value="Lahjoitetaan">
+              <label>Lahjoitetaan</label>
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" ng-model="newType" value="Vaihdetaan">
-            <label>Vaihdetaan</label>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" ng-model="newType" value="Vaihdetaan">
+              <label>Vaihdetaan</label>
+            </div>
           </div>
         </div>
       </div>
@@ -51,7 +54,7 @@
 
           <div class="field">
             <label>Kategoria</label>
-            <select class="ui fluid dropdown" id="refineCategory" ng-model="newCategory" required>
+            <select class="ui fluid dropdown" ng-model="newCategory" required>
               <option value="">Valitse</option>
               <option value="AJO">Ajoneuvot</option>
               <option value="ELO">Elokuvat</option>
@@ -82,30 +85,33 @@
         </div>
       </div>
 
-      <div class="inline fields">
+      <div class="field">
         <label>Kunto</label>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="frequency" ng-model="newCondition" value="Uudenveroinen" ng-required="!newCondition">
-            <label>Uudenveroinen</label>
+        <div class="inline fields">
+
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="frequency" ng-model="newCondition" value="Uudenveroinen" ng-required="!newCondition">
+              <label>Uudenveroinen</label>
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="frequency" ng-model="newCondition" value="Hyvä">
-            <label>Hyvä</label>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="frequency" ng-model="newCondition" value="Hyvä">
+              <label>Hyvä</label>
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="frequency" ng-model="newCondition" value="Kohtalainen">
-            <label>Kohtalainen</label>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="frequency" ng-model="newCondition" value="Kohtalainen">
+              <label>Kohtalainen</label>
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <div class="ui radio checkbox">
-            <input type="radio" name="frequency" ng-model="newCondition" value="Huono">
-            <label>Huono</label>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="frequency" ng-model="newCondition" value="Heikko">
+              <label>Heikko</label>
+            </div>
           </div>
         </div>
       </div>
@@ -118,7 +124,7 @@
 
           <div class="field">
             <label>Sijainti</label>
-            <select class="ui fluid dropdown" id="refineLocation" ng-model="newLocation" required>
+            <select class="ui fluid dropdown" ng-model="newLocation" required>
               <option value="">Valitse</option>
               <option value="AHV">Ahvenanmaa</option>
               <option value="EKA">Etelä-Karjala</option>

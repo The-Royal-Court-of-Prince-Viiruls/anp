@@ -1,3 +1,7 @@
+<script>
+$('.tabular.menu .item').tab();
+</script>
+
 <!-- View begins -->
 <meta charset="utf-8">
 <!-- Some introduction for the page -->
@@ -6,13 +10,12 @@
 
 <!-- Tabular menu for different post options -->
 <div class="ui top attached tabular menu">
-  <div class="active item">Lahjoitetaan</div>
-  <div class="item">Vaihdetaan</div>
-  <div class="item">Etsitään</div>
+  <a class="active item" data-tab="lahjoitetaan">Lahjoitetaan</a>
+  <a class="item" data-tab="vaihdetaan">Vaihdetaan</a>
+  <a class="item" data-tab="etsitaan">Etsitään</a>
 </div>
 
-<!-- The actual content below the tab menu -->
-<div class="ui bottom attached active tab segment">
+<div class="ui bottom attached tab segment" data-tab="vaihdetaan">
 
   <!-- Search for filtering posts -->
   <div class="ui fluid action input">
@@ -23,25 +26,52 @@
     </div>
   </div>
 
+  Listaus
+</div>
+
+<div class="ui bottom attached tab segment" data-tab="etsitaan">
+
+  <!-- Search for filtering posts -->
+  <div class="ui fluid action input">
+    <input type="text" placeholder="Etsi hakusanalla">
+
+    <div class="ui button" id="refineButton" ng-click="refineModal()">
+      <i class="search icon"></i> Hakuehdot
+    </div>
+  </div>
+
+  Listaus
+</div>
+
+<!-- The actual content below the tab menu -->
+<div class="ui bottom attached active tab segment" data-tab="lahjoitetaan">
+
+  <!-- Search for filtering posts -->
+  <div class="ui fluid action input">
+    <input type="text" placeholder="Etsi hakusanalla">
+
+    <div class="ui button" id="refineButton" ng-click="refineModal()">
+      <i class="search icon"></i> Hakuehdot
+    </div>
+  </div>
+
+  <p></p>
+
   <!-- Post items -->
-  <div class="ui accordion">
+  <div class="ui fluid styled accordion">
     <div ng-repeat="post in posts">
       <div class="title" ng-click="accordion()">
         <!-- Post title -->
         <i class="dropdown icon"></i>
-        {{post.item}}
+        {{post.item}} ({{post.location}})
       </div>
       <div class="content">
 
         <!-- Card (post information) begins -->
-        <div class="ui fluid card">
-          <div class="content">
-            <span id="shipping"class="right floated meta">{{post.location}}</span>
-            <div class="header">{{post.type}}</div>
-          </div>
 
           <div class="content">
             <p>{{post.description}}</p>
+
             <!-- Contact information -->
             <div class="ui blue label" ng-show="{{post.contact.gsm}}">
               <i class="phone icon"></i> {{post.contact.gsm}}
@@ -52,7 +82,7 @@
             </div>
           </div>
 
-          <div class="content">
+          <div class="right floated content">
             <!-- Shipping methods -->
             <div class="ui label">
               Toimitustavat:
@@ -70,7 +100,10 @@
             </div>
 
           </div>
-          <div class="extra content">
+
+          <div class="ui divider"></div>
+
+          <div class="content">
 
             <!-- Comment section? -->
             <div class="ui large transparent left icon input">
@@ -79,7 +112,6 @@
             </div>
 
           </div>
-        </div>
         <!-- End of card -->
 
       </div>

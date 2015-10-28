@@ -33,6 +33,21 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
       }
     }
     return array;
+}
+  $scope.shippingMethods = function(post) {
+    var methods = post.methods;
+    var result = "";
+    if (methods.pickup === true) {
+      result+="Nouto ";
+    }
+    if (methods.mail === true) {
+      result+="Postitus ";
+    }
+    if (methods.home === true) {
+      result+="Kotiintoimitus ";
+    }
+
+    return result;
   }
 
 })

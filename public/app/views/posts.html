@@ -23,22 +23,69 @@
     </div>
   </div>
 
+  <!-- Post items -->
   <div class="ui accordion">
     <div ng-repeat="post in posts">
       <div class="title" ng-click="accordion()">
+        <!-- Post title -->
         <i class="dropdown icon"></i>
         {{post.item}}
       </div>
       <div class="content">
+
+        <!-- Card (post information) begins -->
         <div class="ui fluid card">
           <div class="content">
+            <span id="shipping"class="right floated meta">{{post.location}}</span>
             <div class="header">{{post.type}}</div>
+          </div>
+
+          <div class="content">
             <p>{{post.description}}</p>
+            <!-- Contact information -->
+            <div class="ui blue label" ng-show="{{post.contact.gsm}}">
+              <i class="phone icon"></i> {{post.contact.gsm}}
+            </div>
+
+            <div class="ui blue label" ng-show="{{post.contact.email.length}}">
+              <i class="mail icon"></i> {{post.contact.email}}
+            </div>
+          </div>
+
+          <div class="content">
+            <!-- Shipping methods -->
+            <div class="ui label">
+              Toimitustavat:
+              <div class="detail" ng-show="{{post.shipping.mail}}===true">
+                <i class="mail icon"></i> Postitus
+              </div>
+
+              <div class="detail" ng-show="{{post.shipping.pickup}}===true">
+                <i class="car icon"></i> Nouto
+              </div>
+
+              <div class="detail" ng-show="{{post.shipping.home}}===true">
+                <i class="home icon"></i> Kotiintoimitus
+              </div>
+            </div>
+
+          </div>
+          <div class="extra content">
+
+            <!-- Comment section? -->
+            <div class="ui large transparent left icon input">
+              <i class="heart outline icon"></i>
+              <input type="text" placeholder="Add Comment...">
+            </div>
+
           </div>
         </div>
+        <!-- End of card -->
+
       </div>
     </div>
   </div>
+  <!-- End of post items -->
 
 </div>
 <!-- End of tabular menu contents -->
@@ -112,25 +159,24 @@
               <label>Sijainti</label>
               <select name="location" multiple="" class="ui fluid dropdown">
                 <option value="">Valitse</option>
-                <option value="AHV">Ahvenanmaa</option>
-                <option value="EKA">Etelä-Karjala</option>
-                <option value="EPO">Etelä-Pohjanmaa</option>
-                <option value="ESA">Etelä-Savo</option>
-                <option value="KAI">Kainuu</option>
-                <option value="KHÄ">Kanta-Häme</option>
-                <option value="KPO">Keski-Pohjanmaa</option>
-                <option value="KSU">Keski-Suomi</option>
-                <option value="KYM">Kymenlaakso</option>
-                <option value="LAP">Lappi</option>
-                <option value="PIR">Pirkanmaa</option>
-                <option value="POH">Pohjanmaa</option>
-                <option value="PKA">Pohjois-Karjala</option>
-                <option value="PPO">Pohjois-Pohjanmaa</option>
-                <option value="PSA">Pohjois-Savo</option>
-                <option value="PHÄ">Päijät-Häme</option>
-                <option value="SAT">Satakunta</option>
-                <option value="UUS">Uusimaa</option>
-                <option value="VSU">Varsinais-Suomi</option>
+                <option value="Ahvenanmaa">Ahvenanmaa</option>
+                <option value="Etelä-Karjala">Etelä-Karjala</option>
+                <option value="Etelä-Pohjanmaa">Etelä-Pohjanmaa</option>
+                <option value="Etelä-Savo">Etelä-Savo</option>
+                <option value="Kainuu">Kainuu</option>
+                <option value="Kanta-Häme">Kanta-Häme</option>
+                <option value="Keski-Pohjanmaa">Keski-Pohjanmaa</option>
+                <option value="Keski-Suomi">Keski-Suomi</option>
+                <option value="Kymenlaakso">Kymenlaakso</option>
+                <option value="Lappi">Lappi</option>
+                <option value="Pirkanmaa">Pirkanmaa</option>
+                <option value="Pohjanmaa">Pohjanmaa</option>
+                <option value="Pohjois-Karjala">Pohjois-Karjala</option>
+                <option value="Pohjois-Savo">Pohjois-Savo</option>
+                <option value="Päijät-Häme">Päijät-Häme</option>
+                <option value="Satakunta">Satakunta</option>
+                <option value="Uusimaa">Uusimaa</option>
+                <option value="Varsinais-Suomi">Varsinais-Suomi</option>
               </select>
             </div>
           </div>

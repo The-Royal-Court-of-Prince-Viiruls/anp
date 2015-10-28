@@ -102,30 +102,6 @@
 
           <div class="column">
             <div class="grouped fields">
-              <label>Ilmoitustyyppi</label>
-              <div class="field">
-                <div class="ui checked checkbox">
-                  <input type="checkbox" ng-model="searchtype.search" ng-true-value="'Etsitään'" ng-false-value="'false'">
-                  <label>Etsitään</label>
-                </div>
-                <div class="field">
-                  <div class="ui checked checkbox">
-                    <input type="checkbox" ng-model="searchtype.give" ng-true-value="'Lahjoitetaan'" ng-false-value="'false'">
-                    <label>Lahjoitetaan</label>
-                  </div>
-                  <div class="field">
-                    <div class="ui checked checkbox">
-                      <input type="checkbox" ng-model="searchtype.change" ng-true-value="'Vaihdetaan'" ng-false-value="'false'">
-                      <label>Vaihdetaan</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="column">
-            <div class="grouped fields">
               <label>Kunto</label>
               <div class="field">
                 <div class="ui checked checkbox">
@@ -206,18 +182,18 @@
               <label>Toimitustapa</label>
               <div class="field">
                 <div class="ui checked checkbox">
-                  <input type="checkbox" name="pickup" checked="checked">
+                  <input type="checkbox" name="searchshipping.pickup" checked="checked">
                   <label>Nouto</label>
                 </div>
               </div>
               <div class="field">
                 <div class="ui checked checkbox">
-                  <input type="checkbox" name="mail" checked="checked">
+                  <input type="checkbox" name="searchshipping.mail" checked="checked">
                   <label>Postitus</label>
                 </div>
                 <div class="field">
                   <div class="ui checked checkbox">
-                    <input type="checkbox" name="home" checked="checked">
+                    <input type="checkbox" name="searchshipping.home" checked="checked">
                     <label>Toimitus kotiin</label>
                   </div>
                 </div>

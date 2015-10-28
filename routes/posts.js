@@ -18,24 +18,31 @@ exports.listByQuery = function(req, res) {
   var collection = db.get().collection('posts');
 
   collection.find({ "data.type"     : {$in      : type},
-                    "data.category" : {$in      : category},
-                    "data.condition": {$in      : condition},
-                    "data.location" : {$in      : location},
-                    "data.shipping" : {$in      : shipping}}).toArray(function(err, posts) {
+  "data.category" : {$in      : category},
+  "data.condition": {$in      : condition},
+  "data.location" : {$in      : location},
+  "data.shipping" : {$in      : shipping}}).toArray(function(err, posts) {
     res.json(posts);
   })
 };
 
 exports.listByQueryTest = function(req, res) {
-  console.log(req.query.type);
-  var type = req.query.type;
+  var type      = req.query.type;
+  var shipping  = req.query.shipping;
 
   var collection = db.get().collection('posts');
 
-  collection.find({ "data.type"     : {$in      : type}}).toArray(function(err, posts) {
-    res.json(posts);
-  })
-};
+  collection.find({
+                    "data.type"     : type,
+                    $or:[
+                  { "data.shipping.pickup" : shipping.pickup},
+                  { "data.shipping.mail" : shipping.mail},
+                  { "data.shipping.home" : shipping.home}
+                        ]
+                  }).toArray(function(err, posts) {
+                  res.json(posts);
+                })
+              };
 
 
 exports.listByUser = function(req,res) {

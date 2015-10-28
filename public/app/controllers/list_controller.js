@@ -2,14 +2,20 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
 
   $scope.posts = FirebaseService.getPosts();
 
-  $scope.searchtype = {
-    search:'Etsitään',
-    give:'Lahjoitetaan',
-    change:'Vaihdetaan'
+  $scope.searchshipping = {
+    pickup:true,
+    mail:true,
+    home:true
   }
 
+  $scope.searchtype = "";
+
   $scope.query = function(){
-    PostService.query(toArray($scope.searchtype));
+    queryObject = {
+      type : $scope.searchtype,
+      shipping : $scope.searchshipping
+    }
+    PostService.query(queryObject);
   }
 
   // Open the search refining modal

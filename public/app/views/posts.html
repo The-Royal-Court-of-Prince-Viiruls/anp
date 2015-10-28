@@ -15,6 +15,7 @@ $('.tabular.menu .item').tab();
   <a class="item" data-tab="etsitaan">Etsitään</a>
 </div>
 
+<!-- The "Vaihdetaan" content below the tab menu -->
 <div class="ui bottom attached tab segment" data-tab="vaihdetaan">
 
   <!-- Search for filtering posts -->
@@ -29,6 +30,7 @@ $('.tabular.menu .item').tab();
   Listaus
 </div>
 
+<!-- The "Etsitaan" content below the tab menu -->
 <div class="ui bottom attached tab segment" data-tab="etsitaan">
 
   <!-- Search for filtering posts -->
@@ -43,7 +45,7 @@ $('.tabular.menu .item').tab();
   Listaus
 </div>
 
-<!-- The actual content below the tab menu -->
+<!-- The "Lahtjoitetaan" content below the tab menu -->
 <div class="ui bottom attached active tab segment" data-tab="lahjoitetaan">
 
   <!-- Search for filtering posts -->
@@ -67,52 +69,53 @@ $('.tabular.menu .item').tab();
       </div>
       <div class="content">
 
-        <!-- Card (post information) begins -->
-
-          <div class="content">
-            <p>{{post.description}}</p>
-
-            <!-- Contact information -->
-            <div class="ui blue label" ng-show="{{post.contact.gsm}}">
-              <i class="phone icon"></i> {{post.contact.gsm}}
+        <!-- Post information begins -->
+        <div class="content">
+          <!-- Shipping methods -->
+          <div class="ui label">
+            Toimitustavat:
+            <div class="detail" ng-show="{{post.shipping.mail}}===true">
+              <i class="mail icon"></i> Postitus
             </div>
 
-            <div class="ui blue label" ng-show="{{post.contact.email.length}}">
-              <i class="mail icon"></i> {{post.contact.email}}
+            <div class="detail" ng-show="{{post.shipping.pickup}}===true">
+              <i class="car icon"></i> Nouto
+            </div>
+
+            <div class="detail" ng-show="{{post.shipping.home}}===true">
+              <i class="home icon"></i> Kotiintoimitus
             </div>
           </div>
+        </div>
 
-          <div class="right floated content">
-            <!-- Shipping methods -->
-            <div class="ui label">
-              Toimitustavat:
-              <div class="detail" ng-show="{{post.shipping.mail}}===true">
-                <i class="mail icon"></i> Postitus
-              </div>
+        <!-- Description -->
+        <div class="content">
+          <p>{{post.description}}</p>
+        </div>
 
-              <div class="detail" ng-show="{{post.shipping.pickup}}===true">
-                <i class="car icon"></i> Nouto
-              </div>
-
-              <div class="detail" ng-show="{{post.shipping.home}}===true">
-                <i class="home icon"></i> Kotiintoimitus
-              </div>
-            </div>
-
+        <!-- Contact information -->
+        <div class="content">
+          <div ng-show="{{post.contact.gsm}}">
+            <i class="phone icon"></i> {{post.contact.gsm}}
           </div>
 
-          <div class="ui divider"></div>
-
-          <div class="content">
-
-            <!-- Comment section? -->
-            <div class="ui large transparent left icon input">
-              <i class="heart outline icon"></i>
-              <input type="text" placeholder="Add Comment...">
-            </div>
-
+          <div ng-show="{{post.contact.email.length}}">
+            <i class="mail icon"></i> {{post.contact.email}}
           </div>
-        <!-- End of card -->
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="content">
+
+          <!-- Comment section? -->
+          <div class="ui large transparent left icon input">
+            <i class="heart outline icon"></i>
+            <input type="text" placeholder="Add Comment...">
+          </div>
+
+        </div>
+        <!-- End of post information -->
 
       </div>
     </div>

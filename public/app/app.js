@@ -3,7 +3,7 @@ var IlmoitusApp = angular.module('IlmoitusApp', ['firebase', 'ngRoute']);
 IlmoitusApp.config(function ($routeProvider) {
   $routeProvider
   .when('/', {
-    controller: '',
+    controller: 'HomeController',
     templateUrl: 'app/views/etusivu.html'
   })
   .when('/posts', {
@@ -17,5 +17,9 @@ IlmoitusApp.config(function ($routeProvider) {
   .when('/faq', {
     controller:'',
     templateUrl: 'app/views/faq.html'
+  })
+  .when('/signup', {
+    controller:'',
+    templateUrl: 'app/views/signup.html'
   })
 });

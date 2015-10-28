@@ -26,6 +26,18 @@ exports.listByQuery = function(req, res) {
   })
 };
 
+exports.listByQueryTest = function(req, res) {
+  console.log(req.query.type);
+  var type = req.query.type;
+
+  var collection = db.get().collection('posts');
+
+  collection.find({ "data.type"     : {$in      : type}}).toArray(function(err, posts) {
+    res.json(posts);
+  })
+};
+
+
 exports.listByUser = function(req,res) {
   var username = req.params.username;
   var collection = db.get().collection('posts');

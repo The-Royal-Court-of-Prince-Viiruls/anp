@@ -1,5 +1,5 @@
 node_modules/
 bower_components/
-public/semantic/
+public/semantic/*
 semantic.json
 public/bower_components/

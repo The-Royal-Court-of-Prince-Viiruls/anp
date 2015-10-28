@@ -1,5 +1,5 @@
 <!-- View begins -->
-
+<meta charset="utf-8">
 <!-- Some introduction for the page -->
 <h1 class="ui header">Ilmoitukset</h1>
 <p>Täällä voit selata jätettyjä ilmoituksia. Nopeuttaaksesi hakuasi, tarkenna hakuehtojasi! </p>
@@ -58,17 +58,17 @@
               <label>Ilmoitustyyppi</label>
               <div class="field">
                 <div class="ui checked checkbox">
-                  <input type="checkbox" name="lahjoitetaan" checked="">
+                  <input type="checkbox" ng-model="searchtype.search" ng-true-value="'Etsitään'" ng-false-value="'false'">
                   <label>Etsitään</label>
                 </div>
                 <div class="field">
                   <div class="ui checked checkbox">
-                    <input type="checkbox" name="lahjoitetaan" checked="">
+                    <input type="checkbox" ng-model="searchtype.give" ng-true-value="'Lahjoitetaan'" ng-false-value="'false'">
                     <label>Lahjoitetaan</label>
                   </div>
                   <div class="field">
                     <div class="ui checked checkbox">
-                      <input type="checkbox" name="vaihdetaan" checked="">
+                      <input type="checkbox" ng-model="searchtype.change" ng-true-value="'Vaihdetaan'" ng-false-value="'false'">
                       <label>Vaihdetaan</label>
                     </div>
                   </div>
@@ -110,7 +110,7 @@
           <div class="column">
             <div class="field">
               <label>Sijainti</label>
-              <select class="ui fluid dropdown">
+              <select name="location" multiple="" class="ui fluid dropdown">
                 <option value="">Valitse</option>
                 <option value="AHV">Ahvenanmaa</option>
                 <option value="EKA">Etelä-Karjala</option>
@@ -131,6 +131,26 @@
                 <option value="SAT">Satakunta</option>
                 <option value="UUS">Uusimaa</option>
                 <option value="VSU">Varsinais-Suomi</option>
+              </select>
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <label>Kategoria</label>
+              <select name="category" multiple="" class="ui fluid dropdown">
+                <option value="">Valitse</option>
+                <option value="AJO">Ajoneuvot</option>
+                <option value="ELO">Elokuvat</option>
+                <option value="HAR">Harrastukset</option>
+                <option value="KOR">Korut</option>
+                <option value="ELE">Elektroniikka</option>
+                <option value="KOT">Koti</option>
+                <option value="LAS">Lastentarvikkeet</option>
+                <option value="MUS">Musiikki</option>
+                <option value="SEK">Sekalaista</option>
+                <option value="TAI">Taide</option>
+                <option value="TIE">Tietotekniikka</option>
+                <option value="VAA">Vaatetus</option>
               </select>
             </div>
           </div>
@@ -170,7 +190,7 @@
         <div class="row">
 
           <div class="column">
-            <button class="ui basic blue button">Tallenna</button>
+            <button ng-click="query()" class="ui basic blue button">Tallenna</button>
           </div>
 
         </div>
@@ -182,6 +202,9 @@
 
   </div>
 </div>
+<script>
+$('.ui.dropdown').dropdown();
+</script>
 <!-- End of modal -->
 
 <!-- View ends -->

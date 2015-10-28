@@ -21,4 +21,19 @@ IlmoitusApp.service('PostService', function ($http) {
     });
   }
 
+  this.query = function(query) {
+    $http({
+    url: '/posts/query/test',
+    method: "GET",
+    params: {"type[]": query}
+ })
+ .success(function(data, status, headers, config){
+      console.log('Palvelin lähetti vastauksen!');
+      console.log(data);
+    })
+    .error(function(data, status, headers, config){
+      console.log('Jotain meni pieleen...');
+    });
+  }
+
 });

@@ -38,24 +38,15 @@ exports.listByType = function(req, res) {
 exports.listByQueryTest = function(req, res) {
   var type      = req.query.type;
   var shipping  = req.query.shipping;
+  var shipping  = JSON.parse(shipping);
+  console.log(shipping);
 
   var collection = db.get().collection('posts');
 
   collection.find({
                     "data.type"     : type,
-                    $or:[
-                      {
-                         "data.shipping.pickup" : true,
-                         "data.shipping.pickup" : shipping.pickup
-                      },
-                      {
-                         "data.shipping.mail" : true,
-                         "data.shipping.mail" : shipping.mail
-                      },
-                      {
-                         "data.shipping.home" : true,
-                         "data.shipping.home" : shipping.home
-                      }
+              $or:[ {"data.shipping.home":{$eq:true}},
+                    {"data.shipping.pickup":{$eq:false}}
                     ]
                     }).toArray(function(err, posts) {
                   res.json(posts);

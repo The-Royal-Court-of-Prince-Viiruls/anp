@@ -49,7 +49,7 @@ $('.tabular.menu .item').tab();
               <i class="car icon"></i> Nouto
             </div>
 
-            <div class="detail" ng-show="{change.shipping.home}}===true">
+            <div class="detail" ng-show="{{change.shipping.home}}===true">
               <i class="home icon"></i> Kotiintoimitus
             </div>
           </div>
@@ -124,7 +124,7 @@ $('.tabular.menu .item').tab();
               <i class="car icon"></i> Nouto
             </div>
 
-            <div class="detail" ng-show="{search.shipping.home}}===true">
+            <div class="detail" ng-show="{{search.shipping.home}}===true">
               <i class="home icon"></i> Kotiintoimitus
             </div>
           </div>
@@ -202,7 +202,7 @@ $('.tabular.menu .item').tab();
               <i class="car icon"></i> Nouto
             </div>
 
-            <div class="detail" ng-show="{free.shipping.home}}===true">
+            <div class="detail" ng-show="{{free.shipping.home}}===true">
               <i class="home icon"></i> Kotiintoimitus
             </div>
           </div>
@@ -337,18 +337,18 @@ $('.tabular.menu .item').tab();
               <label>Toimitustapa</label>
               <div class="field">
                 <div class="ui checked checkbox">
-                  <input type="checkbox" name="searchshipping.pickup" checked="checked">
+                  <input type="checkbox" ng-model="searchshipping.pickup"  checked="checked">
                   <label>Nouto</label>
                 </div>
               </div>
               <div class="field">
                 <div class="ui checked checkbox">
-                  <input type="checkbox" name="searchshipping.mail" checked="checked">
+                  <input type="checkbox" ng-model="searchshipping.mail" checked="checked">
                   <label>Postitus</label>
                 </div>
                 <div class="field">
                   <div class="ui checked checkbox">
-                    <input type="checkbox" name="searchshipping.home" checked="checked">
+                    <input type="checkbox" ng-model="searchshipping.home" checked="checked">
                     <label>Toimitus kotiin</label>
                   </div>
                 </div>
@@ -367,7 +367,7 @@ $('.tabular.menu .item').tab();
         <div class="row">
 
           <div class="column">
-            <button ng-click="query()" class="ui basic blue button">Tallenna</button>
+            <button ng-click="querySwitch()" class="ui basic blue button">Tallenna</button>
           </div>
 
         </div>

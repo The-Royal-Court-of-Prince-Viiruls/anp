@@ -14,7 +14,8 @@ IlmoitusApp.service('PostService', function ($http) {
     url: '/posts/query/test',
     method: "GET",
     params: { "type": query.type,
-              "shipping":query.shipping}
+              "shipping":query.shipping,
+              "condition[]":query.condition}
  })
  .success(function(data, status, headers, config){
    console.log(data);

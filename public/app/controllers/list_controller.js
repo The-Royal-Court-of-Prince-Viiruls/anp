@@ -9,6 +9,13 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
     home:true
   }
 
+  $scope.searchCondition = {
+    new: "Uudenveroinen",
+    good: "Hyvä",
+    reasonable: "Kohtalainen",
+    bad: "Heikko"
+  }
+
   $scope.searchtype = "Lahjoitetaan";
 
   var searcFree = {
@@ -16,6 +23,12 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
       pickup:true,
       mail:true,
       home:true
+    },
+    searchCondition : {
+      new: "Uudenveroinen",
+      good: "Hyvä",
+      reasonable: "Kohtalainen",
+      bad: "Heikko"
     }
   }
 
@@ -24,6 +37,12 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
       pickup:true,
       mail:true,
       home:true
+    },
+    searchCondition : {
+      new: "Uudenveroinen",
+      good: "Hyvä",
+      reasonable: "Kohtalainen",
+      bad: "Heikko"
     }
   }
 
@@ -32,6 +51,12 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
       pickup:true,
       mail:true,
       home:true
+    },
+    searchCondition : {
+      new: "Uudenveroinen",
+      good: "Hyvä",
+      reasonable: "Kohtalainen",
+      bad: "Heikko"
     }
   }
 
@@ -63,10 +88,13 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
   modalModelSwitch = function() {
     if ($scope.searchtype === "Lahjoitetaan"){
       $scope.searchshipping = searcFree.searchshipping;
+      $scope.searchCondition = searcFree.searchCondition;
     } else if ($scope.searchtype === "Etsitään") {
       $scope.searchshipping = searcSearch.searchshipping;
+      $scope.searchCondition = searcFree.searchCondition;
     } else {
       $scope.searchshipping = searcChange.searchshipping;
+      $scope.searchCondition = searcFree.searchCondition;
     }
   }
 
@@ -101,7 +129,8 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
   query = function(){
     queryObject = {
       type : $scope.searchtype,
-      shipping : $scope.searchshipping
+      shipping : $scope.searchshipping,
+      condition: toArray($scope.searchCondition)
     }
      return PostService.query(queryObject);
   }

@@ -39,4 +39,15 @@ IlmoitusApp.service('PostService', function ($http) {
     });
   }
 
+  this.listByType = function (type) {
+    var array = [];
+    $http.get('/posts/:'+type)
+    .success(function(data, status, headers, config){
+      for (var item in data) {
+        array[item] = data[item].data;
+      }
+    });
+    return array;
+  }
+
 });

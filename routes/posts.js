@@ -26,6 +26,15 @@ exports.listByQuery = function(req, res) {
   })
 };
 
+exports.listByType = function(req, res) {
+  var tyyppi = req.params.type;
+  tyyppi = tyyppi.substring(1);
+  var collection = db.get().collection('posts');
+  collection.find({"data.type" : tyyppi}).toArray(function(err, posts) {
+    res.json(posts);
+  })
+};
+
 exports.listByQueryTest = function(req, res) {
   var type      = req.query.type;
   var shipping  = req.query.shipping;
@@ -35,11 +44,20 @@ exports.listByQueryTest = function(req, res) {
   collection.find({
                     "data.type"     : type,
                     $or:[
-                  { "data.shipping.pickup" : shipping.pickup},
-                  { "data.shipping.mail" : shipping.mail},
-                  { "data.shipping.home" : shipping.home}
-                        ]
-                  }).toArray(function(err, posts) {
+                      {
+                         "data.shipping.pickup" : true,
+                         "data.shipping.pickup" : shipping.pickup
+                      },
+                      {
+                         "data.shipping.mail" : true,
+                         "data.shipping.mail" : shipping.mail
+                      },
+                      {
+                         "data.shipping.home" : true,
+                         "data.shipping.home" : shipping.home
+                      }
+                    ]
+                    }).toArray(function(err, posts) {
                   res.json(posts);
                 })
               };

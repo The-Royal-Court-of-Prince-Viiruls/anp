@@ -1,21 +1,17 @@
 IlmoitusApp.controller('ListController', function ($scope, FirebaseService, PostService) {
-
-  $scope.posts = FirebaseService.getPosts();
-
+  $scope.freeItems = PostService.listByType("Lahjoitetaan");
+  $scope.searchItems = PostService.listByType("Etsitään");
+  $scope.changeItems = PostService.listByType("Vaihdetaan");
   $scope.searchshipping = {
     pickup:true,
     mail:true,
     home:true
   }
 
-  $scope.searchtype = "";
+  $scope.searchtype = "Lahjoitetaan";
 
-  $scope.query = function(){
-    queryObject = {
-      type : $scope.searchtype,
-      shipping : $scope.searchshipping
-    }
-    PostService.query(queryObject);
+  $scope.changeType = function(event) {
+    $scope.searchtype=event.target.getAttribute("data-tab");
   }
 
   // Open the search refining modal
@@ -54,6 +50,14 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
     }
 
     return result;
+  }
+
+  $scope.query = function(){
+    queryObject = {
+      type : $scope.searchtype,
+      shipping : $scope.searchshipping
+    }
+    PostService.query(queryObject);
   }
 
 })

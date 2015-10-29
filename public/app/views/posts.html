@@ -10,18 +10,18 @@ $('.tabular.menu .item').tab();
 
 <!-- Tabular menu for different post options -->
 <div class="ui top attached tabular menu">
-  <a class="active item" data-tab="lahjoitetaan">Lahjoitetaan</a>
-  <a class="item" data-tab="vaihdetaan">Vaihdetaan</a>
-  <a class="item" data-tab="etsitaan">Etsitään</a>
+  <a class="active item" data-tab="Lahjoitetaan" ng-click="changeType($event)">Lahjoitetaan</a>
+  <a class="item" data-tab="Vaihdetaan" ng-click="changeType($event)">Vaihdetaan</a>
+  <a class="item" data-tab="Etsitään" ng-click="changeType($event)">Etsitään</a>
 </div>
 
-<div class="ui bottom attached tab segment" data-tab="vaihdetaan">
+<div class="ui bottom attached tab segment" data-tab="Vaihdetaan">
 
   <!-- Search for filtering posts -->
   <div class="ui fluid action input">
     <input type="text" placeholder="Etsi hakusanalla">
 
-    <div class="ui button" id="refineButton" ng-click="refineModal()">
+    <div class="ui button" ng-click="refineModal()">
       <i class="search icon"></i> Hakuehdot
     </div>
   </div>
@@ -29,28 +29,88 @@ $('.tabular.menu .item').tab();
   Listaus
 </div>
 
-<div class="ui bottom attached tab segment" data-tab="etsitaan">
+<div class="ui bottom attached tab segment" data-tab="Etsitään">
 
   <!-- Search for filtering posts -->
   <div class="ui fluid action input">
     <input type="text" placeholder="Etsi hakusanalla">
 
-    <div class="ui button" id="refineButton" ng-click="refineModal()">
+    <div class="ui button" ng-click="refineModal()">
       <i class="search icon"></i> Hakuehdot
     </div>
   </div>
 
-  Listaus
+  <!-- Post items -->
+  <div class="ui fluid styled accordion">
+    <div ng-repeat="search in searchItems">
+      <div class="title" ng-click="accordion()">
+        <!-- Post title -->
+        <i class="dropdown icon"></i>
+        {{search.item}} ({{search.location}})
+      </div>
+      <div class="content">
+
+        <!-- Card (post information) begins -->
+
+          <div class="content">
+            <p>{{search.description}}</p>
+
+            <!-- Contact information -->
+            <div class="ui blue label" ng-show="{{search.contact.gsm}}">
+              <i class="phone icon"></i> {{search.contact.gsm}}
+            </div>
+
+            <div class="ui blue label" ng-show="{{search.contact.email.length}}">
+              <i class="mail icon"></i> {{search.contact.email}}
+            </div>
+          </div>
+
+          <div class="right floated content">
+            <!-- Shipping methods -->
+            <div class="ui label">
+              Toimitustavat:
+              <div class="detail" ng-show="{{search.shipping.mail}}===true">
+                <i class="mail icon"></i> Postitus
+              </div>
+
+              <div class="detail" ng-show="{{search.shipping.pickup}}===true">
+                <i class="car icon"></i> Nouto
+              </div>
+
+              <div class="detail" ng-show="{{search.shipping.home}}===true">
+                <i class="home icon"></i> Kotiintoimitus
+              </div>
+            </div>
+
+          </div>
+
+          <div class="ui divider"></div>
+
+          <div class="content">
+
+            <!-- Comment section? -->
+            <div class="ui large transparent left icon input">
+              <i class="heart outline icon"></i>
+              <input type="text" placeholder="Add Comment...">
+            </div>
+
+          </div>
+        <!-- End of card -->
+
+      </div>
+    </div>
+  </div>
+  <!-- End of post items -->
 </div>
 
 <!-- The actual content below the tab menu -->
-<div class="ui bottom attached active tab segment" data-tab="lahjoitetaan">
+<div class="ui bottom attached active tab segment" data-tab="Lahjoitetaan">
 
   <!-- Search for filtering posts -->
   <div class="ui fluid action input">
     <input type="text" placeholder="Etsi hakusanalla">
 
-    <div class="ui button" id="refineButton" ng-click="refineModal()">
+    <div class="ui button" ng-click="refineModal()">
       <i class="search icon"></i> Hakuehdot
     </div>
   </div>
@@ -59,26 +119,26 @@ $('.tabular.menu .item').tab();
 
   <!-- Post items -->
   <div class="ui fluid styled accordion">
-    <div ng-repeat="post in posts">
+    <div ng-repeat="free in freeItems">
       <div class="title" ng-click="accordion()">
         <!-- Post title -->
         <i class="dropdown icon"></i>
-        {{post.item}} ({{post.location}})
+        {{free.item}} ({{free.location}})
       </div>
       <div class="content">
 
         <!-- Card (post information) begins -->
 
           <div class="content">
-            <p>{{post.description}}</p>
+            <p>{{free.description}}</p>
 
             <!-- Contact information -->
-            <div class="ui blue label" ng-show="{{post.contact.gsm}}">
-              <i class="phone icon"></i> {{post.contact.gsm}}
+            <div class="ui blue label" ng-show="{{free.contact.gsm}}">
+              <i class="phone icon"></i> {{free.contact.gsm}}
             </div>
 
-            <div class="ui blue label" ng-show="{{post.contact.email.length}}">
-              <i class="mail icon"></i> {{post.contact.email}}
+            <div class="ui blue label" ng-show="{{free.contact.email.length}}">
+              <i class="mail icon"></i> {{free.contact.email}}
             </div>
           </div>
 
@@ -86,15 +146,15 @@ $('.tabular.menu .item').tab();
             <!-- Shipping methods -->
             <div class="ui label">
               Toimitustavat:
-              <div class="detail" ng-show="{{post.shipping.mail}}===true">
+              <div class="detail" ng-show="{{free.shipping.mail}}===true">
                 <i class="mail icon"></i> Postitus
               </div>
 
-              <div class="detail" ng-show="{{post.shipping.pickup}}===true">
+              <div class="detail" ng-show="{{free.shipping.pickup}}===true">
                 <i class="car icon"></i> Nouto
               </div>
 
-              <div class="detail" ng-show="{{post.shipping.home}}===true">
+              <div class="detail" ng-show="{{free.shipping.home}}===true">
                 <i class="home icon"></i> Kotiintoimitus
               </div>
             </div>

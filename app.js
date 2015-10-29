@@ -18,7 +18,4 @@ var app = express();
 // Haetaan expressin asetukset
 require('./config/express')(app);
 
-// Haetaan kontrollerit tietokantaan
-require('./config/routes')(app);
-
 module.exports = app;

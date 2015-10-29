@@ -1,6 +1,7 @@
 IlmoitusApp.service('FirebaseService', function ($firebase, $firebaseArray) {
   var firebaseRef = new Firebase('https://ilmoitusapp.firebaseio.com/posts');
   var posts = $firebaseArray(firebaseRef);
+  console.log(posts);
 
   this.getPosts = function () {
     return posts;

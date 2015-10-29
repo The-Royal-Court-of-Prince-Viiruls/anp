@@ -1,0 +1,68 @@
+<h1 class="ui header">Rekisteröidy käyttäjäksi</h1>
+
+<div class="content">
+  Rekisteröityneenä käyttäjänä voit lisätä ja hallita omia ilmoituksiasi.
+</div>
+
+<div class="ui segment">
+
+  <!-- Form for signing up -->
+  <form class="ui form" name="signUpForm">
+
+    <div class="field">
+      <label>Nimi</label>
+
+      <div class="two fields">
+
+        <div class="field">
+          <input type="text" name="firstName" ng-model="firstName" placeholder="Etunimi" required ng-minlength="2" ng-model-options="{ updateOn: 'blur' }">
+
+          <!-- Error message for input -->
+          <div ng-show="signUpForm.firstName.$invalid && signUpForm.firstName.$dirty">
+            <div class="ui pointing blue label">
+              Nimen on oltava vähintään kaksi merkkiä pitkä
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <input type="text" name="lastName" ng-model="lastName" placeholder="Sukunimi" required ng-minlength="2" ng-model-options="{ updateOn: 'blur' }">
+
+          <!-- Error message for input -->
+          <div ng-show="signUpForm.lastName.$invalid && signUpForm.lastName.$dirty">
+            <div class="ui pointing blue label">
+              Sukunimen on oltava vähintään kaksi merkkiä pitkä
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Sähköpostiosoite</label>
+      <input type="text" name="email" ng-model="email" placeholder="Sähköpostiosoite" required ng-pattern="/^.+@.+\..+$/" ng-model-options="{ updateOn: 'blur' }">
+
+      <!-- Error message for input -->
+      <div ng-show="signUpForm.email.$invalid && signUpForm.email.$dirty">
+        <div class="ui pointing blue label">
+          Sähköpostiosoitteen on oltava muotoa "user@host.com"
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Salasana</label>
+      <input type="text" name="password" ng-model="password" placeholder="Salasana" required ng-minlength="5" ng-model-options="{ updateOn: 'blur' }">
+
+      <!-- Error message for input -->
+      <div ng-show="signUpForm.password.$invalid && signUpForm.password.$dirty">
+        <div class="ui pointing blue label">
+          Salasanan on oltava vähintään viisi merkkiä pitkä
+        </div>
+      </div>
+    </div>
+    <button class="ui blue button" ng-disabled="signUpForm.$invalid" ng-click="signUp()">Rekisteröidy</button>
+  </form>
+  <!-- End of signup form -->
+
+</div>

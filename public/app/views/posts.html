@@ -15,6 +15,7 @@ $('.tabular.menu .item').tab();
   <a class="item" data-tab="Etsitään" ng-click="changeType($event)">Etsitään</a>
 </div>
 
+<!-- The "Vaihdetaan" content below the tab menu -->
 <div class="ui bottom attached tab segment" data-tab="Vaihdetaan">
 
   <!-- Search for filtering posts -->
@@ -26,9 +27,69 @@ $('.tabular.menu .item').tab();
     </div>
   </div>
 
-  Listaus
+  <div class="ui fluid styled accordion">
+    <div ng-repeat="change in changeItems">
+      <div class="title" ng-click="accordion()">
+        <!-- Post title -->
+        <i class="dropdown icon"></i>
+        {{change.item}} ({{change.location}})
+      </div>
+      <div class="content">
+
+        <!-- Post information begins -->
+        <div class="content">
+          <!-- Shipping methods -->
+          <div class="ui label">
+            Toimitustavat:
+            <div class="detail" ng-show="{{change.shipping.mail}}===true">
+              <i class="mail icon"></i> Postitus
+            </div>
+
+            <div class="detail" ng-show="{{change.shipping.pickup}}===true">
+              <i class="car icon"></i> Nouto
+            </div>
+
+            <div class="detail" ng-show="{change.shipping.home}}===true">
+              <i class="home icon"></i> Kotiintoimitus
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="content">
+          <p>{{change.description}}</p>
+        </div>
+
+        <!-- Contact information -->
+        <div class="content">
+          <div ng-show="{{change.contact.gsm}}">
+            <i class="phone icon"></i> {{change.contact.gsm}}
+          </div>
+
+          <div ng-show="{{change.contact.email.length}}">
+            <i class="mail icon"></i> {{change.contact.email}}
+          </div>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="content">
+
+          <!-- Comment section? -->
+          <div class="ui large transparent left icon input">
+            <i class="heart outline icon"></i>
+            <input type="text" placeholder="Add Comment...">
+          </div>
+
+        </div>
+        <!-- End of post information -->
+
+      </div>
+    </div>
+  </div>
 </div>
 
+<!-- The "Etsitaan" content below the tab menu -->
 <div class="ui bottom attached tab segment" data-tab="Etsitään">
 
   <!-- Search for filtering posts -->
@@ -50,52 +111,53 @@ $('.tabular.menu .item').tab();
       </div>
       <div class="content">
 
-        <!-- Card (post information) begins -->
-
-          <div class="content">
-            <p>{{search.description}}</p>
-
-            <!-- Contact information -->
-            <div class="ui blue label" ng-show="{{search.contact.gsm}}">
-              <i class="phone icon"></i> {{search.contact.gsm}}
+        <!-- Post information begins -->
+        <div class="content">
+          <!-- Shipping methods -->
+          <div class="ui label">
+            Toimitustavat:
+            <div class="detail" ng-show="{{search.shipping.mail}}===true">
+              <i class="mail icon"></i> Postitus
             </div>
 
-            <div class="ui blue label" ng-show="{{search.contact.email.length}}">
-              <i class="mail icon"></i> {{search.contact.email}}
+            <div class="detail" ng-show="{{search.shipping.pickup}}===true">
+              <i class="car icon"></i> Nouto
+            </div>
+
+            <div class="detail" ng-show="{search.shipping.home}}===true">
+              <i class="home icon"></i> Kotiintoimitus
             </div>
           </div>
+        </div>
 
-          <div class="right floated content">
-            <!-- Shipping methods -->
-            <div class="ui label">
-              Toimitustavat:
-              <div class="detail" ng-show="{{search.shipping.mail}}===true">
-                <i class="mail icon"></i> Postitus
-              </div>
+        <!-- Description -->
+        <div class="content">
+          <p>{{search.description}}</p>
+        </div>
 
-              <div class="detail" ng-show="{{search.shipping.pickup}}===true">
-                <i class="car icon"></i> Nouto
-              </div>
-
-              <div class="detail" ng-show="{{search.shipping.home}}===true">
-                <i class="home icon"></i> Kotiintoimitus
-              </div>
-            </div>
-
+        <!-- Contact information -->
+        <div class="content">
+          <div ng-show="{{search.contact.gsm}}">
+            <i class="phone icon"></i> {{search.contact.gsm}}
           </div>
 
-          <div class="ui divider"></div>
-
-          <div class="content">
-
-            <!-- Comment section? -->
-            <div class="ui large transparent left icon input">
-              <i class="heart outline icon"></i>
-              <input type="text" placeholder="Add Comment...">
-            </div>
-
+          <div ng-show="{{search.contact.email.length}}">
+            <i class="mail icon"></i> {{search.contact.email}}
           </div>
-        <!-- End of card -->
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="content">
+
+          <!-- Comment section? -->
+          <div class="ui large transparent left icon input">
+            <i class="heart outline icon"></i>
+            <input type="text" placeholder="Add Comment...">
+          </div>
+
+        </div>
+        <!-- End of post information -->
 
       </div>
     </div>
@@ -103,7 +165,7 @@ $('.tabular.menu .item').tab();
   <!-- End of post items -->
 </div>
 
-<!-- The actual content below the tab menu -->
+<!-- The "Lahtjoitetaan" content below the tab menu -->
 <div class="ui bottom attached active tab segment" data-tab="Lahjoitetaan">
 
   <!-- Search for filtering posts -->
@@ -127,52 +189,53 @@ $('.tabular.menu .item').tab();
       </div>
       <div class="content">
 
-        <!-- Card (post information) begins -->
-
-          <div class="content">
-            <p>{{free.description}}</p>
-
-            <!-- Contact information -->
-            <div class="ui blue label" ng-show="{{free.contact.gsm}}">
-              <i class="phone icon"></i> {{free.contact.gsm}}
+        <!-- Post information begins -->
+        <div class="content">
+          <!-- Shipping methods -->
+          <div class="ui label">
+            Toimitustavat:
+            <div class="detail" ng-show="{{free.shipping.mail}}===true">
+              <i class="mail icon"></i> Postitus
             </div>
 
-            <div class="ui blue label" ng-show="{{free.contact.email.length}}">
-              <i class="mail icon"></i> {{free.contact.email}}
+            <div class="detail" ng-show="{{free.shipping.pickup}}===true">
+              <i class="car icon"></i> Nouto
+            </div>
+
+            <div class="detail" ng-show="{free.shipping.home}}===true">
+              <i class="home icon"></i> Kotiintoimitus
             </div>
           </div>
+        </div>
 
-          <div class="right floated content">
-            <!-- Shipping methods -->
-            <div class="ui label">
-              Toimitustavat:
-              <div class="detail" ng-show="{{free.shipping.mail}}===true">
-                <i class="mail icon"></i> Postitus
-              </div>
+        <!-- Description -->
+        <div class="content">
+          <p>{{free.description}}</p>
+        </div>
 
-              <div class="detail" ng-show="{{free.shipping.pickup}}===true">
-                <i class="car icon"></i> Nouto
-              </div>
-
-              <div class="detail" ng-show="{{free.shipping.home}}===true">
-                <i class="home icon"></i> Kotiintoimitus
-              </div>
-            </div>
-
+        <!-- Contact information -->
+        <div class="content">
+          <div ng-show="{{free.contact.gsm}}">
+            <i class="phone icon"></i> {{free.contact.gsm}}
           </div>
 
-          <div class="ui divider"></div>
-
-          <div class="content">
-
-            <!-- Comment section? -->
-            <div class="ui large transparent left icon input">
-              <i class="heart outline icon"></i>
-              <input type="text" placeholder="Add Comment...">
-            </div>
-
+          <div ng-show="{{free.contact.email.length}}">
+            <i class="mail icon"></i> {{free.contact.email}}
           </div>
-        <!-- End of card -->
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="content">
+
+          <!-- Comment section? -->
+          <div class="ui large transparent left icon input">
+            <i class="heart outline icon"></i>
+            <input type="text" placeholder="Add Comment...">
+          </div>
+
+        </div>
+        <!-- End of post information -->
 
       </div>
     </div>

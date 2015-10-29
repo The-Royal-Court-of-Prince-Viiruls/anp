@@ -1,7 +1,8 @@
 [![Build Status](https://travis-ci.org/The-Royal-Court-of-Prince-Viiruls/anp.svg?branch=deploy)](https://travis-ci.org/The-Royal-Court-of-Prince-Viiruls/anp)
 
 # anp
-Angular and Node.js project
+Angular ja Node.js projekti:
+Tavaranvaihtopalvelu, joka listaa uutta kotia etsiviä tavaroita. Rekisteröityneet käyttäjät voivat jättää ja hallita omia ilmoituksiaan (etsitään, lahjoitetaan, vaihdetaan). Hyödynnetään mm. Expressiä, MongoDB:tä ja Semantic UI:tä.
 
 Linkki herokuun:
 https://viiru.herokuapp.com

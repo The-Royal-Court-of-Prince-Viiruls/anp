@@ -1,7 +1,7 @@
 IlmoitusApp.service('PostService', function ($http) {
 
   this.addPost = function (post) {
-    $http.post('/posts', { data: post })
+    $http.post('/posts', post)
     .success(function(data, status, headers, config){
       console.log('Palvelin lähetti vastauksen!');
       console.log(data);
@@ -18,23 +18,14 @@ IlmoitusApp.service('PostService', function ($http) {
               "condition[]":query.condition}
  })
  .success(function(data, status, headers, config){
-   console.log(data);
-   for (var item in data) {
-     array[item] = data[item].data;
-   }
- });
- return array;
+   return data;
   }
 
   this.listByType = function (type) {
     var array = [];
     $http.get('/posts/:'+type)
     .success(function(data, status, headers, config){
-      for (var item in data) {
-        array[item] = data[item].data;
-      }
-    });
-    return array;
+      return data;
   }
 
 });

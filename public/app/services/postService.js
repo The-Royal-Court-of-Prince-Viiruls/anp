@@ -19,13 +19,14 @@ IlmoitusApp.service('PostService', function ($http) {
  })
  .success(function(data, status, headers, config){
    return data;
-  }
+ });
+ }
 
   this.listByType = function (type) {
-    var array = [];
     $http.get('/posts/:'+type)
     .success(function(data, status, headers, config){
       return data;
-  }
+  });
 
+}
 });

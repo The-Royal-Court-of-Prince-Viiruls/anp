@@ -12,18 +12,18 @@ module.exports = function (app,passport) {
   app.get('/posts/query/test',posts.listByQueryTest);
   app.get('/posts/:type',posts.listByType);
 
-app.get('/success',function(req,res){
-  res.json({path: "/"});
-});
-app.get('/perkele',function(req,res){
-  console.log("pieleen meni");
-});
+  app.get('/success',function(req,res){
+    res.json({path: "/"});
+  });
+  app.get('/failure',function(req,res){
+    res.json({path: "/signup"});
+  });
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/success', // redirect to the secure profile section
-        failureRedirect : '/failure', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
+    successRedirect : '/success', // redirect to the secure profile section
+    failureRedirect : '/failure', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+  }));
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {

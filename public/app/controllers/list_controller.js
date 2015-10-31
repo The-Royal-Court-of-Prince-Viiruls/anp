@@ -1,7 +1,19 @@
 IlmoitusApp.controller('ListController', function ($scope, FirebaseService, PostService) {
-  $scope.freeItems = PostService.listByType("Lahjoitetaan");
-  $scope.searchItems = PostService.listByType("Etsitään");
-  $scope.changeItems = PostService.listByType("Vaihdetaan");
+  $scope.freeItems = [];
+  $scope.searchItems = [];
+  $scope.changeItems =  [];
+
+  PostService.type("Lahjoitetaan").then(function(d) {
+      $scope.freeItems = d;
+  });
+
+  PostService.type("Etsitään").then(function(d) {
+    $scope.searchItems = d;
+  });
+
+  PostService.type("Vaihdetaan").then(function(d) {
+    $scope.changeItems = d;
+  });
 
   $scope.searchshipping = {
     pickup:true,
@@ -18,7 +30,7 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
 
   $scope.searchtype = "Lahjoitetaan";
 
-  var searcFree = {
+  var searchFree = {
     searchshipping : {
       pickup:true,
       mail:true,
@@ -32,7 +44,7 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
     }
   }
 
-  var searcChange = {
+  var searchChange = {
     searchshipping : {
       pickup:true,
       mail:true,
@@ -46,7 +58,7 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
     }
   }
 
-  var searcSearch = {
+  var searchSearch = {
     searchshipping : {
       pickup:true,
       mail:true,
@@ -75,26 +87,26 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
     .accordion();
   };
 
-  $scope.querySwitch = function(){
+  querySwitch = function(data){
     if ($scope.searchtype === "Lahjoitetaan"){
-      $scope.freeItems = query();
+      $scope.freeItems = data;
     } else if ($scope.searchtype === "Etsitään") {
-      $scope.searchItems = query();
+      $scope.searchItems = data;
     } else {
-      $scope.changeItems = query();
+      $scope.changeItems = data;
     }
   }
 
   modalModelSwitch = function() {
     if ($scope.searchtype === "Lahjoitetaan"){
-      $scope.searchshipping = searcFree.searchshipping;
-      $scope.searchCondition = searcFree.searchCondition;
+      $scope.searchshipping = searchFree.searchshipping;
+      $scope.searchCondition = searchFree.searchCondition;
     } else if ($scope.searchtype === "Etsitään") {
-      $scope.searchshipping = searcSearch.searchshipping;
-      $scope.searchCondition = searcFree.searchCondition;
+      $scope.searchshipping = searchSearch.searchshipping;
+      $scope.searchCondition = searchSearch.searchCondition;
     } else {
-      $scope.searchshipping = searcChange.searchshipping;
-      $scope.searchCondition = searcFree.searchCondition;
+      $scope.searchshipping = searchChange.searchshipping;
+      $scope.searchCondition = searchChange.searchCondition;
     }
   }
 
@@ -126,13 +138,14 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
     return result;
   }
 
-  query = function(){
+  $scope.query = function(list){
     queryObject = {
       type : $scope.searchtype,
       shipping : $scope.searchshipping,
       condition: toArray($scope.searchCondition)
     }
-     return PostService.query(queryObject);
+    PostService.query(queryObject).then(function(d) {
+    querySwitch(d);
+    });
   }
-
 })

@@ -6,25 +6,50 @@ module.exports = function (app,passport) {
   // liitetään kontrollerit
   app.use('/', index);
 
-  app.post('/posts',posts.add);
+  app.post('/posts', isLoggedIn, posts.add);
   app.get('/posts',posts.listAll);
   app.get('/posts/query',posts.listByQuery);
   app.get('/posts/query/test',posts.listByQueryTest);
   app.get('/posts/:type',posts.listByType);
 
-app.get('/success',function(req,res){
-  res.json({path: "/"});
-});
-app.get('/perkele',function(req,res){
-  console.log("pieleen meni");
-  
-});
+  app.get('/signupsuccess',function(req,res){
+    res.json({path: "/"});
+  });
+
+  app.get('/signupfail',function(req,res){
+    res.json({path:"/signup",message: req.flash('signupMessage')});
+  });
+
+  app.get('/loginsuccess',function(req,res){
+    res.json({path: "/"});
+  });
+
+  app.get('/loginfail',function(req,res){
+    res.json({path:"/login",message: req.flash('signupMessage')});
+  });
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/success', // redirect to the secure profile section
-        failureRedirect : '/failure', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
+    successRedirect : '/signupsuccess', // redirect to the secure profile section
+    failureRedirect : '/signupfail', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+  }));
+
+  // process the login form
+  app.post('/login', passport.authenticate('local-login', {
+    successRedirect : '/loginsuccess', // redirect to the secure profile section
+    failureRedirect : '/loginfail', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+  }));
+
+  function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+    return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+  }
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {

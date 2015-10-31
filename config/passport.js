@@ -15,16 +15,13 @@ module.exports = function(passport) {
 
   // used to serialize the user for the session
   passport.serializeUser(function(user, done) {
-    console.log(user);
     done(null, user._id);
   });
 
   // used to deserialize the user
   passport.deserializeUser(function(id, done) {
-    console.log(id);
     var collection = db.get().collection('users');
     collection.findOne({ '_id' :  new ObjectId(id) }, function(err, user) {
-      console.log(user);
       done(err, user);
     });
   });
@@ -45,55 +42,85 @@ module.exports = function(passport) {
 
     process.nextTick(function() {
       var collection = db.get().collection('users');
-        // find a user whose email is the same as the forms email
-        // we are checking to see if the user trying to login already exists
-        collection.findOne({ 'local.email' :  email }, function(err, user) {
-            // if there are any errors, return the error
-            if (err)
-                return done(err);
+      // find a user whose email is the same as the forms email
+      // we are checking to see if the user trying to login already exists
+      collection.findOne({ 'local.email' :  email }, function(err, user) {
+        // if there are any errors, return the error
+        if (err)
+        return done(err);
 
-            // check to see if theres already a user with that email
-            if (user) {
-                return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-            } else {
+        // check to see if theres already a user with that email
+        if (user) {
+          return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+        } else {
 
-                // if there is no user with that email
-                // create the user
+          // if there is no user with that email
+          // create the user
 
-                    var newuser = {
-                      local : {
-                        email: email,
-                        password: generateHash(password)
-                      }
-                    }
-
-                // save the user
-                collection.insertOne(newuser,function(err) {
-                  if (err)
-                      throw err;
-                });
-
-                collection.findOne({ 'local.email' :  email }, function(err, user) {
-                  return done(null,user);
-                })
+          var newuser = {
+            local : {
+              email: email,
+              password: generateHash(password)
             }
+          }
 
-        });
+          // save the user
+          collection.insertOne(newuser,function(err) {
+            if (err)
+            throw err;
+          });
 
-        });
+          collection.findOne({ 'local.email' :  email }, function(err, user) {
+            return done(null,user);
+          })
+        }
 
-    }));
+      });
 
-};
+    });
+
+  }));
+
+passport.use('local-login', new LocalStrategy({
+  // by default, local strategy uses username and password, we will override with email
+  usernameField : 'email',
+  passwordField : 'password',
+  passReqToCallback : true // allows us to pass back the entire request to the callback
+},
+function(req, email, password, done) { // callback with email and password from our form
+  var collection = db.get().collection('users');
+  // find a user whose email is the same as the forms email
+  // we are checking to see if the user trying to login already exists
+  collection.findOne({ 'local.email' :  email }, function(err, user) {
+    // if there are any errors, return the error
+    if (err)
+    return done(err);
+
+    // if no user is found, return the message
+    if (!user)
+    return done(null, false, req.flash('loginMessage', 'No user found.'));
+
+    // if the user is found but the password is wrong
+    if (!user.validPassword(password))
+    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+
+    // all is well, return successful user
+    return done(null, user);
+
+  });
+
+}));
 
 
 
 // generating a hash
 generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 // checking if password is valid
 validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
+  return bcrypt.compareSync(password, this.local.password);
+};
+
 };

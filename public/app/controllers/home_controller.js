@@ -1,4 +1,7 @@
-IlmoitusApp.controller('HomeController', function ($scope, PostService) {
+IlmoitusApp.controller('HomeController', function ($scope, PostService, SignupService) {
+
+  // Check if the user has just registered
+  $scope.showSuccess = SignupService.getsignUpSuccess();
 
   $scope.menuClick = function () {
     $('.menu')
@@ -20,6 +23,7 @@ IlmoitusApp.controller('HomeController', function ($scope, PostService) {
     $('#loginModal').modal('show');
   };
 
+  // Close the login modal
   $scope.closeLogin = function() {
     $('#loginModal').modal('hide');
   };

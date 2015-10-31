@@ -63,6 +63,12 @@
     </div>
     <button class="ui blue button" ng-disabled="signUpForm.$invalid" ng-click="signUp()">Rekisteröidy</button>
   </form>
+  
+  <!-- Show error message if email is in use -->
+  <div class="ui error message" ng-show="showError != null">
+    <div class="header">Salasana käytössä</div>
+    <p>Antamallasi salasanalla on jo rekisteröity käyttäjä.</p>
+  </div>
   <!-- End of signup form -->
 
 </div>

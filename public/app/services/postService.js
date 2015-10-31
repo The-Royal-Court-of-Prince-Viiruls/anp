@@ -1,32 +1,44 @@
 IlmoitusApp.service('PostService', function ($http) {
 
-  this.addPost = function (post) {
-    $http.post('/posts', post)
-    .success(function(data, status, headers, config){
-      console.log('Palvelin lähetti vastauksen!');
-      console.log(data);
-    });
-  }
+var PostService = {
 
-  this.query = function(query) {
-    var array = [];
-    $http({
-    url: '/posts/query/test',
-    method: "GET",
-    params: { "type": query.type,
-              "shipping":query.shipping,
-              "condition[]":query.condition}
- })
- .success(function(data, status, headers, config){
-   return data;
- });
- }
+    addPost: function (post) {
+      $http.post('/posts', post)
+      .success(function(data, status, headers, config){
+      });
+    },
 
-  this.listByType = function (type) {
-    $http.get('/posts/:'+type)
-    .success(function(data, status, headers, config){
-      return data;
-  });
+    query: function(query) {
+      // $http returns a promise, which has a then function, which also returns a promise
+      var promise = $http({
+      url: '/posts/query/test',
+      method: "GET",
+      params: { "type": query.type,
+                "shipping":query.shipping,
+                "condition[]":query.condition}
+   }).then(function(response){
+        // The then function here is an opportunity to modify the response
 
-}
+        // The return value gets picked up by the then in the controller.
+        return response.data;
+      });
+      // Return the promise to the controller
+      return promise;
+    },
+
+    type: function(type) {
+      // $http returns a promise, which has a then function, which also returns a promise
+      var promise = $http.get('/posts/:'+type)
+      .then(function(response){
+        // The then function here is an opportunity to modify the response
+
+        // The return value gets picked up by the then in the controller.
+        return response.data;
+      });
+      // Return the promise to the controller
+      return promise;
+    }
+
+  };
+  return PostService;
 });

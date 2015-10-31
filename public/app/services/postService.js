@@ -18,15 +18,17 @@ IlmoitusApp.service('PostService', function ($http) {
               "condition[]":query.condition}
  })
  .success(function(data, status, headers, config){
-   return data;
+   array = data;
  });
+ return array;
  }
 
   this.listByType = function (type) {
+    var array = [];
     $http.get('/posts/:'+type)
     .success(function(data, status, headers, config){
-      return data;
+      array = data;
   });
-
-}
+  return array;
+  }
 });

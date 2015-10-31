@@ -25,7 +25,7 @@ module.exports = function (app,passport) {
   });
 
   app.get('/loginfail',function(req,res){
-    res.json({path:"/login",message: req.flash('signupMessage')});
+    res.json({path:"/login",message: req.flash('loginMessage')});
   });
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
@@ -42,13 +42,12 @@ module.exports = function (app,passport) {
   }));
 
   function isLoggedIn(req, res, next) {
-
     // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
+    if (req.isAuthenticated()){
     return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
+  }
+    // if they aren't redirect them TODO
+    res.json({});
   }
 
   // catch 404 and forward to error handler

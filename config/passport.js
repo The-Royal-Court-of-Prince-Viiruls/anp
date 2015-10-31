@@ -98,11 +98,11 @@ function(req, email, password, done) { // callback with email and password from 
 
     // if no user is found, return the message
     if (!user)
-    return done(null, false, req.flash('loginMessage', 'No user found.'));
+    return done(null, false, req.flash('loginMessage', 'Käyttäjätunnusta ei ole olemassa.'));
 
     // if the user is found but the password is wrong
-    if (!user.validPassword(password))
-    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+    if (!validPassword(user,password))
+    return done(null, false, req.flash('loginMessage', 'Väärä salasana.')); // create the loginMessage and save it to session as flashdata
 
     // all is well, return successful user
     return done(null, user);
@@ -119,8 +119,8 @@ generateHash = function(password) {
 };
 
 // checking if password is valid
-validPassword = function(password) {
-  return bcrypt.compareSync(password, this.local.password);
+validPassword = function(user,password) {
+  return bcrypt.compareSync(password, user.local.password);
 };
 
 };

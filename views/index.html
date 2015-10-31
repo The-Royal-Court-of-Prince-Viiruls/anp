@@ -50,21 +50,25 @@
             </div>
           </h2>
           <!-- Login form begins -->
+          <div class="ui error message" ng-show="showLoginError != null">
+              <div class="header">Kirjautuminen ei onnistunut!</div>
+              <p>{{showLoginError}}</p>
+            </div>
           <form class="ui large form">
             <div class="ui stacked segment">
               <div class="field">
                 <div class="ui left icon input">
                   <i class="user icon"></i>
-                  <input type="text" name="email" placeholder="Sähköpostiosoite">
+                  <input type="text" name="email" ng-model="email" placeholder="Sähköpostiosoite">
                 </div>
               </div>
               <div class="field">
                 <div class="ui left icon input">
                   <i class="lock icon"></i>
-                  <input type="password" name="password" placeholder="Salasana">
+                  <input type="password" name="password" ng-model="password" placeholder="Salasana">
                 </div>
               </div>
-              <div class="ui fluid large blue submit button">Kirjaudu</div>
+              <button class="ui basic blue button" ng-click="login()">Kirjaudu</button>
             </div>
 
             <div class="ui error message"></div>
@@ -91,6 +95,7 @@
 
     <!-- Own scripts -->
     <script src="app/app.js"></script>
+    <script src="app/services/login_service.js"></script>
     <script src="app/services/postService.js"></script>
     <script src="app/services/firebase_service.js"></script>
     <script src="app/services/signup_service.js"></script>

@@ -1,0 +1,13 @@
+/* Mini menu for small devices */
+@media screen and (max-width: 699px){
+  #largeMenu{
+    display: none;
+  }
+}
+
+
+@media screen and (min-width: 700px){
+  #miniMenu {
+    display: none;
+  }
+}

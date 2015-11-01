@@ -41,6 +41,11 @@ module.exports = function (app,passport) {
     failureFlash : true // allow flash messages
   }));
 
+  // route to test if the user is logged in or not
+  app.get('/loggedin', function(req, res) {
+     res.send(req.isAuthenticated() ? req.user : '0');
+   });
+
   function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated()){

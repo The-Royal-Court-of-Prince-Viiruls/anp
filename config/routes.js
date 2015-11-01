@@ -11,6 +11,11 @@ module.exports = function (app,passport) {
   app.get('/posts/query',posts.listByQuery);
   app.get('/posts/query/test',posts.listByQueryTest);
   app.get('/posts/:type',posts.listByType);
+  app.get('/posts/user/:id',isLoggedIn, posts.listByUser);
+
+  app.get('/sessioninfo', isLoggedIn, function(req,res){
+    res.json({id: req.user._id, email: req.user.local.email});
+  });
 
   app.get('/signupsuccess',function(req,res){
     res.json({path: "/"});
@@ -41,9 +46,14 @@ module.exports = function (app,passport) {
     failureFlash : true // allow flash messages
   }));
 
+  app.get('/logout', function(req,res){
+    req.logout();
+    res.json(req.isAuthenticated() ? true : false);
+  });
+
   // route to test if the user is logged in or not
   app.get('/loggedin', function(req, res) {
-     res.send(req.isAuthenticated() ? '1' : '0');
+     res.json(req.isAuthenticated() ? true : false);
    });
 
   function isLoggedIn(req, res, next) {

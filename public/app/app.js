@@ -1,6 +1,21 @@
 var IlmoitusApp = angular.module('IlmoitusApp', ['firebase', 'ngRoute']);
 
 IlmoitusApp.config(function ($routeProvider) {
+  
+  var isLoggedIn = function($q, $timeout, $http, $location, $rootScope){
+    var deferred = $q.defer();
+    $http.get('/loggedin')
+    .success(function(data) {
+      if (data === true){
+        deferred.resolve();
+      } else {
+        deferred.reject();
+        $location.url('/');
+      }
+  });
+  return deferred.promise;
+  };
+
   $routeProvider
   .when('/', {
     controller: 'HomeController',
@@ -12,7 +27,8 @@ IlmoitusApp.config(function ($routeProvider) {
   })
   .when('/add', {
     controller:'AddController',
-    templateUrl: 'app/views/add.html'
+    templateUrl: 'app/views/add.html',
+    resolve: { loggedin: isLoggedIn }
   })
   .when('/signup', {
     controller:'SignupController',
@@ -20,6 +36,8 @@ IlmoitusApp.config(function ($routeProvider) {
   })
   .when('/user', {
     controller:'UserController',
-    templateUrl: 'app/views/user.html'
-  })
+    templateUrl: 'app/views/user.html',
+    resolve: { loggedin: isLoggedIn }
+  });
+
 });

@@ -26,6 +26,15 @@ exports.listByQuery = function(req, res) {
   })
 };
 
+exports.listByUser = function(req, res) {
+  var userId = req.params.id;
+  userId = userId.substring(1);
+  var collection = db.get().collection('posts');
+  collection.find({"user" : userId}).toArray(function(err, posts) {
+    res.json(posts);
+  })
+};
+
 exports.listByType = function(req, res) {
   var tyyppi = req.params.type;
   tyyppi = tyyppi.substring(1);

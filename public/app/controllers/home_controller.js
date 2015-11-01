@@ -22,6 +22,7 @@ IlmoitusApp.controller('HomeController', function ($scope, PostService, SignupSe
 
   // Open the login modal
   $scope.loginModal = function() {
+    $scope.showLoginError = null;
     $('#loginModal').modal('show');
   };
 
@@ -38,7 +39,7 @@ IlmoitusApp.controller('HomeController', function ($scope, PostService, SignupSe
     }).then(function(data) {
       if(data.message){
         // If there was an error show error message
-      $scope.showLoginError = data.message[0];
+        $scope.showLoginError = data.message[0];
     } else {
       // If login is successful, show success message and redirect to profile
     $scope.closeLogin();

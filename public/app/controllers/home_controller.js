@@ -2,7 +2,7 @@ IlmoitusApp.controller('HomeController', function ($scope, PostService, SignupSe
 
   // Check if the user has just registered
   $scope.showSuccess = SignupService.getsignUpSuccess();
-  //login error message
+  // Login error message
   $scope.showLoginError = null;
 
   $scope.menuClick = function () {

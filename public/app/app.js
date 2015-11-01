@@ -18,4 +18,8 @@ IlmoitusApp.config(function ($routeProvider) {
     controller:'SignupController',
     templateUrl: 'app/views/signup.html'
   })
+  .when('/user', {
+    controller:'UserController',
+    templateUrl: 'app/views/user.html'
+  })
 });

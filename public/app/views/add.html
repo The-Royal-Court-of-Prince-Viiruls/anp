@@ -1,9 +1,9 @@
 <!-- Add new post into database -->
-<h1 class="ui header">
-  Lisää uusi ilmoitus
-</h1>
-
 <div class="ui piled segment">
+
+  <h1 class="ui centered green header">
+    Lisää uusi ilmoitus
+  </h1>
 
   <!-- Form begins -->
   <div class="ui form">
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <a class="ui blue ribbon label">Tavaran tiedot</a>
+      <a class="ui green ribbon label">Tavaran tiedot</a>
       <p></p>
 
       <div class="field">
@@ -46,7 +46,7 @@
             <input type="text" name=newItem ng-model="newItem" placeholder="Esim. Kirjoituspöytä" required ng-minlength="3" ng-model-options="{ updateOn: 'blur' }">
             <!-- Error message for input -->
             <div ng-show="newPostForm.newItem.$invalid && newPostForm.newItem.$dirty">
-              <div class="ui pointing blue label">
+              <div class="ui pointing primary label">
                 Kuvauksen oltava 3 merkkiä tai pidempi
               </div>
             </div>
@@ -79,7 +79,7 @@
         <textarea name="newDescription" ng-model="newDescription" required ng-minlength="10" ng-model-options="{ updateOn: 'blur' }"></textarea>
         <!-- Error message for input -->
         <div ng-show="newPostForm.newDescription.$invalid && newPostForm.newDescription.$dirty">
-          <div class="ui pointing blue label">
+          <div class="ui pointing primary label">
             Ilmoituksen oltava 10 merkkiä tai pidempi
           </div>
         </div>
@@ -116,7 +116,7 @@
         </div>
       </div>
 
-      <a class="ui blue ribbon label">Toimitus- ja yhteystiedot</a>
+      <a class="ui green ribbon label">Toimitus- ja yhteystiedot</a>
       <p></p>
 
       <div class="field">
@@ -180,7 +180,7 @@
             <input type="text" name="newGSM" placeholder="Puhelinnumero" ng-model="newGSM" ng-required="!(newGSM.length || newEmail.length)" ng-pattern="/^[0-9]{10,}$/" ng-model-options="{ updateOn: 'blur' }">
             <!-- Error message for input -->
             <div ng-show="newPostForm.newGSM.$invalid && newPostForm.newGSM.$dirty">
-              <div class="ui pointing blue label">
+              <div class="ui pointing primary label">
                 Puhelinnumeron on oltava muotoa "0401234567"
               </div>
             </div>
@@ -191,7 +191,7 @@
             <input type="text" name="newEmail" placeholder="Sähköpostiosoite" ng-model="newEmail" ng-required="!(newGSM.length || newEmail.length)" ng-pattern="/^.+@.+\..+$/" ng-model-options="{ updateOn: 'blur' }">
             <!-- Error message for input -->
             <div ng-show="newPostForm.newEmail.$invalid && newPostForm.newEmail.$dirty">
-              <div class="ui pointing blue label">
+              <div class="ui pointing primary label">
                 Sähköpostiosoitteen on oltava muotoa "user@host.com"
               </div>
             </div>
@@ -201,7 +201,7 @@
 
       </div>
 
-      <button ng-click="addPost()" class="ui blue button" ng-disabled="newPostForm.$invalid">Lisää</button>
+      <button ng-click="addPost()" class="ui green button" ng-disabled="newPostForm.$invalid">Lisää</button>
 
     </div>
 

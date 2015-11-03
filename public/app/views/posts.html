@@ -3,272 +3,284 @@ $('.tabular.menu .item').tab();
 </script>
 
 <!-- View begins -->
-<meta charset="utf-8">
-<!-- Some introduction for the page -->
-<h1 class="ui header">Ilmoitukset</h1>
-<p>Täällä voit selata jätettyjä ilmoituksia. Nopeuttaaksesi hakuasi, tarkenna hakuehtojasi! </p>
-
-<!-- Tabular menu for different post options -->
-<div class="ui top attached tabular menu">
-  <a class="active item" data-tab="Lahjoitetaan" ng-click="changeType($event)">Lahjoitetaan</a>
-  <a class="item" data-tab="Vaihdetaan" ng-click="changeType($event)">Vaihdetaan</a>
-  <a class="item" data-tab="Etsitään" ng-click="changeType($event)">Etsitään</a>
-</div>
-
-<!-- The "Vaihdetaan" content below the tab menu -->
-<div class="ui bottom attached tab segment" data-tab="Vaihdetaan">
-
-  <!-- Search for filtering posts -->
-  <div class="ui fluid action input">
-    <input type="text" placeholder="Etsi hakusanalla">
-
-    <div class="ui button" ng-click="refineModal()">
-      <i class="search icon"></i> Hakuehdot
-    </div>
+<div class="ui segments">
+  <div class="ui segment">
+    <!-- Some introduction for the page -->
+    <h1 class="ui centered green header">Ilmoitukset</h1>
   </div>
-
-  <p></p>
-
-  <div class="ui fluid styled accordion">
-    <div ng-repeat="change in changeItems">
-      <div class="title" ng-click="accordion()">
-        <!-- Post title -->
-        <i class="dropdown icon"></i>
-        {{change.item}} ({{change.location}})
-      </div>
-      <div class="content">
-
-        <!-- Post information begins -->
-        <div class="content">
-          <!-- Shipping methods -->
-          <div class="ui label">
-            Toimitustavat:
-            <div class="detail" ng-show="{{change.shipping.mail}}===true">
-              <i class="mail icon"></i> Postitus
-            </div>
-
-            <div class="detail" ng-show="{{change.shipping.pickup}}===true">
-              <i class="car icon"></i> Nouto
-            </div>
-
-            <div class="detail" ng-show="{{change.shipping.home}}===true">
-              <i class="home icon"></i> Kotiintoimitus
-            </div>
-          </div>
-        </div>
-
-        <!-- Description -->
-        <div class="content">
-          <p>{{change.description}}</p>
-        </div>
-
-        <!-- Contact information -->
-        <div class="content">
-          <div ng-show="{{change.contact.gsm}}">
-            <i class="phone icon"></i> {{change.contact.gsm}}
-          </div>
-
-          <div ng-show="{{change.contact.email.length}}">
-            <i class="mail icon"></i> {{change.contact.email}}
-          </div>
-        </div>
-
-        <div class="ui divider"></div>
-
-        <div class="content">
-
-          <!-- Comment section? -->
-          <div class="ui large transparent left icon input">
-            <i class="heart outline icon"></i>
-            <input type="text" placeholder="Add Comment...">
-          </div>
-
-        </div>
-        <!-- End of post information -->
-
-      </div>
-    </div>
+  <div class="ui secondary segment">
+    <p>Täällä voit selata jätettyjä ilmoituksia. Nopeuttaaksesi hakuasi, tarkenna hakuehtojasi! Kirjautuneet käyttäjät voivat kysyä ilmoittajalta ilmoitukseen liittyviä lisätietoja.</p>
   </div>
-</div>
-
-<!-- The "Etsitaan" content below the tab menu -->
-<div class="ui bottom attached tab segment" data-tab="Etsitään">
-
-  <!-- Search for filtering posts -->
-  <div class="ui fluid action input">
-    <input type="text" placeholder="Etsi hakusanalla">
-
-    <div class="ui button" ng-click="refineModal()">
-      <i class="search icon"></i> Hakuehdot
+  <div class="ui segment">
+    <!-- Tabular menu for different post options -->
+    <div class="ui top attached tabular menu">
+      <a class="active item" data-tab="Lahjoitetaan" ng-click="changeType($event)">Lahjoitetaan</a>
+      <a class="item" data-tab="Vaihdetaan" ng-click="changeType($event)">Vaihdetaan</a>
+      <a class="item" data-tab="Etsitään" ng-click="changeType($event)">Etsitään</a>
     </div>
-  </div>
 
-  <p></p>
+    <!-- The "Vaihdetaan" content below the tab menu -->
+    <div class="ui bottom attached tab segment" data-tab="Vaihdetaan">
 
-  <!-- Post items -->
-  <div class="ui fluid styled accordion">
-    <div ng-repeat="search in searchItems">
-      <div class="title" ng-click="accordion()">
-        <!-- Post title -->
-        <i class="dropdown icon"></i>
-        {{search.item}} ({{search.location}})
-      </div>
-      <div class="content">
+      <!-- Search for filtering posts -->
+      <form class="ui fluid form">
+        <div class="ui fluid action input">
+          <input type="text" placeholder="Etsi hakusanalla">
 
-        <!-- Post information begins -->
-        <div class="content">
-          <!-- Shipping methods -->
-          <div class="ui label">
-            Toimitustavat:
-            <div class="detail" ng-show="{{search.shipping.mail}}===true">
-              <i class="mail icon"></i> Postitus
+          <button class="ui green button" ng-click="refineModal()">
+            <i class="search icon"></i> Hakuehdot
+          </button>
+        </div>
+      </form>
+
+      <p></p>
+
+      <div class="ui fluid styled accordion">
+        <div ng-repeat="change in changeItems">
+          <div class="title" ng-click="accordion()">
+            <!-- Post title -->
+            <i class="dropdown icon"></i>
+            {{change.item}} ({{change.location}})
+          </div>
+          <div class="content">
+
+            <!-- Post information begins -->
+            <div class="content">
+              <!-- Shipping methods -->
+              <div class="ui label">
+                Toimitustavat:
+                <div class="detail" ng-show="{{change.shipping.mail}}===true">
+                  <i class="mail icon"></i> Postitus
+                </div>
+
+                <div class="detail" ng-show="{{change.shipping.pickup}}===true">
+                  <i class="car icon"></i> Nouto
+                </div>
+
+                <div class="detail" ng-show="{{change.shipping.home}}===true">
+                  <i class="home icon"></i> Kotiintoimitus
+                </div>
+              </div>
             </div>
 
-            <div class="detail" ng-show="{{search.shipping.pickup}}===true">
-              <i class="car icon"></i> Nouto
+            <!-- Description -->
+            <div class="content">
+              <p>{{change.description}}</p>
             </div>
 
-            <div class="detail" ng-show="{{search.shipping.home}}===true">
-              <i class="home icon"></i> Kotiintoimitus
+            <!-- Contact information -->
+            <div class="content">
+              <div ng-show="{{change.contact.gsm}}">
+                <i class="phone icon"></i> {{change.contact.gsm}}
+              </div>
+
+              <div ng-show="{{change.contact.email.length}}">
+                <i class="mail icon"></i> {{change.contact.email}}
+              </div>
             </div>
+
+            <div class="ui divider"></div>
+
+            <div class="content">
+
+              <!-- Comment section? -->
+              <div class="ui large transparent left icon input">
+                <i class="heart outline icon"></i>
+                <input type="text" placeholder="Add Comment...">
+              </div>
+
+            </div>
+            <!-- End of post information -->
+
           </div>
         </div>
-
-        <!-- Description -->
-        <div class="content">
-          <p>{{search.description}}</p>
-        </div>
-
-        <!-- Contact information -->
-        <div class="content">
-          <div ng-show="{{search.contact.gsm}}">
-            <i class="phone icon"></i> {{search.contact.gsm}}
-          </div>
-
-          <div ng-show="{{search.contact.email.length}}">
-            <i class="mail icon"></i> {{search.contact.email}}
-          </div>
-        </div>
-
-        <div class="ui divider"></div>
-
-        <div class="content">
-
-          <!-- Comment section? -->
-          <div class="ui large transparent left icon input">
-            <i class="heart outline icon"></i>
-            <input type="text" placeholder="Add Comment...">
-          </div>
-
-        </div>
-        <!-- End of post information -->
-
       </div>
     </div>
-  </div>
-  <!-- End of post items -->
-</div>
 
-<!-- The "Lahjoitetaan" content below the tab menu -->
-<div class="ui bottom attached active tab segment" data-tab="Lahjoitetaan">
+    <!-- The "Etsitaan" content below the tab menu -->
+    <div class="ui bottom attached tab segment" data-tab="Etsitään">
 
-  <!-- Search for filtering posts -->
-  <div class="ui fluid action input">
-    <input type="text" placeholder="Etsi hakusanalla">
+      <!-- Search for filtering posts -->
+      <form class="ui fluid form">
+        <div class="ui fluid action input">
+          <input type="text" placeholder="Etsi hakusanalla">
 
-    <div class="ui button" ng-click="refineModal()">
-      <i class="search icon"></i> Hakuehdot
-    </div>
-  </div>
+          <button class="ui green button" ng-click="refineModal()">
+            <i class="search icon"></i> Hakuehdot
+          </button>
+        </div>
+      </form>
 
-  <p></p>
+      <p></p>
 
-  <!-- Post items -->
-  <div class="ui fluid styled accordion">
-    <div ng-repeat="free in freeItems">
-      <div class="title" ng-click="accordion()">
-        <!-- Post title -->
-        <i class="dropdown icon"></i>
-        {{free.item}} ({{free.location}})
+      <!-- Post items -->
+      <div class="ui fluid styled accordion">
+        <div ng-repeat="search in searchItems">
+          <div class="title" ng-click="accordion()">
+            <!-- Post title -->
+            <i class="dropdown icon"></i>
+            {{search.item}} ({{search.location}})
+          </div>
+          <div class="content">
+
+            <!-- Post information begins -->
+            <div class="content">
+              <!-- Shipping methods -->
+              <div class="ui label">
+                Toimitustavat:
+                <div class="detail" ng-show="{{search.shipping.mail}}===true">
+                  <i class="mail icon"></i> Postitus
+                </div>
+
+                <div class="detail" ng-show="{{search.shipping.pickup}}===true">
+                  <i class="car icon"></i> Nouto
+                </div>
+
+                <div class="detail" ng-show="{{search.shipping.home}}===true">
+                  <i class="home icon"></i> Kotiintoimitus
+                </div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="content">
+              <p>{{search.description}}</p>
+            </div>
+
+            <!-- Contact information -->
+            <div class="content">
+              <div ng-show="{{search.contact.gsm}}">
+                <i class="phone icon"></i> {{search.contact.gsm}}
+              </div>
+
+              <div ng-show="{{search.contact.email.length}}">
+                <i class="mail icon"></i> {{search.contact.email}}
+              </div>
+            </div>
+
+            <div class="ui divider"></div>
+
+            <div class="content">
+
+              <!-- Comment section? -->
+              <div class="ui large transparent left icon input">
+                <i class="heart outline icon"></i>
+                <input type="text" placeholder="Add Comment...">
+              </div>
+
+            </div>
+            <!-- End of post information -->
+
+          </div>
+        </div>
       </div>
-      <div class="content">
+      <!-- End of post items -->
+    </div>
 
-        <!-- Post information begins -->
-        <div class="content">
-          <!-- Shipping methods -->
-          <div class="ui label">
-            Toimitustavat:
-            <div class="detail" ng-show="{{free.shipping.mail}}===true">
-              <i class="mail icon"></i> Postitus
+    <!-- The "Lahjoitetaan" content below the tab menu -->
+    <div class="ui bottom attached active tab segment" data-tab="Lahjoitetaan">
+
+      <!-- Search for filtering posts -->
+      <form class="ui fluid form">
+        <div class="ui fluid action input">
+          <input type="text" placeholder="Etsi hakusanalla">
+
+          <button class="ui green button" ng-click="refineModal()">
+            <i class="search icon"></i> Hakuehdot
+          </button>
+        </div>
+      </form>
+
+      <p></p>
+
+      <!-- Post items -->
+      <div class="ui fluid styled accordion">
+        <div ng-repeat="free in freeItems">
+          <div class="title" ng-click="accordion()">
+            <!-- Post title -->
+            <i class="dropdown icon"></i>
+            {{free.item}} ({{free.location}})
+          </div>
+          <div class="content">
+
+            <!-- Post information begins -->
+            <div class="content">
+              <!-- Shipping methods -->
+              <div class="ui label">
+                Toimitustavat:
+                <div class="detail" ng-show="{{free.shipping.mail}}===true">
+                  <i class="mail icon"></i> Postitus
+                </div>
+
+                <div class="detail" ng-show="{{free.shipping.pickup}}===true">
+                  <i class="car icon"></i> Nouto
+                </div>
+
+                <div class="detail" ng-show="{{free.shipping.home}}===true">
+                  <i class="home icon"></i> Kotiintoimitus
+                </div>
+              </div>
             </div>
 
-            <div class="detail" ng-show="{{free.shipping.pickup}}===true">
-              <i class="car icon"></i> Nouto
+            <!-- Description -->
+            <div class="content">
+              <p>{{free.description}}</p>
             </div>
 
-            <div class="detail" ng-show="{{free.shipping.home}}===true">
-              <i class="home icon"></i> Kotiintoimitus
+            <!-- Contact information -->
+            <div class="content">
+              <div ng-show="{{free.contact.gsm}}">
+                <i class="phone icon"></i> {{free.contact.gsm}}
+              </div>
+
+              <div ng-show="{{free.contact.email.length}}">
+                <i class="mail icon"></i> {{free.contact.email}}
+              </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Description -->
-        <div class="content">
-          <p>{{free.description}}</p>
-        </div>
+            <div class="ui horizontal divider">Ilmoitusta koskevat kysymykset</div>
 
-        <!-- Contact information -->
-        <div class="content">
-          <div ng-show="{{free.contact.gsm}}">
-            <i class="phone icon"></i> {{free.contact.gsm}}
-          </div>
+            <div class="content">
 
-          <div ng-show="{{free.contact.email.length}}">
-            <i class="mail icon"></i> {{free.contact.email}}
-          </div>
-        </div>
-
-        <div class="ui horizontal divider">Ilmoitusta koskevat kysymykset</div>
-
-        <div class="content">
-
-          <!-- Comment section? -->
-          <div class="ui list">
-            <div class="item">
-              <i class="blue help icon"></i>
-              <div class="content">
-                <div class="header">Kysyjän nimi</div>
-                <div class="description">Kysymys tavarasta jota ilmoitus koskee</div>
-                <div class="list">
-                  <div class="item">
-                    <i class="green checkmark icon"></i>
-                    <div class="content">
-                      <div class="header">Vastaajan nimi</div>
-                      <div class="description">Vastaus ylläolevaan kysymykseen</div>
+              <!-- Comment section -->
+              <div class="ui list">
+                <div class="item">
+                  <i class="blue help icon"></i>
+                  <div class="content">
+                    <div class="header">Kysyjän nimi</div>
+                    <div class="description">Kysymys tavarasta jota ilmoitus koskee</div>
+                    <div class="list">
+                      <div class="item">
+                        <i class="green checkmark icon"></i>
+                        <div class="content">
+                          <div class="header">Vastaajan nimi</div>
+                          <div class="description">Vastaus ylläolevaan kysymykseen</div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+
+              <form class="ui fluid form">
+                <div class="ui fluid action input">
+                  <input type="text" placeholder="Lisää oma kysymyksesi">
+                  <div class="ui green button" ng-click="sendQuestion()">Lähetä</div>
+                </div>
+              </form>
+
             </div>
+            <!-- End of post information -->
+
           </div>
-
-          <form class="ui fluid form">
-            <div class="ui fluid action input">
-              <input type="text" placeholder="Lisää oma kysymyksesi">
-              <div class="ui blue button" ng-click="sendQuestion()">Lähetä</div>
-            </div>
-          </form>
-
         </div>
-        <!-- End of post information -->
-
       </div>
-    </div>
-  </div>
-  <!-- End of post items -->
+      <!-- End of post items -->
 
+    </div>
+    <!-- End of tabular menu contents -->
+  </div>
 </div>
-<!-- End of tabular menu contents -->
 
 <!-- Modal for refining search results -->
 <div class="ui modal" id="refineModal">
@@ -392,7 +404,7 @@ $('.tabular.menu .item').tab();
         <div class="row">
 
           <div class="column">
-            <button ng-click="query()" class="ui basic blue button">Tallenna</button>
+            <button ng-click="query()" class="ui basic green button">Tallenna</button>
           </div>
 
         </div>

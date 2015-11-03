@@ -28,6 +28,9 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
     bad: "Heikko"
   }
 
+  $scope.category = [];
+  $scope.location = [];
+
   $scope.searchtype = "Lahjoitetaan";
 
   var searchFree = {
@@ -41,7 +44,9 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
       good: "Hyvä",
       reasonable: "Kohtalainen",
       bad: "Heikko"
-    }
+    },
+    category :[],
+    location :[]
   }
 
   var searchChange = {
@@ -55,7 +60,9 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
       good: "Hyvä",
       reasonable: "Kohtalainen",
       bad: "Heikko"
-    }
+    },
+    category :[],
+    location :[]
   }
 
   var searchSearch = {
@@ -69,7 +76,9 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
       good: "Hyvä",
       reasonable: "Kohtalainen",
       bad: "Heikko"
-    }
+    },
+    category :[],
+    location :[]
   }
 
   $scope.changeType = function(event) {
@@ -101,12 +110,18 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
     if ($scope.searchtype === "Lahjoitetaan"){
       $scope.searchshipping = searchFree.searchshipping;
       $scope.searchCondition = searchFree.searchCondition;
+      $scope.category = searchFree.category;
+      $scope.location = searchFree.location;
     } else if ($scope.searchtype === "Etsitään") {
       $scope.searchshipping = searchSearch.searchshipping;
       $scope.searchCondition = searchSearch.searchCondition;
+      $scope.category = searchSearch.category;
+      $scope.location = searchSearch.location;
     } else {
       $scope.searchshipping = searchChange.searchshipping;
       $scope.searchCondition = searchChange.searchCondition;
+      $scope.category = searchChange.category;
+      $scope.location = searchChange.location;
     }
   }
 
@@ -138,12 +153,15 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
     return result;
   }
 
-  $scope.query = function(list){
+  $scope.query = function(){
+    $('#refineModal').modal('hide');
     queryObject = {
       type : $scope.searchtype,
       shipping : $scope.searchshipping,
-      condition: toArray($scope.searchCondition)
-    }
+      condition: toArray($scope.searchCondition),
+      category: $scope.category,
+      location: $scope.location
+    };
     PostService.query(queryObject).then(function(d) {
     querySwitch(d);
     });

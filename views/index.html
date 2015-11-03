@@ -8,13 +8,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Move to own css file "mystyles.css" -->
-  <style type="text/css">
-  .main.container {
-    margin-top: 6em;
-  }
-  </style>
-
   <title></title>
 
 </head>
@@ -22,7 +15,7 @@
 <body ng-app="IlmoitusApp" ng-controller="HomeController">
 
   <!-- Main menu -->
-  <div class="ui fixed inverted menu">
+  <div class="ui fixed secondary pointing menu">
     <div class="ui container" id="largeMenu">
       <a href="#/" class="header item" ng-click="menuClick()"><i class="large home icon"></i></a>
       <a href="#posts" class="item" ng-click="menuClick()">Selaa ilmoituksia</a>
@@ -56,7 +49,7 @@
     <div class="content">
       <div class="ui middle aligned center aligned grid">
         <div class="ten wide column">
-          <h2 class="ui header">
+          <h2 class="ui green header">
             <div class="content">
               Kirjaudu sisään
             </div>
@@ -80,7 +73,7 @@
                   <input type="password" name="password" ng-model="password" placeholder="Salasana">
                 </div>
               </div>
-              <div class="ui fluid large blue submit button" ng-click="login()">Kirjaudu</div>
+              <div class="ui fluid large green submit button" ng-click="login()">Kirjaudu</div>
             </div>
 
             <div class="ui error message"></div>

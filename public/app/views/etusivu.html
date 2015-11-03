@@ -1,11 +1,19 @@
-<div class="ui success message" ng-show="showSuccess != null">
-    <div class="header">Rekisteröityminen onnistui!</div>
-    <p>Voit nyt kirjautua sisään sivun oikeasta yläkulmasta.</p>
+<div class="ui segments">
+  <div class="ui segment">
+    <h1 class="ui centered green header">
+      Tervetuloa tavaranvaihtopalveluun!
+    </h1>
   </div>
-<h1 class="ui header">
-  Tervetuloa tavaranvaihtopalveluun!
-</h1>
-<div class="ui segment"
-<p>Sivusto on tarkoitettu käytettyjen tavaroiden kierrättämiseen.</p>
-<p>Rekisteröityneenä käyttäjänä voit jättää ja hallita omia ilmoituksiasi.</p>
+  <div class="ui secondary segment">
+    <p>Sivusto on tarkoitettu käytettyjen tavaroiden kierrättämiseen. Selaa ilmoituksia -sivulta voit etsiä jätettyjä ilmoituksia.</p>
+</div>
+<div class="ui segment">
+    <p>Rekisteröityneenä käyttäjänä voit kirjoittaa ja hallita omia ilmoituksiasi, sekä kommentoida muiden jättämiä ilmoituksia.</p>
+  </div>
+</div>
+
+<!-- Success message for registration -->
+<div class="ui success message" ng-show="showSuccess != null">
+  <div class="header">Rekisteröityminen onnistui!</div>
+  <p>Voit nyt kirjautua sisään sivun oikeasta yläkulmasta.</p>
 </div>

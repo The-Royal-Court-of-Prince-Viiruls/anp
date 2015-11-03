@@ -1,9 +1,10 @@
-<h1 class="ui header">Rekisteröidy käyttäjäksi</h1>
-
-<div class="content">
-  Rekisteröityneenä käyttäjänä voit lisätä ja hallita omia ilmoituksiasi.
+<div class="ui segments">
+  <div class="ui segment">
+<h1 class="ui centered green header">Rekisteröidy käyttäjäksi</h1>
 </div>
-
+<div class="ui secondary segment">
+  <p> Rekisteröityneenä käyttäjänä voit lisätä ja hallita omia ilmoituksiasi ja kysyä lisää ilmoitetuista tavaroista. </p>
+</div>
 <div class="ui segment">
 
   <!-- Form for signing up -->
@@ -61,7 +62,7 @@
         </div>
       </div>
     </div>
-    <button class="ui blue button" ng-disabled="signUpForm.$invalid" ng-click="signUp()">Rekisteröidy</button>
+    <button class="ui green button" ng-disabled="signUpForm.$invalid" ng-click="signUp()">Rekisteröidy</button>
   </form>
 
   <!-- Show error message if email is in use -->
@@ -71,4 +72,5 @@
   </div>
   <!-- End of signup form -->
 
+</div>
 </div>

@@ -11,3 +11,7 @@
     display: none;
   }
 }
+
+.main.container {
+  margin-top: 3.5em;
+}

@@ -5,8 +5,10 @@ $scope.showError = null;
 $scope.signUp = function() {
   // Send new user information to the service
   SignupService.signUp({
-    firstName: $scope.firstName,
-    lastName: $scope.lastName,
+    name: {
+      firstName: $scope.firstName,
+      lastName: $scope.lastName
+    },
     email: $scope.email,
     password: $scope.password
   }).then(function(data) {

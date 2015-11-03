@@ -1,14 +1,12 @@
 IlmoitusApp.service('PostService', function ($http) {
 
-var PostService = {
-
-    addPost: function (post) {
+    this.addPost = function (post) {
       $http.post('/posts', post)
       .success(function(data, status, headers, config){
       });
-    },
+    };
 
-    query: function(query) {
+    this.query = function(query) {
       // $http returns a promise, which has a then function, which also returns a promise
       var promise = $http({
       url: '/posts/query/test',
@@ -24,9 +22,9 @@ var PostService = {
       });
       // Return the promise to the controller
       return promise;
-    },
+    };
 
-    type: function(type) {
+    this.type = function(type) {
       // $http returns a promise, which has a then function, which also returns a promise
       var promise = $http.get('/posts/:'+type)
       .then(function(response){
@@ -37,8 +35,7 @@ var PostService = {
       });
       // Return the promise to the controller
       return promise;
-    }
+    };
 
-  };
-  return PostService;
+
 });

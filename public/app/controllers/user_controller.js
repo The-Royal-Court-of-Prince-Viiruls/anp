@@ -1,15 +1,13 @@
-IlmoitusApp.controller('UserController', function ($scope, PostService,LoginService) {
+IlmoitusApp.controller('UserController', function ($scope, PostService, LoginService, $rootScope) {
 
 $scope.userInfo = {};
 $scope.usersPosts = [];
 
 $scope.user = function() {
-  LoginService.userInfo().then(function(d) {
-      $scope.userInfo = d;
-  });
+  $scope.userInfo = $rootScope.userinfo;
 };
 
-this.listPosts = function(){
+$scope.listPosts = function(){
   LoginService.listUsersPosts(userInfo.id).then(function(d) {
       $scope.usersPosts = d;
   });

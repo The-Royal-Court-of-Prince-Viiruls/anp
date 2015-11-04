@@ -1,4 +1,4 @@
-IlmoitusApp.controller('AddController', function ($scope, FirebaseService, PostService, LoginService) {
+IlmoitusApp.controller('AddController', function ($scope,$rootScope, FirebaseService, PostService, LoginService) {
 
 $scope.newGSM = '';
 $scope.newEmail = '';
@@ -8,12 +8,6 @@ $scope.newShippingMethods = {
   mail: false,
   home: false
 }
-
-var sessionUserInfo = {};
-
-LoginService.userInfo().then(function(d) {
-    sessionUserInfo = d;
-});
 
   $scope.addPost = function() {
     PostService.addPost({
@@ -29,7 +23,7 @@ LoginService.userInfo().then(function(d) {
         email: $scope.newEmail
       },
       time: Date.now(),
-      user: sessionUserInfo.id,
+      user: $rootScope.userinfo.id,
     });
     FirebaseService.addPost({
       type: $scope.newType,

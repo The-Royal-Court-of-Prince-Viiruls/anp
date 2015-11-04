@@ -1,7 +1,18 @@
-IlmoitusApp.controller('ListController', function ($scope, FirebaseService, PostService) {
+IlmoitusApp.controller('ListController', function ($scope, FirebaseService, PostService, LoginService, $rootScope) {
   $scope.freeItems = [];
   $scope.searchItems = [];
   $scope.changeItems =  [];
+
+
+  $scope.sendQuestion = function(id,event) {
+    var questionInfo = {
+      questionID: id,
+      question: event.target.parentElement.childNodes[1].value,
+      sender: $rootScope.userinfo.email,
+      timestamp: Date.now()
+    }
+    PostService.addQuestion(questionInfo);
+  }
 
   PostService.type("Lahjoitetaan").then(function(d) {
       $scope.freeItems = d;

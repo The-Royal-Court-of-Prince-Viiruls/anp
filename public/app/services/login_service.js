@@ -11,13 +11,12 @@ IlmoitusApp.service('LoginService', function ($http, $rootScope) {
   }
 
   this.userInfo = function () {
-    var promise = $http.get('/sessioninfo')
-    .then(function(response){
+    $http.get('/sessioninfo')
+    .success(function(data){
+      $rootScope.userinfo = data;
       // The then function here is an opportunity to modify the response
       // The return value gets picked up by the then in the controller.
-      return response.data;
-    })
-    return promise;
+    });
   };
 
   this.logout = function () {

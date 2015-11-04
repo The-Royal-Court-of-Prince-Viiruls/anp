@@ -1,16 +1,13 @@
-IlmoitusApp.controller('UserController', function ($scope, PostService, LoginService, $rootScope) {
-
-$scope.userInfo = {};
+IlmoitusApp.controller('UserController', function ($scope, PostService, UserService, $rootScope) {
 $scope.usersPosts = [];
 
-$scope.user = function() {
-  $scope.userInfo = $rootScope.userinfo;
-};
+UserService.listUsersPosts($rootScope.id).then(function(d) {
+    $scope.usersPosts = d;
+ });
 
-$scope.listPosts = function(){
-  LoginService.listUsersPosts(userInfo.id).then(function(d) {
-      $scope.usersPosts = d;
-  });
-};
+ $scope.removePost = function(post) {
+   UserService.removePost(post._id, post.user);
+ }
+
 
 })

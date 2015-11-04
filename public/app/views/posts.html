@@ -6,7 +6,7 @@ $('.tabular.menu .item').tab();
 <div class="ui segments">
   <div class="ui segment">
     <!-- Some introduction for the page -->
-    <h1 class="ui centered green header">Ilmoitukset</h1>
+    <h1 class="ui centered purple header">Ilmoitukset</h1>
   </div>
   <div class="ui secondary segment">
     <p>Täällä voit selata jätettyjä ilmoituksia. Nopeuttaaksesi hakuasi, tarkenna hakuehtojasi! Kirjautuneet käyttäjät voivat kysyä ilmoittajalta ilmoitukseen liittyviä lisätietoja.</p>
@@ -27,7 +27,7 @@ $('.tabular.menu .item').tab();
         <div class="ui fluid action input">
           <input type="text" ng-model="searchTextChange" placeholder="Etsi hakusanalla">
 
-          <button class="ui green button" ng-click="refineModal()">
+          <button class="ui purple button" ng-click="refineModal()">
             <i class="search icon"></i> Hakuehdot
           </button>
         </div>
@@ -50,15 +50,15 @@ $('.tabular.menu .item').tab();
               <div class="ui label">
                 Toimitustavat:
                 <div class="detail" ng-show="{{change.shipping.mail}}===true">
-                  <i class="mail icon"></i> Postitus
+                  <i class="purple mail icon"></i> Postitus
                 </div>
 
                 <div class="detail" ng-show="{{change.shipping.pickup}}===true">
-                  <i class="car icon"></i> Nouto
+                  <i class="purple car icon"></i> Nouto
                 </div>
 
                 <div class="detail" ng-show="{{change.shipping.home}}===true">
-                  <i class="home icon"></i> Kotiintoimitus
+                  <i class="purple home icon"></i> Kotiintoimitus
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@ $('.tabular.menu .item').tab();
         <div class="ui fluid action input">
           <input type="text" ng-model="searchTextSearch" placeholder="Etsi hakusanalla">
 
-          <button class="ui green button" ng-click="refineModal()">
+          <button class="ui purple button" ng-click="refineModal()">
             <i class="search icon"></i> Hakuehdot
           </button>
         </div>
@@ -129,15 +129,15 @@ $('.tabular.menu .item').tab();
               <div class="ui label">
                 Toimitustavat:
                 <div class="detail" ng-show="{{search.shipping.mail}}===true">
-                  <i class="mail icon"></i> Postitus
+                  <i class="purple mail icon"></i> Postitus
                 </div>
 
                 <div class="detail" ng-show="{{search.shipping.pickup}}===true">
-                  <i class="car icon"></i> Nouto
+                  <i class="purple car icon"></i> Nouto
                 </div>
 
                 <div class="detail" ng-show="{{search.shipping.home}}===true">
-                  <i class="home icon"></i> Kotiintoimitus
+                  <i class="purple home icon"></i> Kotiintoimitus
                 </div>
               </div>
             </div>
@@ -185,7 +185,7 @@ $('.tabular.menu .item').tab();
         <div class="ui fluid action input">
           <input type="text" ng-model="searchTextFree" placeholder="Etsi hakusanalla">
 
-          <button class="ui green button" ng-click="refineModal()">
+          <button class="ui purple button" ng-click="refineModal()">
             <i class="search icon"></i> Hakuehdot
           </button>
         </div>
@@ -204,39 +204,43 @@ $('.tabular.menu .item').tab();
           <div class="content">
 
             <!-- Post information begins -->
-            <div class="content">
-              <!-- Shipping methods -->
-              <div class="ui label">
-                Toimitustavat:
-                <div class="detail" ng-show="{{free.shipping.mail}}===true">
-                  <i class="mail icon"></i> Postitus
-                </div>
-
-                <div class="detail" ng-show="{{free.shipping.pickup}}===true">
-                  <i class="car icon"></i> Nouto
-                </div>
-
-                <div class="detail" ng-show="{{free.shipping.home}}===true">
-                  <i class="home icon"></i> Kotiintoimitus
-                </div>
-              </div>
-            </div>
 
             <!-- Description -->
             <div class="content">
               <p>{{free.description}}</p>
+              <p>Ilmoitus jätetty {{ free.time | date : 'd.M.yyyy'}} <br>
+              Kunto: {{free.condition}}</p>
             </div>
 
             <!-- Contact information -->
             <div class="content">
               <div ng-show="{{free.contact.gsm}}">
-                <i class="phone icon"></i> {{free.contact.gsm}}
+                <i class="purple phone icon"></i> {{free.contact.gsm}}
               </div>
 
               <div ng-show="{{free.contact.email.length}}">
-                <i class="mail icon"></i> {{free.contact.email}}
+                <i class="purple mail icon"></i> {{free.contact.email}}
               </div>
             </div>
+
+            <div class="content">
+              <!-- Shipping methods -->
+              <div class="ui label">
+                Toimitustavat:
+                <div class="detail" ng-show="{{free.shipping.mail}}===true">
+                  <i class="purple mail icon"></i> Postitus
+                </div>
+
+                <div class="detail" ng-show="{{free.shipping.pickup}}===true">
+                  <i class="purple car icon"></i> Nouto
+                </div>
+
+                <div class="detail" ng-show="{{free.shipping.home}}===true">
+                  <i class="purple home icon"></i> Kotiintoimitus
+                </div>
+              </div>
+            </div>
+
 
             <div class="ui horizontal divider">Ilmoitusta koskevat kysymykset</div>
 
@@ -264,9 +268,9 @@ $('.tabular.menu .item').tab();
 
               <form class="ui fluid form">
                 <div class="field">
-                <div class="ui fluid action input">
+                <div class="ng-class:{true:'ui fluid action input', false:'ui fluid disabled action input'}[isLoggedIn]">
                   <input type="text" placeholder="Lisää oma kysymyksesi">
-                  <div class="ui green button" ng-click="sendQuestion(free._id,$event)">Lähetä</div>
+                  <div class="ng-class:{true:'ui purple button', false:'ui disabled purple button'}[isLoggedIn]" ng-click="sendQuestion(free._id,$event)">Lähetä</div>
                 </div>
               </div>
               </form>

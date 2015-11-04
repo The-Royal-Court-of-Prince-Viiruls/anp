@@ -204,6 +204,25 @@ $('.tabular.menu .item').tab();
           <div class="content">
 
             <!-- Post information begins -->
+
+            <!-- Description -->
+            <div class="content">
+              <p>{{free.description}}</p>
+              <p>Ilmoitus jätetty {{ free.time | date : 'd.M.yyyy'}} <br>
+              Kunto: {{free.condition}}</p>
+            </div>
+
+            <!-- Contact information -->
+            <div class="content">
+              <div ng-show="{{free.contact.gsm}}">
+                <i class="purple phone icon"></i> {{free.contact.gsm}}
+              </div>
+
+              <div ng-show="{{free.contact.email.length}}">
+                <i class="purple mail icon"></i> {{free.contact.email}}
+              </div>
+            </div>
+
             <div class="content">
               <!-- Shipping methods -->
               <div class="ui label">
@@ -222,21 +241,6 @@ $('.tabular.menu .item').tab();
               </div>
             </div>
 
-            <!-- Description -->
-            <div class="content">
-              <p>{{free.description}}</p>
-            </div>
-
-            <!-- Contact information -->
-            <div class="content">
-              <div ng-show="{{free.contact.gsm}}">
-                <i class="phone icon"></i> {{free.contact.gsm}}
-              </div>
-
-              <div ng-show="{{free.contact.email.length}}">
-                <i class="mail icon"></i> {{free.contact.email}}
-              </div>
-            </div>
 
             <div class="ui horizontal divider">Ilmoitusta koskevat kysymykset</div>
 

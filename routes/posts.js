@@ -9,6 +9,26 @@ exports.add = function (req, res){
   });
 };
 
+exports.removePost = function (req, res) {
+  var userId = req.user;
+  var id = req.params.id.substring(1);
+  var postUserId = req.body.user;
+  console.log(userId._id);
+  console.log(postUserId);
+  if (userId._id != postUserId) {
+    res.send("Et ole viestin haltija");
+  } else {
+  var collection = db.get().collection('posts');
+  collection.remove({ '_id' :  new ObjectId(id)},function(err,removed){
+    if (err) {
+      res.json(err);
+    } else {
+    res.json({message:"Ilmoitus poistettiin onnistuneesti!"});
+  }
+});
+}
+};
+
 exports.addQuestion = function (req, res) {
 
   var postToModify;
@@ -46,12 +66,10 @@ exports.listByQuery = function(req, res) {
 };
 
 exports.listByUser = function(req, res) {
-  console.log(req.params);
   var userId = req.params.id;
   userId = userId.substring(1);
   var collection = db.get().collection('posts');
-  collection.find({'user' :  new ObjectId(userId) }).toArray(function(err, posts) {
-    console.log(posts);
+  collection.find({'user' :  userId }).toArray(function(err, posts) {
     res.json(posts);
   })
 };

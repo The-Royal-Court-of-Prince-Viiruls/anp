@@ -1,13 +1,11 @@
 IlmoitusApp.service('UserService', function ($http) {
 
-
   this.listUsersPosts = function(id) {
     // $http returns a promise, which has a then function, which also returns a promise
     var promise = $http({
       url: '/posts/user/:'+id,
       method: "GET"
     }).then(function(response){
-      //console.log(response);
       // The then function here is an opportunity to modify the response
 
       // The return value gets picked up by the then in the controller.
@@ -17,4 +15,10 @@ IlmoitusApp.service('UserService', function ($http) {
     return promise;
   };
 
+  this.removePost = function(id, user) {
+    $http.post('/posts/delete/:'+id, {user: user})
+    .success(function(data, status, headers, config){
+      console.log(data);
+    });
+  }
 })

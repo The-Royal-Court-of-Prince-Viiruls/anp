@@ -3,6 +3,12 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
   $scope.searchItems = [];
   $scope.changeItems =  [];
 
+  // Check if user is logged in
+  $scope.isLoggedIn = false;
+
+  $scope.$on('logged-value-changed', function(event, args) {
+    $scope.isLoggedIn = args.isLogged.data;
+  });
 
   $scope.sendQuestion = function(id,event) {
     var questionInfo = {

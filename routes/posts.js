@@ -20,7 +20,7 @@ exports.addQuestion = function (req, res) {
   if(typeof questions === 'undefined')
     questions = [];
   questions.push({question: req.body.question,sender: req.body.sender, timestamp: req.body.timestamp});
-  
+
   collection.update({ '_id' :  new ObjectId(req.body.questionID) },{$set : {'questions' : questions}},function(err,post){
     res.json(post);
   });
@@ -46,10 +46,12 @@ exports.listByQuery = function(req, res) {
 };
 
 exports.listByUser = function(req, res) {
+  console.log(req.params);
   var userId = req.params.id;
   userId = userId.substring(1);
   var collection = db.get().collection('posts');
-  collection.find({"user" : userId}).toArray(function(err, posts) {
+  collection.find({'user' :  new ObjectId(userId) }).toArray(function(err, posts) {
+    console.log(posts);
     res.json(posts);
   })
 };

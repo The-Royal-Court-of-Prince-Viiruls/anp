@@ -1,4 +1,5 @@
 IlmoitusApp.service('LoginService', function ($http, $rootScope) {
+
   this.login = function (user) {
     var promise = $http.post('/login', {email: user.email, password: user.password})
     .then(function(response){

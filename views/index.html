@@ -24,6 +24,7 @@
   <script src="app/services/postService.js"></script>
   <script src="app/services/firebase_service.js"></script>
   <script src="app/services/signup_service.js"></script>
+  <script src="app/services/user_service.js"></script>
   <script src="app/controllers/list_controller.js"></script>
   <script src="app/controllers/add_controller.js"></script>
   <script src="app/controllers/home_controller.js"></script>
@@ -72,7 +73,7 @@
     <div class="content">
       <div class="ui middle aligned center aligned grid">
         <div class="ten wide column">
-          <h2 class="ui green header">
+          <h2 class="ui purple header">
             <div class="content">
               Kirjaudu sisään
             </div>
@@ -96,7 +97,7 @@
                   <input type="password" name="password" ng-model="password" placeholder="Salasana">
                 </div>
               </div>
-              <div class="ui fluid large green submit button" ng-click="login()">Kirjaudu</div>
+              <div class="ui fluid large purple submit button" ng-click="login()">Kirjaudu</div>
             </div>
 
             <div class="ui error message"></div>

@@ -1,4 +1,5 @@
 var db = require('../db/db');
+var ObjectId = require('mongodb').ObjectID;
 
 exports.add = function (req, res){
   var post = req.body;
@@ -7,6 +8,24 @@ exports.add = function (req, res){
     res.json(post);
   });
 };
+
+exports.addQuestion = function (req, res) {
+
+  var postToModify;
+
+  var collection = db.get().collection('posts');
+
+  collection.findOne({ '_id' :  new ObjectId(req.body.questionID) },function(err,postToModify){
+  var questions = postToModify.questions;
+  if(typeof questions === 'undefined')
+    questions = [];
+  questions.push({question: req.body.question,sender: req.body.sender, timestamp: req.body.timestamp});
+
+  collection.update({ '_id' :  new ObjectId(req.body.questionID) },{$set : {'questions' : questions}},function(err,post){
+    res.json(post);
+  });
+    });
+}
 
 exports.listByUser = function(req, res) {
   var userId = req.params.id;

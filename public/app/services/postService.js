@@ -39,5 +39,12 @@ IlmoitusApp.service('PostService', function ($http) {
       return promise;
     };
 
+    this.addQuestion = function(msg) {
+      $http.post('/posts/addquestion', msg)
+      .success(function(data, status, headers, config){
+        console.log(data);
+      });
+    }
+
 
 });

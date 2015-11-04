@@ -263,10 +263,12 @@ $('.tabular.menu .item').tab();
               </div>
 
               <form class="ui fluid form">
+                <div class="field">
                 <div class="ui fluid action input">
                   <input type="text" placeholder="Lisää oma kysymyksesi">
-                  <div class="ui green button" ng-click="sendQuestion()">Lähetä</div>
+                  <div class="ui green button" ng-click="sendQuestion(free._id,$event)">Lähetä</div>
                 </div>
+              </div>
               </form>
 
             </div>

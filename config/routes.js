@@ -7,6 +7,7 @@ module.exports = function (app,passport) {
   app.use('/', index);
 
   app.post('/posts', isLoggedIn, posts.add);
+  app.post('/posts/addquestion', isLoggedIn, posts.addQuestion);
   app.get('/posts',posts.listAll);
   app.get('/posts/query',posts.listByQuery);
   app.get('/posts/:type',posts.listByType);

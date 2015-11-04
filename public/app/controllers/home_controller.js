@@ -56,6 +56,7 @@ IlmoitusApp.controller('HomeController', function ($scope,$rootScope, PostServic
     } else {
       // If login is successful, show success message and redirect to profile
     LoginService.isLoggedIn();
+    LoginService.userInfo();
     $scope.closeLogin();
     }
     });

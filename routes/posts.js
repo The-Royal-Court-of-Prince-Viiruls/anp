@@ -52,17 +52,13 @@ exports.listByQuery = function(req, res) {
   var category = req.query.category;
   var location = req.query.location;
 
-  if (typeof location === 'undefined')
-    location = {};
+  if (typeof location === 'undefined'){
+    location = ['Ahvenanmaa','Etelä-Karjala','Etelä-Pohjanmaa','Etelä-Savo','Kainuu','Kanta-Häme','Keski-Pohjanmaa','Keski-Suomi','Kymenlaakso','Lappi','Pirkanmaa','Pohjanmaa','Pohjois-Karjala','Pohjois-Savo','Päijät-Häme','Satakunta','Uusimaa','Varsinais-Suomi'];
+  }
 
-  if (typeof category === 'undefined')
-    category = {};
-
-  console.log("type: "+type);
-  console.log("shipping: "+shipping);
-  console.log("condition: "+condition);
-  console.log("category: "+category);
-  console.log("location: "+location);
+  if (typeof category === 'undefined'){
+    category = ['AJO','ELO','HAR','KOR','ELE','KOT','LAS','MUS','SEK','TAI','TIE','VAA'];
+  }
 
   var collection = db.get().collection('posts');
 

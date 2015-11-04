@@ -39,6 +39,11 @@ IlmoitusApp.controller('HomeController', function ($scope,$rootScope, PostServic
   $scope.logout = function() {
     LoginService.logout().then(function(data) {
       // If login is successful, show success message and redirect to profile
+      for (var prop in $rootScope) {
+    if (prop.substring(0,1) !== '$') {
+        delete $rootScope[prop];
+    }
+}
     LoginService.isLoggedIn();
     });
   };

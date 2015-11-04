@@ -3,12 +3,11 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
   $scope.searchItems = [];
   $scope.changeItems =  [];
 
-
   $scope.sendQuestion = function(id,event) {
     var questionInfo = {
       questionID: id,
       question: event.target.parentElement.childNodes[1].value,
-      sender: $rootScope.userinfo.email,
+      sender: $rootScope.email,
       timestamp: Date.now()
     }
     PostService.addQuestion(questionInfo);
@@ -39,9 +38,6 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
     bad: "Heikko"
   }
 
-  $scope.category = [];
-  $scope.location = [];
-
   $scope.searchtype = "Lahjoitetaan";
 
   var searchFree = {
@@ -55,9 +51,7 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
       good: "Hyvä",
       reasonable: "Kohtalainen",
       bad: "Heikko"
-    },
-    category :[],
-    location :[]
+    }
   }
 
   var searchChange = {
@@ -71,9 +65,7 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
       good: "Hyvä",
       reasonable: "Kohtalainen",
       bad: "Heikko"
-    },
-    category :[],
-    location :[]
+    }
   }
 
   var searchSearch = {
@@ -87,9 +79,7 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
       good: "Hyvä",
       reasonable: "Kohtalainen",
       bad: "Heikko"
-    },
-    category :[],
-    location :[]
+    }
   }
 
   $scope.changeType = function(event) {
@@ -121,19 +111,13 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
     if ($scope.searchtype === "Lahjoitetaan"){
       $scope.searchshipping = searchFree.searchshipping;
       $scope.searchCondition = searchFree.searchCondition;
-      $scope.category = searchFree.category;
-      $scope.location = searchFree.location;
     } else if ($scope.searchtype === "Etsitään") {
       $scope.searchshipping = searchSearch.searchshipping;
       $scope.searchCondition = searchSearch.searchCondition;
-      $scope.category = searchSearch.category;
-      $scope.location = searchSearch.location;
     } else {
       $scope.searchshipping = searchChange.searchshipping;
       $scope.searchCondition = searchChange.searchCondition;
-      $scope.category = searchChange.category;
-      $scope.location = searchChange.location;
-    }
+      }
   }
 
   toArray = function (object) {
@@ -160,18 +144,29 @@ IlmoitusApp.controller('ListController', function ($scope, FirebaseService, Post
     if (methods.home === true) {
       result+="Kotiintoimitus ";
     }
-
     return result;
   }
 
   $scope.query = function(){
+    var location = {};
+    var category = {};
+    if ($scope.searchtype === "Lahjoitetaan"){
+      location = $scope.locationFree;
+      category = $scope.categoryFree;
+    } else if ($scope.searchtype === "Etsitään") {
+      location = $scope.locationSearch;
+      category = $scope.categorySearch;
+    } else {
+      location = $scope.locationChange;
+      category = $scope.categoryChange;
+      }
     $('#refineModal').modal('hide');
     queryObject = {
       type : $scope.searchtype,
       shipping : $scope.searchshipping,
       condition: toArray($scope.searchCondition),
-      category: $scope.category,
-      location: $scope.location
+      category: category,
+      location: location
     };
     PostService.query(queryObject).then(function(d) {
     querySwitch(d);

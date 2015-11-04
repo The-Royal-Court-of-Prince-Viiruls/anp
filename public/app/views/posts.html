@@ -331,7 +331,7 @@ $('.tabular.menu .item').tab();
           <div class="column">
             <div class="field">
               <label>Sijainti</label>
-              <select name="location" multiple="" class="ui fluid dropdown">
+              <select ng-model="location" multiple="" class="ui fluid dropdown">
                 <option value="">Valitse</option>
                 <option value="Ahvenanmaa">Ahvenanmaa</option>
                 <option value="Etelä-Karjala">Etelä-Karjala</option>
@@ -357,7 +357,7 @@ $('.tabular.menu .item').tab();
           <div class="column">
             <div class="field">
               <label>Kategoria</label>
-              <select name="category" multiple="" class="ui fluid dropdown">
+              <select ng-model="category" multiple="" class="ui fluid dropdown">
                 <option value="">Valitse</option>
                 <option value="AJO">Ajoneuvot</option>
                 <option value="ELO">Elokuvat</option>

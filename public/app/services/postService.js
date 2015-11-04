@@ -9,11 +9,13 @@ IlmoitusApp.service('PostService', function ($http) {
     this.query = function(query) {
       // $http returns a promise, which has a then function, which also returns a promise
       var promise = $http({
-      url: '/posts/query/test',
+      url: '/posts/query/',
       method: "GET",
       params: { "type": query.type,
                 "shipping":query.shipping,
-                "condition[]":query.condition}
+                "condition[]":query.condition,
+                "category[]":query.category,
+                "location[]":query.location}
    }).then(function(response){
         // The then function here is an opportunity to modify the response
 

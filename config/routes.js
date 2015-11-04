@@ -10,7 +10,6 @@ module.exports = function (app,passport) {
   app.post('/posts/addquestion', isLoggedIn, posts.addQuestion);
   app.get('/posts',posts.listAll);
   app.get('/posts/query',posts.listByQuery);
-  app.get('/posts/query/test',posts.listByQueryTest);
   app.get('/posts/:type',posts.listByType);
   app.get('/posts/user/:id',isLoggedIn, posts.listByUser);
   app.post('/posts/delete/:id', isLoggedIn, posts.removePost);

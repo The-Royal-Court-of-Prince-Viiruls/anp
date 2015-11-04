@@ -47,24 +47,6 @@ exports.addQuestion = function (req, res) {
     });
 }
 
-exports.listByQuery = function(req, res) {
-  var type = req.query.type;
-  var category = req.query.category;
-  var condition = req.query.condition;
-  var location = req.query.location;
-  var shipping = req.query.shipping;
-
-  var collection = db.get().collection('posts');
-
-  collection.find({ "type"     : {$in      : type},
-  "category" : {$in      : category},
-  "condition": {$in      : condition},
-  "location" : {$in      : location},
-  "shipping" : {$in      : shipping}}).toArray(function(err, posts) {
-    res.json(posts);
-  })
-};
-
 exports.listByUser = function(req, res) {
   var userId = req.params.id;
   userId = userId.substring(1);
@@ -83,20 +65,32 @@ exports.listByType = function(req, res) {
   })
 };
 
-exports.listByQueryTest = function(req, res) {
+exports.listByQuery = function(req, res) {
   var type      = req.query.type;
-  console.log("type: " +type);
-  var shipping  = req.query.shipping;
-  console.log("shipping: "+shipping);
-  var shipping  = JSON.parse(shipping);
+  var shipping  = JSON.parse(req.query.shipping);
   var condition = req.query.condition;
+  var category = req.query.category;
+  var location = req.query.location;
+
+  if (typeof location === 'undefined')
+    location = {};
+
+  if (typeof category === 'undefined')
+    category = {};
+
+  console.log("type: "+type);
+  console.log("shipping: "+shipping);
   console.log("condition: "+condition);
+  console.log("category: "+category);
+  console.log("location: "+location);
 
   var collection = db.get().collection('posts');
 
   collection.find({
                     "type"     : type,
+                    "category" : {$in      : category},
                     "condition": {$in      : condition},
+                    "location" : {$in      : location},
                     $or:[
              {$and: [ { "shipping.home": { $eq: shipping.home } }, { "shipping.home": { $eq: true } } ]},
              {$and: [ { "shipping.pickup": { $eq: shipping.pickup } }, { "shipping.pickup": { $eq: true } } ]},

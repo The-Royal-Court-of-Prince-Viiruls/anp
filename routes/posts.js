@@ -10,12 +10,10 @@ exports.add = function (req, res){
 };
 
 exports.removePost = function (req, res) {
-  var userId = req.user;
+  var user = req.user;
   var id = req.params.id.substring(1);
   var postUserId = req.body.user;
-  console.log(userId._id);
-  console.log(postUserId);
-  if (userId._id != postUserId) {
+  if (user._id != postUserId) {
     res.send("Et ole viestin haltija");
   } else {
   var collection = db.get().collection('posts');
@@ -31,20 +29,44 @@ exports.removePost = function (req, res) {
 
 exports.addQuestion = function (req, res) {
 
-  var postToModify;
-
   var collection = db.get().collection('posts');
 
   collection.findOne({ '_id' :  new ObjectId(req.body.questionID) },function(err,postToModify){
   var questions = postToModify.questions;
   if(typeof questions === 'undefined')
     questions = [];
-  questions.push({question: req.body.question,sender: req.body.sender, timestamp: req.body.timestamp});
+  questions.push({_id: new ObjectId(),question: req.body.question,sender: req.body.sender, timestamp: req.body.timestamp});
 
   collection.update({ '_id' :  new ObjectId(req.body.questionID) },{$set : {'questions' : questions}},function(err,post){
     res.json(post);
   });
     });
+}
+
+exports.addReply = function (req, res) {
+  var user = req.user;
+  var postId = req.params.id.substring(1);
+  var questionId = req.body.postId;
+  var postUserId = req.body.user;
+  if (user._id != postUserId) {
+    res.send("Et ole viestin haltija");
+  } else {
+
+  var collection = db.get().collection('posts');
+
+  collection.findOne({'_id' :  new ObjectId(req.body.questionID),
+                      'questions._id' : new ObjectId(questionId)},function(err,questionToModify){
+  console.log(questionToModify);
+  var questions = postToModify.questions;
+  if(typeof questions === 'undefined')
+    questions = [];
+  questions.push({_id: new ObjectID(),question: req.body.question,sender: req.body.sender, timestamp: req.body.timestamp});
+
+  collection.update({ '_id' :  new ObjectId(req.body.questionID) },{$set : {'questions' : questions}},function(err,post){
+    res.json(post);
+  });
+    });
+  }
 }
 
 exports.listByUser = function(req, res) {

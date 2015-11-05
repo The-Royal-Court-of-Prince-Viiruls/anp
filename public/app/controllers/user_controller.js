@@ -9,5 +9,15 @@ UserService.listUsersPosts($rootScope.id).then(function(d) {
    UserService.removePost(post._id, post.user);
  }
 
+ $scope.sendReply = function(postId,questionId,event) {
+   var replyInfo = {
+     postId: postId,
+     questionId: questionId,
+     reply: event.target.parentElement.childNodes[1].value,
+     sender: $rootScope.email,
+     timestamp: Date.now()
+   }
+   UserService.addReply(replyInfo);
+ }
 
 })

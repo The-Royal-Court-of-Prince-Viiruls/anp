@@ -21,4 +21,9 @@ IlmoitusApp.service('UserService', function ($http) {
       console.log(data);
     });
   }
+
+  this.addReply = function(reply) {
+    
+  }
+
 })

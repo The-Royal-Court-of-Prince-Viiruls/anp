@@ -16,15 +16,15 @@ exports.removePost = function (req, res) {
   if (user._id != postUserId) {
     res.send("Et ole viestin haltija");
   } else {
-  var collection = db.get().collection('posts');
-  collection.remove({ '_id' :  new ObjectId(id)},function(err,removed){
-    if (err) {
-      res.json(err);
-    } else {
-    res.json({message:"Ilmoitus poistettiin onnistuneesti!"});
+    var collection = db.get().collection('posts');
+    collection.remove({ '_id' :  new ObjectId(id)},function(err,removed){
+      if (err) {
+        res.json(err);
+      } else {
+        res.json({message:"Ilmoitus poistettiin onnistuneesti!"});
+      }
+    });
   }
-});
-}
 };
 
 exports.addQuestion = function (req, res) {
@@ -32,39 +32,37 @@ exports.addQuestion = function (req, res) {
   var collection = db.get().collection('posts');
 
   collection.findOne({ '_id' :  new ObjectId(req.body.questionID) },function(err,postToModify){
-  var questions = postToModify.questions;
-  if(typeof questions === 'undefined')
+    var questions = postToModify.questions;
+    if(typeof questions === 'undefined')
     questions = [];
-  questions.push({_id: new ObjectId(),question: req.body.question,sender: req.body.sender, timestamp: req.body.timestamp});
+    questions.push({_id: new ObjectId(),question: req.body.question,sender: req.body.sender, timestamp: req.body.timestamp});
 
-  collection.update({ '_id' :  new ObjectId(req.body.questionID) },{$set : {'questions' : questions}},function(err,post){
-    res.json(post);
-  });
+    collection.update({ '_id' :  new ObjectId(req.body.questionID) },{$set : {'questions' : questions}},function(err,post){
+      res.json(post);
     });
+  });
 }
 
 exports.addReply = function (req, res) {
   var user = req.user;
   var postId = req.params.id.substring(1);
-  var questionId = req.body.postId;
-  var postUserId = req.body.user;
-  if (user._id != postUserId) {
+  var questionId = req.body.questionId;
+  var postUserEmail = req.body.sender;
+
+  if (user.local.email != postUserEmail) {
     res.send("Et ole viestin haltija");
   } else {
+    var collection = db.get().collection('posts');
+    collection.findOne({ 'questions._id' : new ObjectId(questionId)},{'_id': 0},function(err,post){
+      for (var question in post.questions) {
+        if (post.questions[question]._id == questionId){
+          post.questions[question]["reply"]=req.body;
+        }
+      }
+      collection.update({ '_id' :  new ObjectId(postId) },{$set : {'questions' : post.questions}},function(err,post){
+        res.json(post);
+      });
 
-  var collection = db.get().collection('posts');
-
-  collection.findOne({'_id' :  new ObjectId(req.body.questionID),
-                      'questions._id' : new ObjectId(questionId)},function(err,questionToModify){
-  console.log(questionToModify);
-  var questions = postToModify.questions;
-  if(typeof questions === 'undefined')
-    questions = [];
-  questions.push({_id: new ObjectID(),question: req.body.question,sender: req.body.sender, timestamp: req.body.timestamp});
-
-  collection.update({ '_id' :  new ObjectId(req.body.questionID) },{$set : {'questions' : questions}},function(err,post){
-    res.json(post);
-  });
     });
   }
 }
@@ -105,23 +103,23 @@ exports.listByQuery = function(req, res) {
   var collection = db.get().collection('posts');
 
   collection.find({
-                    "type"     : type,
-                    "category" : {$in      : category},
-                    "condition": {$in      : condition},
-                    "location" : {$in      : location},
-                    $or:[
-             {$and: [ { "shipping.home": { $eq: shipping.home } }, { "shipping.home": { $eq: true } } ]},
-             {$and: [ { "shipping.pickup": { $eq: shipping.pickup } }, { "shipping.pickup": { $eq: true } } ]},
-             {$and: [ { "shipping.mail": { $eq: shipping.mail } }, { "shipping.mail": { $eq: true } } ]}]
-                    }).toArray(function(err, posts) {
-                  res.json(posts);
-                })
-              };
+    "type"     : type,
+    "category" : {$in      : category},
+    "condition": {$in      : condition},
+    "location" : {$in      : location},
+    $or:[
+      {$and: [ { "shipping.home": { $eq: shipping.home } }, { "shipping.home": { $eq: true } } ]},
+      {$and: [ { "shipping.pickup": { $eq: shipping.pickup } }, { "shipping.pickup": { $eq: true } } ]},
+      {$and: [ { "shipping.mail": { $eq: shipping.mail } }, { "shipping.mail": { $eq: true } } ]}]
+    }).toArray(function(err, posts) {
+      res.json(posts);
+    })
+  };
 
-exports.listAll = function(req, res) {
-  var collection = db.get().collection('posts');
+  exports.listAll = function(req, res) {
+    var collection = db.get().collection('posts');
 
-  collection.find().toArray(function(err, posts) {
-    res.json(posts);
-  })
-};
+    collection.find().toArray(function(err, posts) {
+      res.json(posts);
+    })
+  };

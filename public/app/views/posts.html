@@ -208,8 +208,7 @@ $('.tabular.menu .item').tab();
             <!-- Description -->
             <div class="content">
               <p>{{free.description}}</p>
-              <p>Ilmoitus jätetty {{ free.time | date : 'd.M.yyyy'}} <br>
-              Kunto: {{free.condition}}</p>
+              <p> Kunto: {{free.condition}}</p>
             </div>
 
             <!-- Contact information -->
@@ -224,6 +223,8 @@ $('.tabular.menu .item').tab();
             </div>
 
             <div class="content">
+              <div class="ui grid">
+                <div class="twelve wide column">
               <!-- Shipping methods -->
               <div class="ui label">
                 Toimitustavat:
@@ -240,6 +241,13 @@ $('.tabular.menu .item').tab();
                 </div>
               </div>
             </div>
+            <div class="four wide right aligned column">
+              <div class="ui label">
+                {{ free.time | date : 'd.M.yyyy'}}
+              </div>
+            </div>
+            </div>
+          </div>
 
 
             <div class="ui horizontal divider">Ilmoitusta koskevat kysymykset</div>
@@ -248,11 +256,11 @@ $('.tabular.menu .item').tab();
 
               <!-- Comment section -->
               <div class="ui list">
-                <div class="item">
+                <div class="item" ng-repeat="kommentti in free.questions">
                   <i class="blue help icon"></i>
                   <div class="content">
-                    <div class="header">Kysyjän nimi</div>
-                    <div class="description">Kysymys tavarasta jota ilmoitus koskee</div>
+                    <div class="header">{{kommentti.sender}}</div>
+                    <div class="description">{{kommentti.question}}</div>
                     <div class="list">
                       <div class="item">
                         <i class="green checkmark icon"></i>
@@ -268,7 +276,9 @@ $('.tabular.menu .item').tab();
 
               <form class="ui fluid form">
                 <div class="field">
+
                 <div unhide access="user" class="ui disabled fluid action input">
+
                   <input type="text" placeholder="Lisää oma kysymyksesi">
                   <div unhide access="user" class="ui disabled purple button" ng-click="sendQuestion(free._id,$event)">Lähetä</div>
                 </div>

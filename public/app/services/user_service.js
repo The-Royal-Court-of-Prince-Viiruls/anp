@@ -20,4 +20,11 @@ IlmoitusApp.service('UserService', function ($http) {
     .success(function(data, status, headers, config){
     });
   }
+
+  this.addReply = function(reply,postId) {
+    $http.post('/posts/addReply/:'+postId, reply)
+    .success(function(data, status, headers, config){
+    });
+  }
+
 })

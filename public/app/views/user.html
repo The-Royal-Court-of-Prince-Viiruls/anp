@@ -21,7 +21,7 @@
         </div>
         <div class="item">
           <i class="mail icon"></i>
-          <div class="content"> {{email}}</div>
+          <div class="content"> {{user.email}}</div>
         </div>
       </div>
     </div>
@@ -35,17 +35,53 @@
         <tr><th>Tyyppi</th>
           <th>Otsikko</th>
           <th>Lisätty</th>
-          <th></th>
+          <th colspan="3"></th>
         </tr></thead>
         <tbody>
           <tr ng-repeat="posti in usersPosts">
             <td>{{posti.type}}</td>
             <td>{{posti.item}}</td>
             <td>{{ posti.time | date : 'd.M.yyyy'}}</td>
-            <td class="center aligned"><i class="large red remove icon" ng-click="removePost(posti)"></i></td>
+            <td class="center aligned"><a href=""><i class="large black unhide icon"></i></a></td>
+            <td class="center aligned"><a href=""><i class="large black comments icon" ng-click="openCommentModal(posti)"></i></a></td>
+            <td class="center aligned"><a href=""><i class="large red remove icon" ng-click="removePost(posti)"></i></a></td>
           </tr>
         </tbody>
-          </table>
+      </table>
+
+    </div>
+  </div>
+
+  <!-- Modal for viewing the comments of a post -->
+  <div class="ui modal" id="commentModal">
+    <i class="close icon"></i>
+
+    <div class="header">
+      Ilmoitustasi koskevat kysymykset
+    </div>
+    <!-- Show if there are no comments -->
+    <div class="content" ng-show="!(postsComments.length)">
+      Ei kysymyksiä!
+    </div>
+    <!-- List comments if there are any -->
+    <div class="content" ng-show="postsComments.length">
+      <div class="ui relaxed divided list">
+        <div class="ui two column grid">
+
+          <div class="row" ng-repeat="kysymykset in postsComments">
+            <div class="column">
+              <div class="header">{{kysymykset.question}}</div>
+              <div class="description">({{ kysymykset.timestamp | date : 'd.M.yyyy'}})</div>
+            </div>
+            <div class="column">
+              <div class="ui fluid action input">
+                <input type="text" placeholder="Kirjoita vastauksesi tähän">
+                <div class="ui purple button" ng-click="sendReply(kysymykset._id, $event)">Lähetä</div>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>
+    </div>
+  </div>

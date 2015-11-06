@@ -43,7 +43,7 @@
             <td>{{posti.item}}</td>
             <td>{{ posti.time | date : 'd.M.yyyy'}}</td>
             <td class="center aligned"><a href=""><i class="large black unhide icon"></i></a></td>
-            <td class="center aligned"><a href=""><i class="large orange comments icon" ng-click="openCommentModal(posti)"></i></a></td>
+            <td class="center aligned"><a href=""><i class="large black comments icon" ng-click="openCommentModal(posti)"></i></a></td>
             <td class="center aligned"><a href=""><i class="large red remove icon" ng-click="removePost(posti)"></i></a></td>
           </tr>
         </tbody>
@@ -52,19 +52,26 @@
     </div>
   </div>
 
+  <!-- Modal for viewing the comments of a post -->
   <div class="ui modal" id="commentModal">
     <i class="close icon"></i>
+
     <div class="header">
       Ilmoitustasi koskevat kysymykset
     </div>
-    <div class="content">
+    <!-- Show if there are no comments -->
+    <div class="content" ng-show="!(postsComments.length)">
+      Ei kysymyksiä!
+    </div>
+    <!-- List comments if there are any -->
+    <div class="content" ng-show="postsComments.length">
       <div class="ui relaxed divided list">
         <div class="ui two column grid">
 
           <div class="row" ng-repeat="kysymykset in postsComments">
             <div class="column">
-                <div class="header">{{kysymykset.question}}</div>
-                <div class="description">({{ kysymykset.timestamp | date : 'd.M.yyyy'}})</div>
+              <div class="header">{{kysymykset.question}}</div>
+              <div class="description">({{ kysymykset.timestamp | date : 'd.M.yyyy'}})</div>
             </div>
             <div class="column">
               <div class="ui fluid action input">

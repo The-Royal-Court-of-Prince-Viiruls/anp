@@ -22,8 +22,10 @@ IlmoitusApp.service('UserService', function ($http) {
     });
   }
 
-  this.addReply = function(reply) {
-    
+  this.addReply = function(reply,postId) {
+    $http.post('/posts/addReply/:'+postId, reply)
+    .success(function(data, status, headers, config){
+    });
   }
 
 })

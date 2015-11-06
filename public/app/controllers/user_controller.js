@@ -25,13 +25,12 @@ UserService.listUsersPosts($rootScope.id).then(function(d) {
 
  $scope.sendReply = function(questionId, event) {
    var replyInfo = {
-     postId: $scope.postId,
      questionId: questionId,
      reply: event.target.parentElement.childNodes[1].value,
      sender: $rootScope.email,
      timestamp: Date.now()
    }
-   UserService.addReply(replyInfo);
+   UserService.addReply(replyInfo,$scope.postId);
  }
 
 })

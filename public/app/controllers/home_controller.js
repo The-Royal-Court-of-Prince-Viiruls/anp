@@ -1,10 +1,4 @@
-IlmoitusApp.controller('HomeController', function ($scope,$rootScope, PostService, SignupService, LoginService, $location) {
-  // Check if user is logged in
-  $scope.isLoggedIn = false;
-
-  $scope.$on('logged-value-changed', function(event, args) {
-    $scope.isLoggedIn = args.isLogged.data;
-});
+IlmoitusApp.controller('HomeController', function ($scope,$rootScope, SignupService, LoginService, $location,$window) {
   // Check if the user has just registered
   $scope.showSuccess = SignupService.getsignUpSuccess();
   // Login error message
@@ -38,13 +32,8 @@ IlmoitusApp.controller('HomeController', function ($scope,$rootScope, PostServic
 
   $scope.logout = function() {
     LoginService.logout().then(function(data) {
-      // If login is successful, show success message and redirect to profile
-      for (var prop in $rootScope) {
-    if (prop.substring(0,1) !== '$') {
-        delete $rootScope[prop];
-    }
-}
-    LoginService.isLoggedIn();
+    $location.path('/');
+    $window.location.reload();
     });
   };
 
@@ -59,10 +48,8 @@ IlmoitusApp.controller('HomeController', function ($scope,$rootScope, PostServic
         // If there was an error show error message
         $scope.showLoginError = data.message[0];
     } else {
-      // If login is successful, show success message and redirect to profile
-    LoginService.isLoggedIn();
-    LoginService.userInfo();
-    $scope.closeLogin();
+    $location.path('/');
+    $window.location.reload();
     }
     });
   };

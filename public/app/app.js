@@ -1,12 +1,11 @@
 var IlmoitusApp = angular.module('IlmoitusApp', ['firebase', 'ngRoute']);
 
 IlmoitusApp.config(function ($routeProvider) {
-
   var isLoggedIn = function($q, $timeout, $http, $location, $rootScope){
     var deferred = $q.defer();
     $http.get('/loggedin')
     .success(function(data) {
-      if (data === true){
+      if (data){
         deferred.resolve();
       } else {
         deferred.reject();

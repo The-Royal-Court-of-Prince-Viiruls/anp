@@ -1,7 +1,7 @@
 IlmoitusApp.controller('UserController', function ($scope, PostService, UserService, $rootScope) {
 $scope.usersPosts = [];
 
-UserService.listUsersPosts($rootScope.id).then(function(d) {
+UserService.listUsersPosts($rootScope.user.id).then(function(d) {
     $scope.usersPosts = d;
  });
 

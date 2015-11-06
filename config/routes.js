@@ -15,10 +15,6 @@ module.exports = function (app,passport) {
   app.get('/posts/user/:id',isLoggedIn, posts.listByUser);
   app.post('/posts/delete/:id', isLoggedIn, posts.removePost);
 
-  app.get('/sessioninfo', isLoggedIn, function(req,res){
-    res.json({id: req.user._id, email: req.user.local.email});
-  });
-
   app.get('/signupsuccess',function(req,res){
     res.json({path: "/"});
   });
@@ -28,11 +24,11 @@ module.exports = function (app,passport) {
   });
 
   app.get('/loginsuccess',function(req,res){
-    res.json({path: "/"});
+    res.json({});
   });
 
   app.get('/loginfail',function(req,res){
-    res.json({path:"/login",message: req.flash('loginMessage')});
+    res.json({message: req.flash('loginMessage')});
   });
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
@@ -55,7 +51,7 @@ module.exports = function (app,passport) {
 
   // route to test if the user is logged in or not
   app.get('/loggedin', function(req, res) {
-     res.json(req.isAuthenticated() ? true : false);
+     res.json(req.isAuthenticated() ? req.user : false);
    });
 
   function isLoggedIn(req, res, next) {

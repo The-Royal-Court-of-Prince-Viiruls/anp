@@ -268,9 +268,9 @@ $('.tabular.menu .item').tab();
 
               <form class="ui fluid form">
                 <div class="field">
-                <div class="ng-class:{true:'ui fluid action input', false:'ui fluid disabled action input'}[isLoggedIn]">
+                <div unhide access="user" class="ui disabled fluid action input">
                   <input type="text" placeholder="Lisää oma kysymyksesi">
-                  <div class="ng-class:{true:'ui purple button', false:'ui disabled purple button'}[isLoggedIn]" ng-click="sendQuestion(free._id,$event)">Lähetä</div>
+                  <div unhide access="user" class="ui disabled purple button" ng-click="sendQuestion(free._id,$event)">Lähetä</div>
                 </div>
               </div>
               </form>

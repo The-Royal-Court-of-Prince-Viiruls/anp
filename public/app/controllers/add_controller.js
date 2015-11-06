@@ -1,4 +1,4 @@
-IlmoitusApp.controller('AddController', function ($scope,$rootScope, FirebaseService, PostService, LoginService) {
+IlmoitusApp.controller('AddController', function ($scope,$rootScope, PostService) {
 
 $scope.newGSM = '';
 $scope.newEmail = '';
@@ -23,21 +23,9 @@ $scope.newShippingMethods = {
         email: $scope.newEmail
       },
       time: Date.now(),
-      user: $rootScope.userinfo.id,
+      user: $rootScope.id,
     });
-    FirebaseService.addPost({
-      type: $scope.newType,
-      item: $scope.newItem,
-      category: $scope.newCategory,
-      description: $scope.newDescription,
-      condition: $scope.newCondition,
-      location: $scope.newLocation,
-      shipping: $scope.newShippingMethods,
-      contact: {
-        gsm: $scope.newGSM,
-        email: $scope.newEmail
-      }
-    });
+
   }
 
 })

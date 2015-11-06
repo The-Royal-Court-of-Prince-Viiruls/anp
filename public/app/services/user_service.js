@@ -18,7 +18,6 @@ IlmoitusApp.service('UserService', function ($http) {
   this.removePost = function(id, user) {
     $http.post('/posts/delete/:'+id, {user: user})
     .success(function(data, status, headers, config){
-      console.log(data);
     });
   }
 })

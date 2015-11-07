@@ -276,11 +276,16 @@ $('.tabular.menu .item').tab();
 
               <form class="ui fluid form">
                 <div class="field">
+                  <div restrict access="guest" class="ui disabled fluid action input">
 
-                <div unhide access="user" class="ui disabled fluid action input">
+                    <input type="text" placeholder="Lisää oma kysymyksesi">
+                    <div restrict access="guest" class="ui disabled purple button" ng-click="sendQuestion(free._id,$event)">Lähetä</div>
+                  </div>
+
+                <div restrict access="user" class="ui fluid action input">
 
                   <input type="text" placeholder="Lisää oma kysymyksesi">
-                  <div unhide access="user" class="ui disabled purple button" ng-click="sendQuestion(free._id,$event)">Lähetä</div>
+                  <div restrict access="user" class="ui purple button" ng-click="sendQuestion(free._id,$event)">Lähetä</div>
                 </div>
               </div>
               </form>

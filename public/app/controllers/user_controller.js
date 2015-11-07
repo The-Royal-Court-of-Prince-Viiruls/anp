@@ -2,6 +2,7 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
   $scope.usersPosts = [];
   $scope.postId = "";
   $scope.postsComments = [];
+  $scope.post = "";
 
   UserService.listUsersPosts($rootScope.user.id).then(function(d) {
     $scope.usersPosts = d;
@@ -24,6 +25,13 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
     $scope.postsComments = posti.questions;
     $scope.postId = posti._id;
     $('#commentModal')
+    .modal('show')
+    ;
+  }
+
+  $scope.openPostModal = function(posti) {
+    $scope.post = posti;
+    $('#postModal')
     .modal('show')
     ;
   }

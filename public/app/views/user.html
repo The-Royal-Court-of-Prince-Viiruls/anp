@@ -30,21 +30,23 @@
     <a class="ui purple ribbon label">Omat ilmoitukseni</a>
     <p></p>
 
-    <table class="ui purple celled table">
+    <table class="ui purple table" id="usersPostsTable">
       <thead>
-        <tr><th>Tyyppi</th>
+        <tr>
+          <th>Tyyppi</th>
           <th>Otsikko</th>
           <th>Lisätty</th>
           <th></th>
-        </tr></thead>
-        <tbody>
-          <tr ng-repeat="posti in usersPosts">
-            <td>{{posti.type}}</td>
-            <td>{{posti.item}}</td>
-            <td>{{ posti.time | date : 'd.M.yyyy'}}</td>
-            <td class="center aligned"><a href=""><i class="large black unhide icon"></i></a>
-              <a href=""><i ng-class="{true : 'large green comments icon', false : 'large black comments icon'}[unansweredQuestions(posti)]" ng-click="openCommentModal(posti)"></i></a>
-              <a href=""><i class="large red remove icon" ng-click="removePost(posti)"></i></a></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="posti in usersPosts">
+          <td>{{posti.type}}</td>
+          <td>{{posti.item}}</td>
+          <td>{{ posti.time | date : 'd.M.yyyy'}}</td>
+          <td><a href=""><i class="large black unhide icon" ng-click="openPostModal(posti)"></i></a>
+            <a href=""><i ng-class="{true : 'large green comments icon', false : 'large black comments icon'}[unansweredQuestions(posti)]" ng-click="openCommentModal(posti)"></i></a>
+            <a href=""><i class="large red remove icon" ng-click="removePost(posti)"></i></a></td>
           </tr>
         </tbody>
       </table>
@@ -85,3 +87,52 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal for viewing a post -->
+  <div class="ui modal" id="postModal">
+    <i class="close icon"></i>
+
+    <div class="header">
+      Ilmoituksesi tiedot
+    </div>
+
+    <!-- List post information -->
+    <div class="content">
+
+      <h4 class="ui header">{{post.item}} ({{post.location}})</h4>
+
+      <p>{{post.description}}</p>
+      <p> Kunto: {{post.condition}}</p>
+
+      <!-- Contact information -->
+      <div ng-if="post.contact.gsm">
+        <i class="purple phone icon"></i> {{post.contact.gsm}}
+      </div>
+
+      <div ng-if="post.contact.email.length">
+        <i class="purple mail icon"></i> {{post.contact.email}}
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="ui medium label">
+        Toimitustavat:
+        <div class="detail" ng-if="post.shipping.mail===true">
+          <i class="purple mail icon"></i> Postitus
+        </div>
+
+        <div class="detail" ng-if="post.shipping.pickup===true">
+          <i class="purple car icon"></i> Nouto
+        </div>
+
+        <div class="detail" ng-if="post.shipping.home===true">
+          <i class="purple home icon"></i> Kotiintoimitus
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</div>

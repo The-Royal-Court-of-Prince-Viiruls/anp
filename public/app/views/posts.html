@@ -259,14 +259,14 @@ $('.tabular.menu .item').tab();
                 <div class="item" ng-repeat="kommentti in free.questions">
                   <i class="blue help icon"></i>
                   <div class="content">
-                    <div class="header">{{kommentti.sender}}</div>
+                    <div class="header">Kysyjän nimi</div>
                     <div class="description">{{kommentti.question}}</div>
                     <div class="list">
                       <div class="item">
                         <i class="green checkmark icon"></i>
                         <div class="content">
                           <div class="header">Vastaajan nimi</div>
-                          <div class="description">Vastaus ylläolevaan kysymykseen</div>
+                          <div class="description">{{kommentti.reply.reply}}</div>
                         </div>
                       </div>
                     </div>
@@ -276,19 +276,16 @@ $('.tabular.menu .item').tab();
 
               <form class="ui fluid form">
                 <div class="field">
-                  <div restrict access="guest" class="ui disabled fluid action input">
-
-                    <input type="text" placeholder="Lisää oma kysymyksesi">
-                    <div restrict access="guest" class="ui disabled purple button" ng-click="sendQuestion(free._id,$event)">Lähetä</div>
-                  </div>
-
                 <div restrict access="user" class="ui fluid action input">
-
                   <input type="text" placeholder="Lisää oma kysymyksesi">
                   <div restrict access="user" class="ui purple button" ng-click="sendQuestion(free._id,$event)">Lähetä</div>
                 </div>
               </div>
               </form>
+
+              <div restrict access="guest" class="content">
+                Kirjautuneena käyttäjänä voit esittää kysymyksiä.
+              </div>
 
             </div>
             <!-- End of post information -->

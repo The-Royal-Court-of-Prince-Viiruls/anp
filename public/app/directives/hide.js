@@ -19,7 +19,6 @@ IlmoitusApp.directive('unhide', function(AuthService){
             AuthService.generateRoleData("guest");
           }
   			var user = AuthService.getUser();
-        console.log(user);
   			var attributes = attr.access.split(" ");
   			for(var i in attributes){
   				if(user.role == attributes[i]){
@@ -29,6 +28,7 @@ IlmoitusApp.directive('unhide', function(AuthService){
 
   			if(!accessDenied){
           element[0].className=replaceAll(attr.class,"disabled ","");
+          console.log(element[0].className);
         }
 
         })

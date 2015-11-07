@@ -11,7 +11,6 @@ UserService.listUsersPosts($rootScope.user.id).then(function(d) {
    var i = posti.questions.length;
    while (i--) {
      if (!posti.questions[i].contains(reply)) {
-       console.log('tru')
        return true;
      }
    }

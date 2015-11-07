@@ -1,4 +1,6 @@
+
 IlmoitusApp.controller('ListController', function ($scope, PostService,$rootScope,AuthService) {
+
   $scope.freeItems = [];
   $scope.searchItems = [];
   $scope.changeItems =  [];

@@ -7,6 +7,7 @@
   <div class="ui secondary segment">
 
     <p>Täällä voit (joskus tulevaisuudessa) hallinnoida omia ilmoituksiasi ja muokata käyttäjätietojasi.</p>
+
   </div>
   <div class="ui segment">
     <p></p>
@@ -30,21 +31,23 @@
     <a class="ui purple ribbon label">Omat ilmoitukseni</a>
     <p></p>
 
-    <table class="ui purple celled table">
+    <table class="ui purple table" id="usersPostsTable">
       <thead>
-        <tr><th>Tyyppi</th>
+        <tr>
+          <th>Tyyppi</th>
           <th>Otsikko</th>
           <th>Lisätty</th>
-          <th colspan="3"></th>
-        </tr></thead>
-        <tbody>
-          <tr ng-repeat="posti in usersPosts">
-            <td>{{posti.type}}</td>
-            <td>{{posti.item}}</td>
-            <td>{{ posti.time | date : 'd.M.yyyy'}}</td>
-            <td class="center aligned"><a href=""><i class="large black unhide icon"></i></a></td>
-            <td class="center aligned"><a href=""><i class="ng-class="{true : 'large green comments icon', false : 'large black comments icon'}[unansweredQuestions()]"" ng-click="openCommentModal(posti)"></i></a></td>
-            <td class="center aligned"><a href=""><i class="large red remove icon" ng-click="removePost(posti)"></i></a></td>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="posti in usersPosts">
+          <td>{{posti.type}}</td>
+          <td>{{posti.item}}</td>
+          <td>{{ posti.time | date : 'd.M.yyyy'}}</td>
+          <td><a href=""><i class="large black unhide icon" ng-click="openPostModal(posti)"></i></a>
+            <a href=""><i ng-class="{true : 'large purple comments icon', false : 'large black comments icon'}[unansweredQuestions(posti)]" ng-click="openCommentModal(posti)"></i></a>
+            <a href=""><i class="large red remove icon" ng-click="removePost(posti)"></i></a></td>
           </tr>
         </tbody>
       </table>
@@ -65,23 +68,70 @@
     </div>
     <!-- List comments if there are any -->
     <div class="content" ng-show="postsComments.length">
-      <div class="ui relaxed divided list">
-        <div class="ui two column grid">
+      <div class="ui two column grid">
 
-          <div class="row" ng-repeat="kysymykset in postsComments">
-            <div class="column">
-              <div class="header">{{kysymykset.question}}</div>
-              <div class="description">({{ kysymykset.timestamp | date : 'd.M.yyyy'}})</div>
+        <div class="row" ng-repeat="kysymykset in postsComments">
+          <div class="column">
+            <div class="header">{{kysymykset.question}}</div>
+            <div class="description">({{ kysymykset.timestamp | date : 'd.M.yyyy'}})</div>
+          </div>
+          <div class="column">
+            <div class="ui fluid icon input" ng-if="!(kysymykset.reply)">
+              <i class="purple right arrow link icon" ng-click="sendReply(kysymykset._id, $event)"></i>
+              <input type="text" placeholder="Kirjoita vastauksesi tähän">
             </div>
-            <div class="column">
-              <div class="ui fluid action input">
-                <input type="text" placeholder="Kirjoita vastauksesi tähän">
-                <div class="ui purple button" ng-click="sendReply(kysymykset._id, $event)">Lähetä</div>
-              </div>
+            <div class="content" ng-if="kysymykset.reply">
+              <p>{{kysymykset.reply.reply}}</p>
             </div>
           </div>
+        </div>
 
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for viewing a post -->
+  <div class="ui modal" id="postModal">
+    <i class="close icon"></i>
+
+    <div class="header">
+      Ilmoituksesi tiedot
+    </div>
+
+    <!-- Post information -->
+    <div class="content">
+
+      <h4 class="ui header">{{post.item}} ({{post.location}})</h4>
+
+      <p>{{post.description}}</p>
+      <p> Kunto: {{post.condition}}</p>
+
+      <!-- Contact information -->
+      <div ng-if="post.contact.gsm">
+        <i class="purple phone icon"></i> {{post.contact.gsm}}
+      </div>
+
+      <div ng-if="post.contact.email.length">
+        <i class="purple mail icon"></i> {{post.contact.email}}
+      </div>
+    </div>
+
+    <!-- Shipping information -->
+    <div class="actions">
+      <div class="ui medium label">
+        Toimitustavat:
+        <div class="detail" ng-if="post.shipping.mail===true">
+          <i class="purple mail icon"></i> Postitus
+        </div>
+
+        <div class="detail" ng-if="post.shipping.pickup===true">
+          <i class="purple car icon"></i> Nouto
+        </div>
+
+        <div class="detail" ng-if="post.shipping.home===true">
+          <i class="purple home icon"></i> Kotiintoimitus
         </div>
       </div>
     </div>
+
   </div>

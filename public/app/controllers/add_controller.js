@@ -23,7 +23,7 @@ $scope.newShippingMethods = {
         email: $scope.newEmail
       },
       time: Date.now(),
-      user: $rootScope.id,
+      user: $rootScope.user.id,
     });
 
   }

@@ -1,9 +1,10 @@
-IlmoitusApp.controller('UserController', function ($scope, PostService, UserService, $rootScope) {
-$scope.usersPosts = [];
-$scope.postId = "";
-$scope.postsComments = [];
+IlmoitusApp.controller('UserController', function ($scope, PostService, UserService, $rootScope, $window) {
+  $scope.usersPosts = [];
+  $scope.postId = "";
+  $scope.postsComments = [];
+  $scope.post = "";
 
-UserService.listUsersPosts($rootScope.user.id).then(function(d) {
+  UserService.listUsersPosts($rootScope.user.id).then(function(d) {
     $scope.usersPosts = d;
  });
 

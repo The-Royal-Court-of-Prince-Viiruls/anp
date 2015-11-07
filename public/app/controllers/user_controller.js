@@ -7,6 +7,17 @@ UserService.listUsersPosts($rootScope.user.id).then(function(d) {
     $scope.usersPosts = d;
  });
 
+ $scope.unansweredQuestions = function(posti) {
+   var i = posti.questions.length;
+   while (i--) {
+     if (!posti.questions[i].contains(reply)) {
+       console.log('tru')
+       return true;
+     }
+   }
+   return false
+ }
+
  $scope.openCommentModal = function(posti) {
    $scope.postsComments = posti.questions;
    $scope.postId = posti._id;

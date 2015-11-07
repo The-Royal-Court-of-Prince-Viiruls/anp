@@ -12,6 +12,7 @@ IlmoitusApp.directive('restrict', function(AuthService, $http, AuthService, $roo
          if (d.data) {
            $rootScope.userLoggedIn = true;
            $rootScope.user = d.data.local;
+           $rootScope.user.id = d.data._id;
            AuthService.generateRoleData("user");
          } else {
            $rootScope.userLoggedIn = false;

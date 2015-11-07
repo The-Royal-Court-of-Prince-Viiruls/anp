@@ -48,7 +48,6 @@ IlmoitusApp.controller('HomeController', function ($scope,$rootScope, SignupServ
         // If there was an error show error message
         $scope.showLoginError = data.message[0];
     } else {
-    $location.path('/');
     $window.location.reload();
     }
     });

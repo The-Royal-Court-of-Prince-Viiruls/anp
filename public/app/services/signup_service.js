@@ -14,7 +14,7 @@ IlmoitusApp.service('SignupService', function ($http, $timeout) {
   };
 
   this.signUp = function (user) {
-    var promise = $http.post('/signup', {email: user.email, password: user.password})
+    var promise = $http.post('/signup', {name:user.name,email: user.email, password: user.password})
     .then(function(response){
       // The then function here is an opportunity to modify the response
       //$location.path( response.data.path );

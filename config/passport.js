@@ -59,6 +59,7 @@ module.exports = function(passport) {
 
           var newuser = {
             local : {
+              name: req.body.name,
               email: email,
               password: generateHash(password)
             }

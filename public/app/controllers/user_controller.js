@@ -1,4 +1,4 @@
-IlmoitusApp.controller('UserController', function ($scope, PostService, UserService, $rootScope) {
+IlmoitusApp.controller('UserController', function ($scope, PostService, UserService, $rootScope, $window) {
   $scope.usersPosts = [];
   $scope.postId = "";
   $scope.postsComments = [];
@@ -6,6 +6,7 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
 
   UserService.listUsersPosts($rootScope.user.id).then(function(d) {
     $scope.usersPosts = d;
+    console.log($rootScope.user.id);
   });
 
   $scope.unansweredQuestions = function(posti) {
@@ -22,11 +23,14 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
   }
 
   $scope.openCommentModal = function(posti) {
+    $scope.post = posti;
     $scope.postsComments = posti.questions;
     $scope.postId = posti._id;
+    // Modal doesn't scale right (Semantic bug); workoround:
     $('#commentModal')
+    .modal({ detachable:false, observeChanges:true })
     .modal('show')
-    ;
+    .modal('refresh');
   }
 
   $scope.openPostModal = function(posti) {
@@ -47,11 +51,12 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
   $scope.sendReply = function(questionId, event) {
     var replyInfo = {
       questionId: questionId,
-      reply: event.target.parentElement.childNodes[1].value,
+      reply: event.target.parentElement.childNodes[3].value,
       sender: $rootScope.user.email,
       timestamp: Date.now()
     }
     UserService.addReply(replyInfo,$scope.postId);
+    $scope.openCommentModal($scope.post);
   }
 
 })

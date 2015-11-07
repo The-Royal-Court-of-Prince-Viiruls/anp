@@ -7,6 +7,7 @@
   <div class="ui secondary segment">
 
     <p>Täällä voit (joskus tulevaisuudessa) hallinnoida omia ilmoituksiasi ja muokata käyttäjätietojasi.</p>
+
   </div>
   <div class="ui segment">
     <p></p>
@@ -45,7 +46,7 @@
           <td>{{posti.item}}</td>
           <td>{{ posti.time | date : 'd.M.yyyy'}}</td>
           <td><a href=""><i class="large black unhide icon" ng-click="openPostModal(posti)"></i></a>
-            <a href=""><i ng-class="{true : 'large green comments icon', false : 'large black comments icon'}[unansweredQuestions(posti)]" ng-click="openCommentModal(posti)"></i></a>
+            <a href=""><i ng-class="{true : 'large purple comments icon', false : 'large black comments icon'}[unansweredQuestions(posti)]" ng-click="openCommentModal(posti)"></i></a>
             <a href=""><i class="large red remove icon" ng-click="removePost(posti)"></i></a></td>
           </tr>
         </tbody>
@@ -67,23 +68,24 @@
     </div>
     <!-- List comments if there are any -->
     <div class="content" ng-show="postsComments.length">
-      <div class="ui relaxed divided list">
-        <div class="ui two column grid">
+      <div class="ui two column grid">
 
-          <div class="row" ng-repeat="kysymykset in postsComments">
-            <div class="column">
-              <div class="header">{{kysymykset.question}}</div>
-              <div class="description">({{ kysymykset.timestamp | date : 'd.M.yyyy'}})</div>
+        <div class="row" ng-repeat="kysymykset in postsComments">
+          <div class="column">
+            <div class="header">{{kysymykset.question}}</div>
+            <div class="description">({{ kysymykset.timestamp | date : 'd.M.yyyy'}})</div>
+          </div>
+          <div class="column">
+            <div class="ui fluid icon input" ng-if="!(kysymykset.reply)">
+              <i class="purple right arrow link icon" ng-click="sendReply(kysymykset._id, $event)"></i>
+              <input type="text" placeholder="Kirjoita vastauksesi tähän">
             </div>
-            <div class="column">
-              <div class="ui fluid action input">
-                <input type="text" placeholder="Kirjoita vastauksesi tähän">
-                <div class="ui purple button" ng-click="sendReply(kysymykset._id, $event)">Lähetä</div>
-              </div>
+            <div class="content" ng-if="kysymykset.reply">
+              <p>{{kysymykset.reply.reply}}</p>
             </div>
           </div>
-
         </div>
+
       </div>
     </div>
   </div>
@@ -96,7 +98,7 @@
       Ilmoituksesi tiedot
     </div>
 
-    <!-- List post information -->
+    <!-- Post information -->
     <div class="content">
 
       <h4 class="ui header">{{post.item}} ({{post.location}})</h4>
@@ -114,6 +116,7 @@
       </div>
     </div>
 
+    <!-- Shipping information -->
     <div class="actions">
       <div class="ui medium label">
         Toimitustavat:
@@ -132,7 +135,3 @@
     </div>
 
   </div>
-
-</div>
-
-</div>

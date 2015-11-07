@@ -1,7 +1,16 @@
-IlmoitusApp.controller('ListController', function ($scope, PostService, $rootScope) {
+
+IlmoitusApp.controller('ListController', function ($scope, PostService,$rootScope,AuthService) {
+
   $scope.freeItems = [];
   $scope.searchItems = [];
   $scope.changeItems =  [];
+
+  $scope.user = "guest";
+
+  askAuth = function(){
+      $scope.user = AuthService.getUser().role;
+  }
+
 
   $scope.sendQuestion = function(id,event) {
     var questionInfo = {
@@ -93,6 +102,7 @@ IlmoitusApp.controller('ListController', function ($scope, PostService, $rootSco
   };
 
   $scope.accordion = function() {
+    askAuth();
     $('.ui.accordion')
     .accordion();
   };

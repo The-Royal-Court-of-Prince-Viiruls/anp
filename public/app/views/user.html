@@ -35,16 +35,16 @@
         <tr><th>Tyyppi</th>
           <th>Otsikko</th>
           <th>Lisätty</th>
-          <th colspan="3"></th>
+          <th></th>
         </tr></thead>
         <tbody>
           <tr ng-repeat="posti in usersPosts">
             <td>{{posti.type}}</td>
             <td>{{posti.item}}</td>
             <td>{{ posti.time | date : 'd.M.yyyy'}}</td>
-            <td class="center aligned"><a href=""><i class="large black unhide icon"></i></a></td>
-            <td class="center aligned"><a href=""><i class="ng-class="{true : 'large green comments icon', false : 'large black comments icon'}[unansweredQuestions()]"" ng-click="openCommentModal(posti)"></i></a></td>
-            <td class="center aligned"><a href=""><i class="large red remove icon" ng-click="removePost(posti)"></i></a></td>
+            <td class="center aligned"><a href=""><i class="large black unhide icon"></i></a>
+              <a href=""><i ng-class="{true : 'large green comments icon', false : 'large black comments icon'}[unansweredQuestions(posti)]" ng-click="openCommentModal(posti)"></i></a>
+              <a href=""><i class="large red remove icon" ng-click="removePost(posti)"></i></a></td>
           </tr>
         </tbody>
       </table>

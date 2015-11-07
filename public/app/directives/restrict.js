@@ -7,7 +7,7 @@ IlmoitusApp.directive('restrict', function(AuthService, $http, AuthService, $roo
   		},
   		compile:  function(element, attr, linker){
         var accessDenied = true;
-
+        if (AuthService.getUser().role==="guest"){
        AuthService.isUserAuthenticated().then(function(d){
          if (d.data) {
            $rootScope.userLoggedIn = true;
@@ -31,8 +31,22 @@ IlmoitusApp.directive('restrict', function(AuthService, $http, AuthService, $roo
    				element.children().remove();
    				element.remove();
    			}
-        
+
        })
+     } else {
+       var user = AuthService.getUser();
+       var attributes = attr.access.split(" ");
+       for(var i in attributes){
+         if(user.role == attributes[i]){
+           accessDenied = false;
+         }
+       }
+
+       if(accessDenied){
+         element.children().remove();
+         element.remove();
+       }
+     }
 
   		}
   	}

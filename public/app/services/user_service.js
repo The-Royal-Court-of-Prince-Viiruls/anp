@@ -29,7 +29,6 @@ IlmoitusApp.service('UserService', function ($http) {
     }).then(function(response){
       return response.data;
     });
-    // Return the promise to the controller
     return promise;
   }
 })

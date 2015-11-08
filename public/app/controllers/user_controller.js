@@ -6,7 +6,6 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
 
   UserService.listUsersPosts($rootScope.user.id).then(function(d) {
     $scope.usersPosts = d;
-    console.log($rootScope.user.id);
   });
 
   $scope.unansweredQuestions = function(posti) {
@@ -55,8 +54,13 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
       sender: $rootScope.user.email,
       timestamp: Date.now()
     }
-    UserService.addReply(replyInfo,$scope.postId);
-    $scope.openCommentModal($scope.post);
+    // UserService.addReply(replyInfo,$scope.postId);
+    for (var comment in $scope.postsComments) {
+      if(questionId === $scope.postsComments[comment]._id){
+        $scope.postsComments[comment]["reply"]= replyInfo;
+      }
+    }
+    console.log($scope.postsComments);
   }
 
 })

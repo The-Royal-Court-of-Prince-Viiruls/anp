@@ -3,6 +3,8 @@ var ObjectId = require('mongodb').ObjectID;
 
 exports.add = function (req, res){
   var post = req.body;
+  post["sender"] = req.user.local.name.firstName;
+  post["questions"] = [];
   var collection = db.get().collection('posts');
   collection.insertOne(post,function(err, post) {
     res.json(post);
@@ -10,13 +12,12 @@ exports.add = function (req, res){
 };
 
 exports.listUsersQuestions = function(req,res) {
-  var userId = req.query.userId;
-
+  var id = req.user._id;
   var collection = db.get().collection('posts');
-  collection.find({'questions._id' : new ObjectId(userId) }).toArray(function(err, posts) {
+  collection.find({'questions.senderId' : new ObjectId(id) }).toArray(function(err, posts) {
     res.json(posts);
-  })
-}
+  });
+};
 
 exports.removePost = function (req, res) {
   var user = req.user;
@@ -44,7 +45,7 @@ exports.addQuestion = function (req, res) {
     var questions = postToModify.questions;
     if(typeof questions === 'undefined')
     questions = [];
-    questions.push({_id: new ObjectId(),question: req.body.question,sender: req.body.sender, timestamp: req.body.timestamp});
+    questions.push({_id: new ObjectId(),question: req.body.question,sender: req.body.sender, name: req.user.local.name, timestamp: req.body.timestamp,senderId: new ObjectId(req.user._id)});
 
     collection.update({ '_id' :  new ObjectId(req.body.questionID) },{$set : {'questions' : questions}},function(err,post){
       res.json(post);
@@ -65,7 +66,9 @@ exports.addReply = function (req, res) {
     collection.findOne({ 'questions._id' : new ObjectId(questionId)},{'_id': 0},function(err,post){
       for (var question in post.questions) {
         if (post.questions[question]._id == questionId){
-          post.questions[question]["reply"]=req.body;
+          var reply = req.body;
+          reply["name"] = user.local.name;
+          post.questions[question]["reply"]=reply;
         }
       }
       collection.update({ '_id' :  new ObjectId(postId) },{$set : {'questions' : post.questions}},function(err,post){

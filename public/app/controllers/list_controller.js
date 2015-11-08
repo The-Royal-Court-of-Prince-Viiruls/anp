@@ -17,7 +17,7 @@ IlmoitusApp.controller('ListController', function ($scope, PostService,$rootScop
     var questionInfo = {
       questionID: id,
       question: question,
-      sender: $rootScope.email,
+      sender: $rootScope.user.email,
       timestamp: Date.now()
     }
     PostService.addQuestion(questionInfo);

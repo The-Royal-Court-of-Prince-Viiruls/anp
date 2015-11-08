@@ -3,50 +3,71 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
   $scope.postId = "";
   $scope.postsComments = [];
   $scope.post = "";
+  $scope.usersQuestions = [];
+
+  UserService.listUsersQuestions().then(function(d) {
+    $scope.usersQuestions = d;
+    console.log(d);
+  });
 
   UserService.listUsersPosts($rootScope.user.id).then(function(d) {
     $scope.usersPosts = d;
- });
+  });
 
- UserService.listUsersQuestions($rootScope.user.id).then(function(d) {
-   $scope.usersQuestions = d;
-});
+  $scope.unansweredQuestions = function(posti) {
+    if (typeof posti.questions === 'undefined') {
+      return false;
+    }
+    var i = posti.questions.length;
+    while (i--) {
+      if (typeof posti.questions[i].reply === 'undefined') {
+        return true;
+      }
+    }
+    return false
+  }
 
- $scope.unansweredQuestions = function(posti) {
-   var i = posti.questions.length;
-   while (i--) {
-     if (!posti.questions[i].contains(reply)) {
-       return true;
-     }
-   }
-   return false
- }
+  $scope.openCommentModal = function(posti) {
+    $scope.post = posti;
+    $scope.postsComments = posti.questions;
+    $scope.postId = posti._id;
+    // Modal doesn't scale right (Semantic bug); workoround:
+    $('#commentModal')
+    .modal({ detachable:false, observeChanges:true })
+    .modal('show')
+    .modal('refresh');
+  }
 
- $scope.openCommentModal = function(posti) {
-   $scope.postsComments = posti.questions;
-   $scope.postId = posti._id;
-   $('#commentModal')
-   .modal('show')
-   ;
- }
+  $scope.openPostModal = function(posti) {
+    $scope.post = posti;
+    $('#postModal')
+    .modal('show')
+    ;
+  }
 
- $scope.showAnswerBox = function(event) {
-   event.currentTarget.parentElement.getElementsByClassName("ui fluid action input")[0].style.display = '';
- }
+  $scope.showAnswerBox = function(event) {
+    event.currentTarget.parentElement.getElementsByClassName("ui fluid action input")[0].style.display = '';
+  }
 
- $scope.removePost = function(post) {
-   UserService.removePost(post._id, post.user);
- }
+  $scope.removePost = function(post, index) {
+    UserService.removePost(post._id, post.user);
+    $scope.usersPosts.splice(index,1);
+  }
 
- $scope.sendReply = function(questionId, event) {
-   var replyInfo = {
-     questionId: questionId,
-     reply: event.target.parentElement.childNodes[1].value,
-     sender: $rootScope.user.email,
-     timestamp: Date.now()
-   }
-   UserService.addReply(replyInfo,$scope.postId);
- }
-
+  $scope.sendReply = function(questionId, event) {
+    var replyInfo = {
+      questionId: questionId,
+      reply: event.target.parentElement.childNodes[3].value,
+      sender: $rootScope.user.email,
+      timestamp: Date.now()
+    }
+     UserService.addReply(replyInfo,$scope.postId);
+    for (var comment in $scope.postsComments) {
+      if(questionId === $scope.postsComments[comment]._id){
+        $scope.postsComments[comment]["reply"]= replyInfo;
+      }
+    }
+    console.log($scope.postsComments);
+  }
 
 })

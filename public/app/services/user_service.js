@@ -1,17 +1,12 @@
 IlmoitusApp.service('UserService', function ($http) {
 
   this.listUsersPosts = function(id) {
-    // $http returns a promise, which has a then function, which also returns a promise
     var promise = $http({
       url: '/posts/user/:'+id,
       method: "GET"
     }).then(function(response){
-      // The then function here is an opportunity to modify the response
-
-      // The return value gets picked up by the then in the controller.
       return response.data;
     });
-    // Return the promise to the controller
     return promise;
   };
 
@@ -27,11 +22,10 @@ IlmoitusApp.service('UserService', function ($http) {
     });
   }
 
-  this.listUsersQuestions = function(userId){
+  this.listUsersQuestions = function(){
     var promise = $http({
-      url: '/posts/user/questions',
-      method: "GET",
-      params:{"postId": postId}
+      url: '/questions/user',
+      method: "GET"
     }).then(function(response){
       return response.data;
     });

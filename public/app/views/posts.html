@@ -213,6 +213,9 @@ $('.tabular.menu .item').tab();
 
             <!-- Contact information -->
             <div class="content">
+              <div>
+                <i class="purple user icon"></i> {{free.sender}}
+              </div>
               <div ng-show="{{free.contact.gsm}}">
                 <i class="purple phone icon"></i> {{free.contact.gsm}}
               </div>
@@ -259,13 +262,13 @@ $('.tabular.menu .item').tab();
                 <div class="item" ng-repeat="kommentti in free.questions">
                   <i class="blue help icon"></i>
                   <div class="content">
-                    <div class="header">Kysyjän nimi</div>
+                    <div class="header">{{kommentti.name.firstName}}</div>
                     <div class="description">{{kommentti.question}}</div>
                     <div class="list">
-                      <div class="item">
+                      <div class="item" ng-if="kommentti.reply">
                         <i class="green checkmark icon"></i>
                         <div class="content">
-                          <div class="header">Vastaajan nimi</div>
+                          <div class="header">{{kommentti.reply.name.firstName}}</div>
                           <div class="description">{{kommentti.reply.reply}}</div>
                         </div>
                       </div>
@@ -290,10 +293,6 @@ $('.tabular.menu .item').tab();
                 </div>
               </div>
               </form>
-
-              <div restrict access="guest" class="content">
-                Kirjautuneena käyttäjänä voit esittää kysymyksiä.
-              </div>
 
             </div>
             <!-- End of post information -->

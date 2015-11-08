@@ -3,9 +3,11 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
   $scope.postId = "";
   $scope.postsComments = [];
   $scope.post = "";
+  $scope.usersQuestions = [];
 
-  UserService.listUsersQuestions($rootScope.user.id).then(function(d) {
+  UserService.listUsersQuestions().then(function(d) {
     $scope.usersQuestions = d;
+    console.log(d);
   });
 
   UserService.listUsersPosts($rootScope.user.id).then(function(d) {
@@ -47,8 +49,9 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
     event.currentTarget.parentElement.getElementsByClassName("ui fluid action input")[0].style.display = '';
   }
 
-  $scope.removePost = function(post) {
+  $scope.removePost = function(post, index) {
     UserService.removePost(post._id, post.user);
+    $scope.usersPosts.splice(index,1);
   }
 
   $scope.sendReply = function(questionId, event) {
@@ -58,7 +61,7 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
       sender: $rootScope.user.email,
       timestamp: Date.now()
     }
-    // UserService.addReply(replyInfo,$scope.postId);
+     UserService.addReply(replyInfo,$scope.postId);
     for (var comment in $scope.postsComments) {
       if(questionId === $scope.postsComments[comment]._id){
         $scope.postsComments[comment]["reply"]= replyInfo;

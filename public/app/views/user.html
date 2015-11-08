@@ -6,7 +6,7 @@
   </div>
   <div class="ui secondary segment">
 
-    <p>Täällä voit hallinnoida omia ilmoituksiasi.</p>
+    <p>Täällä voit tarkistaa käyttäjätietosi ja hallinnoida omia ilmoituksiasi. Näet myös ilmoituksiin jättämäsi kysymykset ja niiden vastaukset.</p>
 
   </div>
   <div class="ui segment">
@@ -31,7 +31,7 @@
     <a class="ui purple ribbon label">Omat ilmoitukseni</a>
     <p></p>
 
-    <table class="ui purple table" id="usersPostsTable">
+    <table class="ui purple table" id="usersPostsTable" ng-if="usersPosts.length">
       <thead>
         <tr>
           <th>Tyyppi</th>
@@ -52,14 +52,19 @@
         </tbody>
       </table>
 
+      <div ng-if="!usersPosts.length">
+        Sinulla ei ole voimassaolevia ilmoituksia!
+      </div>
+
       <p></p>
       <a class="ui purple ribbon label">Kommentoimani ilmoitukset</a>
       <p></p>
 
-      <table class="ui purple celled structured table">
+      <table class="ui purple celled structured table" ng-if="usersQuestions.length ">
         <thead>
           <tr>
-            <th colspan="3">Ilmoitus</th>
+            <th>Ilmoitus</th>
+            <th colspan="2"></th>
           </tr>
         </thead>
         <tbody ng-repeat="post in usersQuestions">
@@ -68,11 +73,16 @@
             <td rowspan="2">{{post.post}}</td>
             <td>{{post.question}}</td>
           </tr>
-          <tr ng-if="post.reply">
-            <td>{{post.reply}}</td>
+          <tr>
+            <td ng-class="post.reply ? 'positive' : 'warning'"><span ng-if="!post.reply">Ilmoittaja ei ole vielä vastannut kysymykseesi.</span>{{post.reply}}</td>
           </tr>
         </tr>
         </tbody>
+      </table>
+
+      <div ng-if="!usersQuestions.length">
+        Sinulla ei ole voimassaolevia kysymyksiä!
+      </div>
 
     </div>
   </div>

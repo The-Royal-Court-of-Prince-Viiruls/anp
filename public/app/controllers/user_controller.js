@@ -21,6 +21,7 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
       }
     }
   }
+  console.log($scope.usersQuestions);
 });
 
   UserService.listUsersPosts($rootScope.user.id).then(function(d) {

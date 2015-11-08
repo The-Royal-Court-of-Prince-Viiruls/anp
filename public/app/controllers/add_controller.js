@@ -26,6 +26,10 @@ $scope.newShippingMethods = {
       user: $rootScope.user.id,
     });
 
+    $('#addSuccess')
+    .modal('show')
+    ;
+
     $scope.newPostForm.$setPristine();
     $scope.newType = {};
     $scope.newItem = '';

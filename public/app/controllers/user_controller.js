@@ -4,6 +4,10 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
   $scope.postsComments = [];
   $scope.post = "";
 
+  UserService.listUsersQuestions($rootScope.user.id).then(function(d) {
+    $scope.usersQuestions = d;
+  });
+
   UserService.listUsersPosts($rootScope.user.id).then(function(d) {
     $scope.usersPosts = d;
   });

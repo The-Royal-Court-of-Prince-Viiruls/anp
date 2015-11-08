@@ -26,6 +26,20 @@ $scope.newShippingMethods = {
       user: $rootScope.user.id,
     });
 
+    $scope.newPostForm.$setPristine();
+    $scope.newType = {};
+    $scope.newItem = '';
+    $scope.newCategory = {};
+    $scope.newDescription = '';
+    $scope.newCondition = {};
+    $scope.newLocation = {};
+    $scope.newGSM = '';
+    $scope.newEmail = '';
+    $scope.newShippingMethods = {
+      pickup: false,
+      mail: false,
+      home: false
+    }
   }
 
 })

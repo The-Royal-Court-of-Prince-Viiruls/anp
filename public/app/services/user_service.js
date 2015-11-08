@@ -27,4 +27,15 @@ IlmoitusApp.service('UserService', function ($http) {
     });
   }
 
+  this.listUsersQuestions = function(userId){
+    var promise = $http({
+      url: '/posts/user/questions',
+      method: "GET",
+      params:{"postId": postId}
+    }).then(function(response){
+      return response.data;
+    });
+    // Return the promise to the controller
+    return promise;
+  }
 })

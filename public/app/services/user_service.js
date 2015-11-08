@@ -31,7 +31,7 @@ IlmoitusApp.service('UserService', function ($http) {
     var promise = $http({
       url: '/posts/user/questions',
       method: "GET",
-      params:{"postId": postId}
+      params:{"userId": userId}
     }).then(function(response){
       return response.data;
     });

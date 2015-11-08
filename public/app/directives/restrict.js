@@ -1,18 +1,4 @@
 IlmoitusApp.directive('restrict', function(AuthService, $http, AuthService, $rootScope){
-  hideElements = function(element, attr, linker){
-    var user = AuthService.getUser();
-    var attributes = attr.access.split(" ");
-    for(var i in attributes){
-      if(user.role == attributes[i]){
-        accessDenied = false;
-      }
-    }
-
-    if(accessDenied){
-      element.children().remove();
-      element.remove();
-    }
-  }
 
   return{
     restrict: 'A',
@@ -35,11 +21,33 @@ IlmoitusApp.directive('restrict', function(AuthService, $http, AuthService, $roo
             AuthService.generateRoleData("guest");
           }
 
-          hideElements(element, attr, linker);
+          var user = AuthService.getUser();
+          var attributes = attr.access.split(" ");
+          for(var i in attributes){
+            if(user.role == attributes[i]){
+              accessDenied = false;
+            }
+          }
+
+          if(accessDenied){
+            element.children().remove();
+            element.remove();
+          }
 
         })
       } else {
-        hideElements(element, attr, linker);
+        var user = AuthService.getUser();
+        var attributes = attr.access.split(" ");
+        for(var i in attributes){
+          if(user.role == attributes[i]){
+            accessDenied = false;
+          }
+        }
+
+        if(accessDenied){
+          element.children().remove();
+          element.remove();
+        }
       }
 
     }

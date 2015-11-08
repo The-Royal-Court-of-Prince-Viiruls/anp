@@ -8,6 +8,10 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
     $scope.usersPosts = d;
  });
 
+ UserService.listUsersQuestions($rootScope.user.id).then(function(d) {
+   $scope.usersQuestions = d;
+});
+
  $scope.unansweredQuestions = function(posti) {
    var i = posti.questions.length;
    while (i--) {
@@ -43,5 +47,6 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
    }
    UserService.addReply(replyInfo,$scope.postId);
  }
+
 
 })

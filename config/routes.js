@@ -14,6 +14,7 @@ module.exports = function (app,passport) {
   app.get('/posts/:type',posts.listByType);
   app.get('/posts/user/:id',isLoggedIn, posts.listByUser);
   app.post('/posts/delete/:id', isLoggedIn, posts.removePost);
+  app.get('/posts/user/questions',isLoggedIn,posts.listUsersQuestions);
 
   app.get('/signupsuccess',function(req,res){
     res.json({path: "/"});

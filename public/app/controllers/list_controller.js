@@ -12,14 +12,24 @@ IlmoitusApp.controller('ListController', function ($scope, PostService,$rootScop
   }
 
 
-  $scope.sendQuestion = function(id,event) {
+  $scope.sendQuestion = function(id,event,post) {
+    var question = event.target.parentElement.childNodes[1].value;
     var questionInfo = {
       questionID: id,
-      question: event.target.parentElement.childNodes[1].value,
+      question: question,
       sender: $rootScope.email,
       timestamp: Date.now()
     }
     PostService.addQuestion(questionInfo);
+    event.target.parentElement.childNodes[1].value='';
+    var questions = post.questions;
+    if (typeof questions === 'undefined') {
+      questions = [];
+    }
+    questions.push({question: question,
+    sender: $rootScope.email,
+    timestamp: Date.now()});
+    post[questions]=questions;
   }
 
   PostService.type("Lahjoitetaan").then(function(d) {

@@ -9,6 +9,15 @@ exports.add = function (req, res){
   });
 };
 
+exports.listUsersQuestions = function(req,res) {
+  var userId = req.query.userId;
+
+  var collection = db.get().collection('posts');
+  collection.find({'questions._id' : new ObjectId(userId) }).toArray(function(err, posts) {
+    res.json(posts);
+  })
+}
+
 exports.removePost = function (req, res) {
   var user = req.user;
   var id = req.params.id.substring(1);

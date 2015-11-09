@@ -35,9 +35,11 @@ $('.tabular.menu .item').tab();
 
       <p></p>
 
+      <!-- Post items -->
       <div class="ui fluid styled accordion">
         <div ng-repeat="change in changeItems | filter:searchTextChange">
           <div class="title" ng-click="accordion()">
+
             <!-- Post title -->
             <i class="dropdown icon"></i>
             {{change.item}} ({{change.location}})
@@ -45,117 +47,104 @@ $('.tabular.menu .item').tab();
           <div class="content">
 
             <!-- Post information begins -->
-            <div class="ui fluid styled accordion">
-              <div ng-repeat="change in changeItems | filter:searchTextChange">
-                <div class="title" ng-click="accordion()">
-                  <!-- Post title -->
-                  <i class="dropdown icon"></i>
-                  {{change.item}} ({{change.location}})
+
+            <!-- Description -->
+            <div class="content">
+              <p>{{change.description}}</p>
+              <p> Kunto: {{change.condition}}</p>
+            </div>
+
+            <!-- Contact information -->
+            <div class="content">
+              <div>
+                <i class="purple user icon"></i> {{change.sender}}
+              </div>
+              <div ng-show="{{change.contact.gsm}}">
+                <i class="purple phone icon"></i> {{change.contact.gsm}}
+              </div>
+
+              <div ng-show="{{change.contact.email.length}}">
+                <i class="purple mail icon"></i> {{change.contact.email}}
+              </div>
+            </div>
+
+            <div class="content">
+              <div class="ui grid">
+                <div class="twelve wide column">
+                  <!-- Shipping methods -->
+                  <div class="ui label">
+                    Toimitustavat:
+                    <div class="detail" ng-show="{{change.shipping.mail}}===true">
+                      <i class="purple mail icon"></i> Postitus
+                    </div>
+
+                    <div class="detail" ng-show="{{change.shipping.pickup}}===true">
+                      <i class="purple car icon"></i> Nouto
+                    </div>
+
+                    <div class="detail" ng-show="{{change.shipping.home}}===true">
+                      <i class="purple home icon"></i> Kotiintoimitus
+                    </div>
+                  </div>
                 </div>
-                <div class="content">
-
-                  <!-- Post information begins -->
-
-                  <!-- Description -->
-                  <div class="content">
-                    <p>{{change.description}}</p>
-                    <p> Kunto: {{change.condition}}</p>
+                <div class="four wide right aligned column">
+                  <div class="ui label">
+                    {{ change.time | date : 'd.M.yyyy'}}
                   </div>
-
-                  <!-- Contact information -->
-                  <div class="content">
-                    <div>
-                      <i class="purple user icon"></i> {{change.sender}}
-                    </div>
-                    <div ng-show="{{change.contact.gsm}}">
-                      <i class="purple phone icon"></i> {{change.contact.gsm}}
-                    </div>
-
-                    <div ng-show="{{change.contact.email.length}}">
-                      <i class="purple mail icon"></i> {{change.contact.email}}
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    <div class="ui grid">
-                      <div class="twelve wide column">
-                        <!-- Shipping methods -->
-                        <div class="ui label">
-                          Toimitustavat:
-                          <div class="detail" ng-show="{{change.shipping.mail}}===true">
-                            <i class="purple mail icon"></i> Postitus
-                          </div>
-
-                          <div class="detail" ng-show="{{change.shipping.pickup}}===true">
-                            <i class="purple car icon"></i> Nouto
-                          </div>
-
-                          <div class="detail" ng-show="{{change.shipping.home}}===true">
-                            <i class="purple home icon"></i> Kotiintoimitus
-                          </div>
-                        </div>
-                      </div>
-                      <div class="four wide right aligned column">
-                        <div class="ui label">
-                          {{ change.time | date : 'd.M.yyyy'}}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="ui horizontal divider">Ilmoitusta koskevat kysymykset</div>
-
-                  <div class="content">
-
-                    <!-- Comment section -->
-                    <div class="ui list">
-                      <div class="item" ng-repeat="kommentti in change.questions">
-                        <i class="blue help icon"></i>
-                        <div class="content">
-                          <div class="header">{{kommentti.name.firstName}}</div>
-                          <div class="description">{{kommentti.question}}</div>
-                          <div class="list">
-                            <div class="item" ng-if="kommentti.reply">
-                              <i class="green checkmark icon"></i>
-                              <div class="content">
-                                <div class="header">{{kommentti.reply.name.firstName}}</div>
-                                <div class="description">{{kommentti.reply.reply}}</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <form class="ui fluid form">
-                      <div class="field">
-
-                        <div class="ui disabled fluid action input" ng-if='user=="guest"'>
-
-                          <input type="text" placeholder="Lisää oma kysymyksesi">
-                          <div class="ui disabled purple button" ng-click="sendQuestion(change._id,$event)">Lähetä</div>
-                        </div>
-
-                        <div class="ui fluid action input" ng-if='user=="user"'>
-
-                          <input type="text" placeholder="Lisää oma kysymyksesi">
-                          <div class="ui purple button" ng-click="sendQuestion(change._id,$event,change)">Lähetä</div>
-                        </div>
-                      </div>
-                    </form>
-
-                  </div>
-                  <!-- End of post information -->
-
                 </div>
               </div>
+            </div>
+
+
+            <div class="ui horizontal divider">Ilmoitusta koskevat kysymykset</div>
+
+            <div class="content">
+
+              <!-- Comment section -->
+              <div class="ui list">
+                <div class="item" ng-repeat="kommentti in change.questions">
+                  <i class="blue help icon"></i>
+                  <div class="content">
+                    <div class="header">{{kommentti.name.firstName}}</div>
+                    <div class="description">{{kommentti.question}}</div>
+                    <div class="list">
+                      <div class="item" ng-if="kommentti.reply">
+                        <i class="green checkmark icon"></i>
+                        <div class="content">
+                          <div class="header">{{kommentti.reply.name.firstName}}</div>
+                          <div class="description">{{kommentti.reply.reply}}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <form class="ui fluid form">
+                <div class="field">
+
+                  <div class="ui disabled fluid action input" ng-if='user=="guest"'>
+
+                    <input type="text" placeholder="Lisää oma kysymyksesi">
+                    <div class="ui disabled purple button" ng-click="sendQuestion(change._id,$event,change)">Lähetä</div>
+                  </div>
+
+                  <div class="ui fluid action input" ng-if='user=="user"'>
+
+                    <input type="text" placeholder="Lisää oma kysymyksesi">
+                    <div class="ui purple button" ng-click="sendQuestion(change._id,$event,change)">Lähetä</div>
+                  </div>
+                </div>
+              </form>
+
             </div>
             <!-- End of post information -->
 
           </div>
         </div>
       </div>
+      <!-- End of post information -->
+
     </div>
 
     <!-- The "Etsitaan" content below the tab menu -->
@@ -264,7 +253,7 @@ $('.tabular.menu .item').tab();
                   <div class="ui disabled fluid action input" ng-if='user=="guest"'>
 
                     <input type="text" placeholder="Lisää oma kysymyksesi">
-                    <div class="ui disabled purple button" ng-click="sendQuestion(search._id,$event)">Lähetä</div>
+                    <div class="ui disabled purple button" ng-click="sendQuestion(search._id,$event,search)">Lähetä</div>
                   </div>
 
                   <div class="ui fluid action input" ng-if='user=="user"'>
@@ -390,7 +379,7 @@ $('.tabular.menu .item').tab();
                   <div class="ui disabled fluid action input" ng-if='user=="guest"'>
 
                     <input type="text" placeholder="Lisää oma kysymyksesi">
-                    <div class="ui disabled purple button" ng-click="sendQuestion(free._id,$event)">Lähetä</div>
+                    <div class="ui disabled purple button" ng-click="sendQuestion(free._id,$event, free)">Lähetä</div>
                   </div>
 
                   <div class="ui fluid action input" ng-if='user=="user"'>
@@ -483,7 +472,7 @@ $('.tabular.menu .item').tab();
           <div class="column">
             <div class="field" ng-show='searchtype==="Lahjoitetaan"'>
               <label>Sijainti</label>
-              <select ng-model="locationSearch" multiple class="ui fluid dropdown">
+              <select ng-model="locationFree" multiple class="ui fluid dropdown">
                 <option value="">Valitse</option>
                 <option value="Ahvenanmaa">Ahvenanmaa</option>
                 <option value="Etelä-Karjala">Etelä-Karjala</option>
@@ -558,7 +547,7 @@ $('.tabular.menu .item').tab();
           <div class="column">
             <div class="field" ng-show='searchtype==="Lahjoitetaan"'>
               <label>Kategoria</label>
-              <select ng-model="categorySearch" multiple="" class="ui fluid dropdown">
+              <select ng-model="categoryFree" multiple="" class="ui fluid dropdown">
                 <option value="">Valitse</option>
                 <option value="AJO">Ajoneuvot</option>
                 <option value="ELO">Elokuvat</option>

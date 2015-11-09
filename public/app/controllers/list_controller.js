@@ -27,7 +27,7 @@ IlmoitusApp.controller('ListController', function ($scope, PostService,$rootScop
       questions = [];
     }
     questions.push({question: question,
-    sender: $rootScope.email,
+    name: $rootScope.user.name,
     timestamp: Date.now()});
     post[questions]=questions;
   }
@@ -180,7 +180,7 @@ IlmoitusApp.controller('ListController', function ($scope, PostService,$rootScop
       location = $scope.locationChange;
       category = $scope.categoryChange;
       }
-    $('#refineModal').modal('hide');
+
     queryObject = {
       type : $scope.searchtype,
       shipping : $scope.searchshipping,
@@ -188,8 +188,10 @@ IlmoitusApp.controller('ListController', function ($scope, PostService,$rootScop
       category: category,
       location: location
     };
+
     PostService.query(queryObject).then(function(d) {
     querySwitch(d);
+    $('#refineModal').modal('hide');
     });
   }
 })

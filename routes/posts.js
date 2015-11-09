@@ -14,23 +14,7 @@ exports.add = function (req, res){
 exports.listUsersQuestions = function(req,res) {
   var id = req.user._id;
   var collection = db.get().collection('posts');
-  collection.find({'questions.senderId' : new ObjectId(id) }).toArray(function(err, d) {
-    var posts = [];
-    for (var post in d){
-      var questions = d[post].questions;
-      for (var question in questions) {
-        var quiz = questions[question];
-        if($rootScope.user.id == quiz.senderId){
-          var reply = quiz.reply;
-          if (typeof reply === 'undefined'){
-            reply = ''
-          } else {
-            reply = quiz.reply.reply;
-          }
-          posts.push({post: d[post].item, question: quiz.question,  reply: reply})
-      }
-    }
-    }
+  collection.find({'questions.senderId' : new ObjectId(id) }).toArray(function(err, posts) {
     res.json(posts);
   });
 };

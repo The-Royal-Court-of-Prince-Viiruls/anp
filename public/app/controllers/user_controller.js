@@ -6,7 +6,21 @@ IlmoitusApp.controller('UserController', function ($scope, PostService, UserServ
   $scope.usersQuestions = [];
 
   UserService.listUsersQuestions().then(function(d) {
-    $scope.usersQuestions = d;
+    for (var post in d){
+      var questions = d[post].questions;
+      for (var question in questions) {
+        var quiz = questions[question];
+        if($rootScope.user.id == quiz.senderId){
+          var reply = quiz.reply;
+          if (typeof reply === 'undefined'){
+            reply = ''
+          } else {
+            reply = quiz.reply.reply;
+          }
+          $scope.usersQuestions.push({post: d[post].item, question: quiz.question,  reply: reply})
+      }
+    }
+  }
 });
 
   UserService.listUsersPosts($rootScope.user.id).then(function(d) {
